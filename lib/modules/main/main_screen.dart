@@ -1,5 +1,6 @@
 import 'package:clothes_store_app/modules/main/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/main/cubit/states.dart';
+import 'package:clothes_store_app/modules/women/women.dart';
 import 'package:clothes_store_app/shared/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +22,7 @@ class MainScreen extends StatelessWidget {
                 backgroundColor: Colors.white,
                 leading: IconButton(
                   onPressed: () {},
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.add_alert_outlined,
                     color: Colors.black45,
                   ),
@@ -33,35 +34,35 @@ class MainScreen extends StatelessWidget {
                     textAlign: TextAlign.end,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
-                      suffixIcon: Icon(
+                      suffixIcon: const Icon(
                         Icons.search_outlined,
                         color: Colors.black45,
                       ),
                       hintText: "ابحث عن منج' ماركة أو فئة",
                       filled: true,
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                         color: Colors.black54,
                       ),
                       focusedErrorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(25),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.black45,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(25),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.black45,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(25),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.black45,
                         ),
                       ),
                     ),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black54,
                       fontSize: 18,
                     ),
@@ -69,25 +70,57 @@ class MainScreen extends StatelessWidget {
                 ),
                 elevation: 0,
               ),
-              body: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 100.0,
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) => buildStoryItem(),
-                          separatorBuilder: (context, index) => SizedBox(
-                            width: 10.0,
-                          ),
-                          itemCount: 10,
-                        ),
+              body: DefaultTabController(
+                length: 6,
+                child: Scaffold(
+                  appBar: AppBar(
+                    backgroundColor: Colors.white,
+                    bottom: TabBar(
+                      indicatorColor: Colors.green[300],
+                      isScrollable: true,
+                      labelStyle: const TextStyle(
+                        fontSize: 17,
                       ),
+                      labelPadding: const EdgeInsets.symmetric(horizontal: 30),
+                      indicatorPadding: const EdgeInsets.symmetric(horizontal: -5),
+                      tabs: const [
+                        Text(
+                          "النساء",
+                          style: TextStyle(color: Colors.black54),
+                        ),
+                        Text(
+                          "الرجال",
+                          style: TextStyle(color: Colors.black54),
+                        ),
+                        Text(
+                          "ركن الجمال",
+                          style: TextStyle(color: Colors.black54),
+                        ),
+                        Text(
+                          "الاطفال",
+                          style: TextStyle(color: Colors.black54),
+                        ),
+                        Text(
+                          "بريميوم",
+                          style: TextStyle(color: Colors.black54),
+                        ),
+                        Text(
+                          "رياضه",
+                          style: TextStyle(color: Colors.black54),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
+                  body:  const TabBarView(
+                    children: [
+                      WomenScreen(),
+                      Center(child: Text("الرجال")),
+                      Center(child: Text("ركن الجمال")),
+                      Center(child: Text("الاطفال")),
+                      Center(child: Text("بريميوم")),
+                      Center(child: Text("رياضه")),
+                    ],
+                  ),
                 ),
               ),
             );
@@ -95,28 +128,3 @@ class MainScreen extends StatelessWidget {
     );
   }
 }
-
-Widget buildStoryItem() => Container(
-      width: 100.0,
-      child: const Column(
-        children: [
-          Stack(
-            alignment: AlignmentDirectional.center,
-            children: [
-              CircleAvatar(
-                radius: 50.0,
-                backgroundImage: NetworkImage(
-                  'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/1c75ba1d-78f4-4103-8d74-f5c4421a5c8b/primary-mens-dri-fit-versatile-tank-RcQ41g.png',
-                ),
-              ),
-              Center(
-                child: Text(
-                  "ملابس",
-                  style: TextStyle(color: Colors.white, fontSize: 18.0),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );

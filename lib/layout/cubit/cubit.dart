@@ -30,7 +30,7 @@ class AppCubit extends Cubit<AppStates> {
       ),
       const BottomNavigationBarItem(
         icon: Icon(
-          Icons.heart_broken_outlined,
+          Icons.favorite_outlined,
         ),
         label: "قائمة الامنيات",
       ),
@@ -42,7 +42,7 @@ class AppCubit extends Cubit<AppStates> {
       ),
       const BottomNavigationBarItem(
         icon: Icon(
-          Icons.widgets_outlined,
+          Icons.apps_outlined,
         ),
         label: "الفئات",
       ),

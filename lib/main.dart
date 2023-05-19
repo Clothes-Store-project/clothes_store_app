@@ -24,22 +24,14 @@ class MyApp extends StatelessWidget {
       child: BlocConsumer<AppCubit, AppStates>(
           listener: (context, state) {},
           builder: (context, state) {
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              home: AppScreen(),
+            return Directionality(
+              child: MaterialApp(
+                debugShowCheckedModeBanner: false,
+                home: AppScreen(),
+              ),
+              textDirection: TextDirection.rtl,
             );
           }),
     );
   }
 }
-
-/*
-class MyApp extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: AppScreen(),
-    );
-  }
-}*/
