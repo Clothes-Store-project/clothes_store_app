@@ -10,6 +10,7 @@ void main() {
   Bloc.observer = MyBlocObserver();
   runApp(MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -24,12 +25,10 @@ class MyApp extends StatelessWidget {
       child: BlocConsumer<AppCubit, AppStates>(
           listener: (context, state) {},
           builder: (context, state) {
-            return Directionality(
-              child: MaterialApp(
-                debugShowCheckedModeBanner: false,
-                home: AppScreen(),
-              ),
-              textDirection: TextDirection.rtl,
+            return const MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: Directionality(
+                  textDirection: TextDirection.rtl, child: AppScreen()),
             );
           }),
     );

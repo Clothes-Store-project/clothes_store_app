@@ -7,4 +7,10 @@ class MainScreenCubit extends Cubit<MainScreenStates> {
 
   static MainScreenCubit get(context) => BlocProvider.of(context);
   TextEditingController searchController = TextEditingController();
+
+  int index = 0;
+  void changeIndex(int newIndex){
+    index = newIndex;
+    emit(ChangeIndexState());
+  }
 }
