@@ -1,5 +1,6 @@
 import 'package:clothes_store_app/modules/main/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/main/cubit/states.dart';
+import 'package:clothes_store_app/modules/men/men.dart';
 import 'package:clothes_store_app/modules/women/women.dart';
 import 'package:clothes_store_app/shared/components.dart';
 import 'package:clothes_store_app/shared/constant.dart';
@@ -111,7 +112,7 @@ class MainScreen extends StatelessWidget {
                 body: const TabBarView(
                   children: [
                     WomenScreen(),
-                    Center(child: Text("الرجال")),
+                    MenScreen(),
                     Center(child: Text("ركن الجمال")),
                     Center(child: Text("الاطفال")),
                     Center(child: Text("بريميوم")),

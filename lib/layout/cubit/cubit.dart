@@ -10,47 +10,52 @@ class AppCubit extends Cubit<AppStates> {
 
   static AppCubit get(context) => BlocProvider.of(context);
 
-  int bottomNavIndex = 4;
+  int bottomNavIndex = 0;
 
   List<Widget> layoutScreens = [
-    const Center(child: Text("صفحتى")),
-    const Center(child: Text("قائمة الامنيات")),
-    const Center(child: Text("عربة التسوق")),
-    const Center(child: Text("الفئات")),
     const MainScreen(),
+    const Center(child: Text("الفئات")),
+    const Center(child: Text("عربة التسوق")),
+    const Center(child: Text("قائمة الامنيات")),
+    const Center(child: Text("صفحتى")),
   ];
 
   List<BottomNavigationBarItem> items(int index) {
     return [
       const BottomNavigationBarItem(
         icon: Icon(
-          Icons.person,
+          Icons.home_outlined,
+          size: 35,
         ),
-        label: "صفحتى",
-      ),
-      const BottomNavigationBarItem(
-        icon: Icon(
-          Icons.favorite_outlined,
-        ),
-        label: "قائمة الامنيات",
-      ),
-      const BottomNavigationBarItem(
-        icon: Icon(
-          Icons.shopping_cart_outlined,
-        ),
-        label: "عربة التسوق",
+        label: "الرئيسية",
       ),
       const BottomNavigationBarItem(
         icon: Icon(
           Icons.apps_outlined,
+          size: 35,
         ),
         label: "الفئات",
       ),
       const BottomNavigationBarItem(
         icon: Icon(
-          Icons.home_outlined,
+          Icons.shopping_cart_outlined,
+          size: 35,
         ),
-        label: "الرئيسية",
+        label: "عربة التسوق",
+      ),
+      const BottomNavigationBarItem(
+        icon: Icon(
+          Icons.favorite_outline,
+          size: 35,
+        ),
+        label: "قائمة الامنيات",
+      ),
+      const BottomNavigationBarItem(
+        icon: Icon(
+          Icons.person_2_outlined,
+          size: 35,
+        ),
+        label: "صفحتى",
       ),
     ];
   }

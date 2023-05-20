@@ -1,22 +1,22 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:clothes_store_app/modules/women/cubit/cubit.dart';
-import 'package:clothes_store_app/modules/women/cubit/states.dart';
+import 'package:clothes_store_app/modules/men/cubit/cubit.dart';
+import 'package:clothes_store_app/modules/men/cubit/states.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class WomenScreen extends StatelessWidget {
-  const WomenScreen({Key? key}) : super(key: key);
+class MenScreen extends StatelessWidget {
+  const MenScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return BlocProvider(
-      create: (BuildContext context) => WomenCubit(),
-      child: BlocConsumer<WomenCubit, WomenStates>(
+      create: (BuildContext context) => MenCubit(),
+      child: BlocConsumer<MenCubit, MenStates>(
           listener: (context, state) {},
           builder: (context, state) {
-            WomenCubit cubit = WomenCubit.get(context);
+            MenCubit cubit = MenCubit.get(context);
             return Scaffold(
               backgroundColor: Colors.white,
               body: SingleChildScrollView(
@@ -48,13 +48,6 @@ class WomenScreen extends StatelessWidget {
                       height: 10,
                     ),
                     const Image(
-                      image: AssetImage('assets/img_1.png'),
-                      width: double.infinity,
-                    ),
-                    const SizedBox(
-                      height: 15.0,
-                    ),
-                    const Image(
                       image: AssetImage('assets/img.png'),
                       width: double.infinity,
                     ),
@@ -62,8 +55,11 @@ class WomenScreen extends StatelessWidget {
                       height: 15.0,
                     ),
                     const Image(
-                      image: AssetImage('assets/img_2.png'),
+                      image: AssetImage('assets/men/img_1.jpg'),
                       width: double.infinity,
+                    ),
+                    const SizedBox(
+                      height: 15.0,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(10),
@@ -110,7 +106,7 @@ class WomenScreen extends StatelessWidget {
                                           ),
                                           image: DecorationImage(
                                             image: AssetImage(
-                                              'assets/img_3.jpg',
+                                              'assets/men/img_2.jpg',
                                             ),
                                             fit: BoxFit.cover,
                                           ),
@@ -121,7 +117,7 @@ class WomenScreen extends StatelessWidget {
                                       height: 5,
                                     ),
                                     const Text(
-                                      "كوتون",
+                                      "نايك",
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 15,
@@ -133,7 +129,7 @@ class WomenScreen extends StatelessWidget {
                                       height: 5,
                                     ),
                                     const Text(
-                                      "Tencel Shorts High Rise Pocket",
+                                      "حذاء داون شيفتر 12",
                                       style: TextStyle(
                                         color: Colors.black45,
                                         fontSize: 15,
@@ -145,7 +141,7 @@ class WomenScreen extends StatelessWidget {
                                       height: 5,
                                     ),
                                     const Text(
-                                      "د.أ. 178",
+                                      "د.أ. 206",
                                       style: TextStyle(
                                         color: Colors.red,
                                         fontSize: 15,
@@ -203,7 +199,7 @@ class WomenScreen extends StatelessWidget {
                       height: 15.0,
                     ),
                     const Image(
-                      image: AssetImage('assets/img_3.png'),
+                      image: AssetImage('assets/men/img_3.jpg'),
                       width: double.infinity,
                     ),
                     const SizedBox(
@@ -215,15 +211,15 @@ class WomenScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Image(
-                            image: AssetImage('assets/img_5.jpg'),
+                            image: AssetImage('assets/men/img_4.jpg'),
                             width: 115,
                           ),
                           Image(
-                            image: AssetImage('assets/img_5.jpg'),
+                            image: AssetImage('assets/men/img_4.jpg'),
                             width: 115,
                           ),
                           Image(
-                            image: AssetImage('assets/img_5.jpg'),
+                            image: AssetImage('assets/men/img_4.jpg'),
                             width: 115,
                           ),
                         ],
@@ -277,7 +273,7 @@ class WomenScreen extends StatelessWidget {
                                             ),
                                             image: DecorationImage(
                                               image: AssetImage(
-                                                'assets/img_6.jpg',
+                                                'assets/men/img_5.jpg',
                                               ),
                                               fit: BoxFit.cover,
                                             ),
@@ -288,7 +284,7 @@ class WomenScreen extends StatelessWidget {
                                         height: 5,
                                       ),
                                       const Text(
-                                        "اديداس اوريجنالز",
+                                        "سفنتي فايف بيسيكس",
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 15,
@@ -300,7 +296,7 @@ class WomenScreen extends StatelessWidget {
                                         height: 5,
                                       ),
                                       const Text(
-                                        "بنطال فضفاض",
+                                        "تيشرت كت كاجوال",
                                         style: TextStyle(
                                           color: Colors.black45,
                                           fontSize: 15,
@@ -312,7 +308,7 @@ class WomenScreen extends StatelessWidget {
                                         height: 5,
                                       ),
                                       const Text(
-                                        "د.أ. 178",
+                                        "د.أ. 13",
                                         style: TextStyle(
                                           color: Colors.red,
                                           fontSize: 15,
@@ -373,7 +369,7 @@ class WomenScreen extends StatelessWidget {
                     Container(
                       width: double.infinity,
                       child: const Image(
-                        image: AssetImage('assets/women-nb-desktop-ar.jpg'),
+                        image: AssetImage('assets/men/img_6.jpg'),
                         width: double.infinity,
                       ),
                     ),
@@ -410,13 +406,13 @@ class WomenScreen extends StatelessWidget {
                       height: 15,
                     ),
                     ConditionalBuilder(
-                      condition: Image.asset("assets/img_8.jpg") != null,
+                      condition: Image.asset("assets/men/img_7.jpg") != null,
                       builder: (context) => builderWidget(
-                        "assets/img_6.jpg",
-                        "assets/img_5.jpg",
-                        "assets/img_5.jpg",
-                        "assets/img_8.jpg",
-                        "assets/img_5.jpg",
+                        "assets/men/img_7.jpg",
+                        "assets/men/img_8.jpg",
+                        "assets/men/img_9.jpg",
+                        "assets/men/img_10.jpg",
+                        "assets/men/img_7.jpg",
                       ),
                       fallback: (context) =>
                           const Center(child: CircularProgressIndicator()),
@@ -427,7 +423,37 @@ class WomenScreen extends StatelessWidget {
                     Container(
                       width: double.infinity,
                       child: const Image(
-                        image: AssetImage('assets/img_9.jpg'),
+                        image: AssetImage('assets/men/img_11.jpg'),
+                        width: double.infinity,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      child: const Image(
+                        image: AssetImage('assets/men/img_12.jpg'),
+                        width: double.infinity,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      child: const Image(
+                        image: AssetImage('assets/men/img_13.jpg'),
+                        width: double.infinity,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      child: const Image(
+                        image: AssetImage('assets/men/img_14.jpg'),
                         width: double.infinity,
                       ),
                     ),
@@ -440,15 +466,15 @@ class WomenScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Image(
-                            image: AssetImage('assets/img_5.jpg'),
+                            image: AssetImage('assets/men/img_4.jpg'),
                             width: 115,
                           ),
                           Image(
-                            image: AssetImage('assets/img_5.jpg'),
+                            image: AssetImage('assets/men/img_4.jpg'),
                             width: 115,
                           ),
                           Image(
-                            image: AssetImage('assets/img_5.jpg'),
+                            image: AssetImage('assets/men/img_4.jpg'),
                             width: 115,
                           ),
                         ],
@@ -463,7 +489,7 @@ class WomenScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text(
-                            "وصلنا حديثا",
+                            "افضل مختارات التصاميم الرياضية",
                             style: TextStyle(color: Colors.black, fontSize: 16),
                           ),
                           InkWell(
@@ -505,7 +531,7 @@ class WomenScreen extends StatelessWidget {
                                             ),
                                             image: DecorationImage(
                                               image: AssetImage(
-                                                'assets/img_11.jpg',
+                                                'assets/men/img_15.jpg',
                                               ),
                                               fit: BoxFit.cover,
                                             ),
@@ -516,7 +542,7 @@ class WomenScreen extends StatelessWidget {
                                         height: 5,
                                       ),
                                       const Text(
-                                        "ديفاتكو",
+                                        "اديداس",
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 15,
@@ -528,7 +554,7 @@ class WomenScreen extends StatelessWidget {
                                         height: 5,
                                       ),
                                       const Text(
-                                        "Woman Bike Neck Knitted Short Sleeve Tunic",
+                                        "شبشب بشعار الماركة للجنسين",
                                         style: TextStyle(
                                           color: Colors.black45,
                                           fontSize: 15,
@@ -540,7 +566,7 @@ class WomenScreen extends StatelessWidget {
                                         height: 5,
                                       ),
                                       const Text(
-                                        "د.أ. 159",
+                                        "د.أ. 84",
                                         style: TextStyle(
                                           color: Colors.red,
                                           fontSize: 15,
@@ -598,16 +624,6 @@ class WomenScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    Container(
-                      width: double.infinity,
-                      child: const Image(
-                        image: AssetImage('assets/img_12.jpg'),
-                        width: double.infinity,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Container(
@@ -625,7 +641,7 @@ class WomenScreen extends StatelessWidget {
                             ),
                             Text(
                               'منتجات وستايلات ترحب بالموسم انتقاها خبراء الموضة من'
-                              '\nمختلف الفئات لك خصيصا لتغطى احتياجاتك هذا الصيف.',
+                                  '\nمختلف الفئات لك خصيصا لتغطى احتياجاتك هذا الموسم.',
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.black,
@@ -639,13 +655,13 @@ class WomenScreen extends StatelessWidget {
                       height: 15,
                     ),
                     ConditionalBuilder(
-                      condition: Image.asset("assets/img_8.jpg") != null,
+                      condition: Image.asset("assets/men/img_16.jpg") != null,
                       builder: (context) => builderWidget(
-                        "assets/img_13.jpg",
-                        "assets/img_14.jpg",
-                        "assets/img_15.jpg",
-                        "assets/img_16.jpg",
-                        "assets/img_17.jpg",
+                        "assets/men/img_16.jpg",
+                        "assets/men/img_17.jpg",
+                        "assets/men/img_18.jpg",
+                        "assets/men/img_16.jpg",
+                        "assets/men/img_17.jpg",
                       ),
                       fallback: (context) =>
                           const Center(child: CircularProgressIndicator()),
@@ -653,7 +669,6 @@ class WomenScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-
                   ],
                 ),
               ),
