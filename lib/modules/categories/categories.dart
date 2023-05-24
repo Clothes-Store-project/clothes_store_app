@@ -1,29 +1,29 @@
-import 'package:clothes_store_app/modules/beauty/beauty.dart';
+import 'package:clothes_store_app/modules/categories/cubit/cubit.dart';
+import 'package:clothes_store_app/modules/categories/cubit/states.dart';
+import 'package:clothes_store_app/modules/categories_kids/categories_kids.dart';
+import 'package:clothes_store_app/modules/categories_men/categories_men.dart';
+import 'package:clothes_store_app/modules/categories_women/categories_women.dart';
 import 'package:clothes_store_app/modules/kids/kids.dart';
-import 'package:clothes_store_app/modules/main/cubit/cubit.dart';
-import 'package:clothes_store_app/modules/main/cubit/states.dart';
 import 'package:clothes_store_app/modules/men/men.dart';
-import 'package:clothes_store_app/modules/premium/premium.dart';
-import 'package:clothes_store_app/modules/sport/sport.dart';
 import 'package:clothes_store_app/modules/women/women.dart';
 import 'package:clothes_store_app/shared/components.dart';
 import 'package:clothes_store_app/shared/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MainScreen extends StatelessWidget {
-  const MainScreen({Key? key}) : super(key: key);
+class CategoriesScreen extends StatelessWidget {
+  const CategoriesScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => MainScreenCubit(),
-      child: BlocConsumer<MainScreenCubit, MainScreenStates>(
+      create: (BuildContext context) => CategoriesCubit(),
+      child: BlocConsumer<CategoriesCubit, CategoriesStates>(
           listener: (context, state) {},
           builder: (context, state) {
-            MainScreenCubit cubit = MainScreenCubit.get(context);
+            CategoriesCubit cubit = CategoriesCubit.get(context);
             return DefaultTabController(
-              length: 6,
+              length: 3,
               child: Scaffold(
                 backgroundColor: Colors.white,
                 appBar: AppBar(
@@ -46,7 +46,7 @@ class MainScreen extends StatelessWidget {
                     decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
-                        hintText: "ابحث عن منتج، ماركة أو فئة",
+                        hintText: "الفئات",
                         hintStyle: const TextStyle(
                             color: Colors.black, fontSize: 13),
                         focusedBorder: OutlineInputBorder(
@@ -71,7 +71,7 @@ class MainScreen extends StatelessWidget {
                       fontSize: 17,
                     ),
                     onTap: (newIndex) => cubit.changeIndex(newIndex),
-                    labelPadding: const EdgeInsets.symmetric(horizontal: 30),
+                    labelPadding: const EdgeInsets.symmetric(horizontal: 45),
                     indicatorPadding:
                         const EdgeInsets.symmetric(horizontal: -5),
                     tabs: [
@@ -88,40 +88,19 @@ class MainScreen extends StatelessWidget {
                                 cubit.index == 1 ? mainColor : Colors.black54),
                       ),
                       Text(
-                        "ركن الجمال",
-                        style: TextStyle(
-                            color:
-                                cubit.index == 2 ? mainColor : Colors.black54),
-                      ),
-                      Text(
                         "الاطفال",
                         style: TextStyle(
                             color:
-                                cubit.index == 3 ? mainColor : Colors.black54),
-                      ),
-                      Text(
-                        "بريميوم",
-                        style: TextStyle(
-                            color:
-                                cubit.index == 4 ? mainColor : Colors.black54),
-                      ),
-                      Text(
-                        "رياضه",
-                        style: TextStyle(
-                            color:
-                                cubit.index == 5 ? mainColor : Colors.black54),
+                                cubit.index == 2 ? mainColor : Colors.black54),
                       ),
                     ],
                   ),
                 ),
                 body: const TabBarView(
                   children: [
-                    WomenScreen(),
-                    MenScreen(),
-                    BeautyScreen(),
-                    KidsScreen(),
-                    PremiumScreen(),
-                    SportScreen(),
+                    CategoriesWomenScreen(),
+                    CategoriesMenScreen(),
+                    CategoriesKidsScreen(),
                   ],
                 ),
               ),

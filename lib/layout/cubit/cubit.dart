@@ -1,6 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:clothes_store_app/layout/cubit/states.dart';
+import 'package:clothes_store_app/modules/categories/categories.dart';
 import 'package:clothes_store_app/modules/main/main_screen.dart';
+import 'package:clothes_store_app/modules/shopping_cart/shopping_cart.dart';
+import 'package:clothes_store_app/modules/wishlist/wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,9 +17,9 @@ class AppCubit extends Cubit<AppStates> {
 
   List<Widget> layoutScreens = [
     const MainScreen(),
-    const Center(child: Text("الفئات")),
-    const Center(child: Text("عربة التسوق")),
-    const Center(child: Text("قائمة الامنيات")),
+    const CategoriesScreen(),
+    const ShoppingCartScreen(),
+    const WishlistScreen(),
     const Center(child: Text("صفحتى")),
   ];
 
