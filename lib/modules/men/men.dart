@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:clothes_store_app/modules/men/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/men/cubit/states.dart';
+import 'package:clothes_store_app/modules/view_data/view_data.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,15 +30,23 @@ class MenScreen extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           itemCount: cubit.images.length,
                           itemBuilder: (context, index) {
-                            return Container(
-                              width: size.width * 0.21,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                      cubit.images[index],
-                                    ),
-                                  )),
+                            return InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const ViewDataScreen()),
+                                );
+                              },
+                              child: Container(
+                                width: size.width * 0.21,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                        cubit.images[index],
+                                      ),
+                                    )),
+                              ),
                             );
                           },
                           separatorBuilder: (context, index) => const SizedBox(
@@ -47,16 +56,32 @@ class MenScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Image(
-                      image: AssetImage('assets/img.png'),
-                      width: double.infinity,
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const ViewDataScreen()),
+                        );
+                      },
+                      child: const Image(
+                        image: AssetImage('assets/img.png'),
+                        width: double.infinity,
+                      ),
                     ),
                     const SizedBox(
                       height: 15.0,
                     ),
-                    const Image(
-                      image: AssetImage('assets/men/img_1.jpg'),
-                      width: double.infinity,
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const ViewDataScreen()),
+                        );
+                      },
+                      child: const Image(
+                        image: AssetImage('assets/men/img_1.jpg'),
+                        width: double.infinity,
+                      ),
                     ),
                     const SizedBox(
                       height: 15.0,
@@ -71,7 +96,12 @@ class MenScreen extends StatelessWidget {
                             style: TextStyle(color: Colors.black, fontSize: 16),
                           ),
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => ViewDataScreen()),
+                              );
+                            },
                             child: const Text(
                               "اعرض الكل",
                               style:
@@ -91,7 +121,12 @@ class MenScreen extends StatelessWidget {
                             child: SizedBox(
                               width: size.width * 0.33,
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const ViewDataScreen()),
+                                  );
+                                },
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -198,29 +233,61 @@ class MenScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15.0,
                     ),
-                    const Image(
-                      image: AssetImage('assets/men/img_3.jpg'),
-                      width: double.infinity,
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const ViewDataScreen()),
+                        );
+                      },
+                      child: const Image(
+                        image: AssetImage('assets/men/img_3.jpg'),
+                        width: double.infinity,
+                      ),
                     ),
                     const SizedBox(
                       height: 15,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Image(
-                            image: AssetImage('assets/men/img_4.jpg'),
-                            width: 115,
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const ViewDataScreen()),
+                              );
+                            },
+                            child: const Image(
+                              image: AssetImage('assets/men/img_4.jpg'),
+                              width: 115,
+                            ),
                           ),
-                          Image(
-                            image: AssetImage('assets/men/img_4.jpg'),
-                            width: 115,
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const ViewDataScreen()),
+                              );
+                            },
+                            child: const Image(
+                              image: AssetImage('assets/men/img_4.jpg'),
+                              width: 115,
+                            ),
                           ),
-                          Image(
-                            image: AssetImage('assets/men/img_4.jpg'),
-                            width: 115,
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const ViewDataScreen()),
+                              );
+                            },
+                            child: const Image(
+                              image: AssetImage('assets/men/img_4.jpg'),
+                              width: 115,
+                            ),
                           ),
                         ],
                       ),
@@ -235,7 +302,12 @@ class MenScreen extends StatelessWidget {
                             style: TextStyle(color: Colors.black, fontSize: 16),
                           ),
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => ViewDataScreen()),
+                              );
+                            },
                             child: const Text(
                               "اعرض الكل",
                               style:
@@ -257,7 +329,12 @@ class MenScreen extends StatelessWidget {
                               child: Container(
                                 width: size.width * 0.33,
                                 child: InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => ViewDataScreen()),
+                                    );
+                                  },
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -368,9 +445,17 @@ class MenScreen extends StatelessWidget {
                     ),
                     Container(
                       width: double.infinity,
-                      child: const Image(
-                        image: AssetImage('assets/men/img_6.jpg'),
-                        width: double.infinity,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ViewDataScreen()),
+                          );
+                        },
+                        child: const Image(
+                          image: AssetImage('assets/men/img_6.jpg'),
+                          width: double.infinity,
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -641,7 +726,7 @@ class MenScreen extends StatelessWidget {
                             ),
                             Text(
                               'منتجات وستايلات ترحب بالموسم انتقاها خبراء الموضة من'
-                                  '\nمختلف الفئات لك خصيصا لتغطى احتياجاتك هذا الموسم.',
+                              '\nمختلف الفئات لك خصيصا لتغطى احتياجاتك هذا الموسم.',
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.black,
