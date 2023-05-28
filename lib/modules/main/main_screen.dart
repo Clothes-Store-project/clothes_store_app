@@ -16,6 +16,7 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return BlocProvider(
       create: (BuildContext context) => MainScreenCubit(),
       child: BlocConsumer<MainScreenCubit, MainScreenStates>(
@@ -41,21 +42,23 @@ class MainScreen extends StatelessWidget {
                   title: TextField(
                     keyboardType: TextInputType.text,
                     controller: cubit.searchController,
-                    style:
-                        const TextStyle(color: Colors.black54, fontSize: 16),
+                    style: const TextStyle(color: Colors.black54, fontSize: 16),
                     decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
                         hintText: "ابحث عن منتج، ماركة أو فئة",
-                        hintStyle: const TextStyle(
-                            color: Colors.black, fontSize: 13),
+                        hintStyle: TextStyle(
+                            color: Colors.grey.shade700,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w100,
+                            fontFamily: "regular"),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
+                          borderSide: const BorderSide(color: Colors.black),
                           borderRadius: BorderRadius.circular(50),
                         ),
                         contentPadding: EdgeInsets.zero,
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
+                          borderSide: const BorderSide(color: Colors.black),
                           borderRadius: BorderRadius.circular(50),
                         ),
                         prefixIcon: Icon(
@@ -67,13 +70,13 @@ class MainScreen extends StatelessWidget {
                   bottom: TabBar(
                     indicatorColor: mainColor,
                     isScrollable: true,
-                    labelStyle: const TextStyle(
-                      fontSize: 17,
+                    labelStyle: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey.shade700,
+                      fontFamily: "regular",
                     ),
                     onTap: (newIndex) => cubit.changeIndex(newIndex),
-                    labelPadding: const EdgeInsets.symmetric(horizontal: 30),
-                    indicatorPadding:
-                        const EdgeInsets.symmetric(horizontal: -5),
+                    labelPadding: EdgeInsets.symmetric(horizontal: size.width * 0.0785),
                     tabs: [
                       Text(
                         "النساء",
@@ -115,6 +118,7 @@ class MainScreen extends StatelessWidget {
                   ),
                 ),
                 body: const TabBarView(
+                  physics: NeverScrollableScrollPhysics(),
                   children: [
                     WomenScreen(),
                     MenScreen(),

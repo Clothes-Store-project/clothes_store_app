@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:clothes_store_app/layout/cubit/states.dart';
 import 'package:clothes_store_app/modules/categories/categories.dart';
 import 'package:clothes_store_app/modules/main/main_screen.dart';
+import 'package:clothes_store_app/modules/profile/profile_screen.dart';
 import 'package:clothes_store_app/modules/shopping_cart/shopping_cart.dart';
 import 'package:clothes_store_app/modules/wishlist/wishlist.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class AppCubit extends Cubit<AppStates> {
     const CategoriesScreen(),
     const ShoppingCartScreen(),
     const WishlistScreen(),
-    const Center(child: Text("صفحتى")),
+    const ProfileScreen(),
   ];
 
   List<BottomNavigationBarItem> items(int index) {
@@ -55,7 +56,7 @@ class AppCubit extends Cubit<AppStates> {
       ),
       const BottomNavigationBarItem(
         icon: Icon(
-          Icons.person_2_outlined,
+          Icons.person_outline,
           size: 35,
         ),
         label: "صفحتى",

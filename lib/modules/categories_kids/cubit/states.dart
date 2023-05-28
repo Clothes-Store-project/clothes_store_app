@@ -2,4 +2,4 @@ abstract class CategoriesKidsStates {}
 
 class CategoriesKidsInitialState extends CategoriesKidsStates {}
 
-class ChangeState extends CategoriesKidsStates {}
+class ChangeIndexState extends CategoriesKidsStates {}

@@ -37,7 +37,7 @@ class SportScreen extends StatelessWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => ViewDataScreen()),
+                          MaterialPageRoute(builder: (context) => const ViewDataScreen()),
                         );
                       },
                       child: const Image(

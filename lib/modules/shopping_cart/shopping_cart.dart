@@ -9,13 +9,11 @@ class ShoppingCartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return BlocProvider(
       create: (BuildContext context) => ShoppingCartCubit(),
       child: BlocConsumer<ShoppingCartCubit, ShoppingCartStates>(
           listener: (context, state) {},
           builder: (context, state) {
-            ShoppingCartCubit cubit = ShoppingCartCubit.get(context);
             return Scaffold(
               backgroundColor: Colors.white,
               appBar: AppBar(
@@ -36,24 +34,24 @@ class ShoppingCartScreen extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.only(
+                       Padding(
+                        padding: const EdgeInsets.only(
                           top: 10.0,
                           left: 10.0,
                           right: 10.0,
                         ),
                         child: Row(
                           children: [
-                            CircleAvatar(
+                            const CircleAvatar(
                               backgroundColor: Colors.tealAccent,
                               radius: 50,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
+                              children: const [
                                 Text(
                                   "حقيبة التسوق فارغة",
                                   style: TextStyle(
@@ -81,7 +79,7 @@ class ShoppingCartScreen extends StatelessWidget {
                       const Divider(
                         thickness: 1,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 500,
                       ),
                       Padding(

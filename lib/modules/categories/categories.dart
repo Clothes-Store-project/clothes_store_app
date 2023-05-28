@@ -50,12 +50,12 @@ class CategoriesScreen extends StatelessWidget {
                         hintStyle: const TextStyle(
                             color: Colors.black, fontSize: 13),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
+                          borderSide: const BorderSide(color: Colors.black),
                           borderRadius: BorderRadius.circular(50),
                         ),
                         contentPadding: EdgeInsets.zero,
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
+                          borderSide: const BorderSide(color: Colors.black),
                           borderRadius: BorderRadius.circular(50),
                         ),
                         prefixIcon: Icon(
@@ -97,6 +97,7 @@ class CategoriesScreen extends StatelessWidget {
                   ),
                 ),
                 body: const TabBarView(
+                  physics: const NeverScrollableScrollPhysics(),
                   children: [
                     CategoriesWomenScreen(),
                     CategoriesMenScreen(),

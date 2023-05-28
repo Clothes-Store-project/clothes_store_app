@@ -1,4 +1,3 @@
-
 import 'package:clothes_store_app/modules/categories_men/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/categories_men/cubit/states.dart';
 import 'package:flutter/material.dart';
@@ -18,41 +17,33 @@ class CategoriesMenScreen extends StatelessWidget {
             CategoriesMenCubit cubit = CategoriesMenCubit.get(context);
             return Scaffold(
               backgroundColor: Colors.white,
-              body: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SingleChildScrollView(
-                  child: Row(
-                    children: [
-                      Container(
-                        color: Colors.grey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              color: Colors.white70,
-                              height: 1000,
-                              width: 150,
-                              child: ListView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                                itemBuilder: (context, index) => MaterialButton(
-                                  onPressed: () {},
-                                  focusColor: Colors.white,
-                                  height: 50,
-                                  child: cubit.text[index],
-                                  elevation: 0,
-                                ),
-                                itemCount: cubit.text.length,
-                              ),
-                            ),
-                          ],
+              body: Row(
+                children: [
+                  Container(
+                    color: Colors.grey.shade300,
+                    width: size.width * 0.36,
+                    child: ListView.builder(
+                      itemBuilder: (context, index) => MaterialButton(
+                        onPressed: () {
+                          cubit.changeIndex(index);
+                        },
+                        color: index == cubit.currentIndex
+                            ? Colors.white
+                            : Colors.grey.shade300,
+                        focusColor: Colors.white,
+                        height: 50,
+                        elevation: 0,
+                        child: Text(
+                          cubit.text[index],
+                          style: const TextStyle(
+                              fontSize: 16, color: Colors.black),
+                          textAlign: TextAlign.start,
                         ),
                       ),
-
-                    ],
+                      itemCount: cubit.text.length,
+                    ),
                   ),
-                ),
+                ],
               ),
             );
           }),

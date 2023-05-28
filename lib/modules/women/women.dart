@@ -30,22 +30,25 @@ class WomenScreen extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           itemCount: cubit.images.length,
                           itemBuilder: (context, index) {
-                            return InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => const ViewDataScreen()),
-                                );
-                              },
-                              child: Container(
-                                width: size.width * 0.21,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                      image: AssetImage(
-                                        cubit.images[index],
-                                      ),
-                                    )),
+                            return Container(
+                              width: size.width * 0.21,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      cubit.images[index],
+                                    ),
+                                  )),
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                        const ViewDataScreen()),
+                                  );
+                                },
+                                child: const SizedBox(),
                               ),
                             );
                           },
@@ -56,47 +59,23 @@ class WomenScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const ViewDataScreen()),
-                        );
-                      },
-                      child: const Image(
-                        image: AssetImage('assets/img_1.png'),
-                        width: double.infinity,
-                      ),
+                    const Image(
+                      image: AssetImage('assets/img_1.png'),
+                      width: double.infinity,
                     ),
                     const SizedBox(
                       height: 15.0,
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const ViewDataScreen()),
-                        );
-                      },
-                      child: const Image(
-                        image: AssetImage('assets/img.png'),
-                        width: double.infinity,
-                      ),
+                    const Image(
+                      image: AssetImage('assets/img.png'),
+                      width: double.infinity,
                     ),
                     const SizedBox(
                       height: 15.0,
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const ViewDataScreen()),
-                        );
-                      },
-                      child: const Image(
-                        image: AssetImage('assets/img_2.png'),
-                        width: double.infinity,
-                      ),
+                    const Image(
+                      image: AssetImage('assets/img_2.png'),
+                      width: double.infinity,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(10),
@@ -108,12 +87,7 @@ class WomenScreen extends StatelessWidget {
                             style: TextStyle(color: Colors.black, fontSize: 16),
                           ),
                           InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const ViewDataScreen()),
-                              );
-                            },
+                            onTap: () {},
                             child: const Text(
                               "اعرض الكل",
                               style:
@@ -133,12 +107,7 @@ class WomenScreen extends StatelessWidget {
                             child: SizedBox(
                               width: size.width * 0.33,
                               child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => const ViewDataScreen()),
-                                  );
-                                },
+                                onTap: () {},
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -245,17 +214,9 @@ class WomenScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15.0,
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const ViewDataScreen()),
-                        );
-                      },
-                      child: const Image(
-                        image: AssetImage('assets/img_3.png'),
-                        width: double.infinity,
-                      ),
+                    const Image(
+                      image: AssetImage('assets/img_3.png'),
+                      width: double.infinity,
                     ),
                     const SizedBox(
                       height: 15,
@@ -265,41 +226,17 @@ class WomenScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const ViewDataScreen()),
-                              );
-                            },
-                            child: const Image(
-                              image: AssetImage('assets/img_5.jpg'),
-                              width: 115,
-                            ),
+                          Image(
+                            image: const AssetImage('assets/img_5.jpg'),
+                            width: size.width * 0.3,
                           ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => ViewDataScreen()),
-                              );
-                            },
-                            child: const Image(
-                              image: AssetImage('assets/img_5.jpg'),
-                              width: 115,
-                            ),
+                          Image(
+                            image: const AssetImage('assets/img_5.jpg'),
+                            width: size.width * 0.3,
                           ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => ViewDataScreen()),
-                              );
-                            },
-                            child: const Image(
-                              image: AssetImage('assets/img_5.jpg'),
-                              width: 115,
-                            ),
+                          Image(
+                            image: const AssetImage('assets/img_5.jpg'),
+                            width: size.width * 0.3,
                           ),
                         ],
                       ),
@@ -314,12 +251,7 @@ class WomenScreen extends StatelessWidget {
                             style: TextStyle(color: Colors.black, fontSize: 16),
                           ),
                           InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => ViewDataScreen()),
-                              );
-                            },
+                            onTap: () {},
                             child: const Text(
                               "اعرض الكل",
                               style:
@@ -338,15 +270,10 @@ class WomenScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return Padding(
                               padding: const EdgeInsets.all(5),
-                              child: Container(
+                              child: SizedBox(
                                 width: size.width * 0.33,
                                 child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => ViewDataScreen()),
-                                    );
-                                  },
+                                  onTap: () {},
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -455,9 +382,9 @@ class WomenScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    Container(
+                    const SizedBox(
                       width: double.infinity,
-                      child: const Image(
+                      child: Image(
                         image: AssetImage('assets/women-nb-desktop-ar.jpg'),
                         width: double.infinity,
                       ),
@@ -467,11 +394,11 @@ class WomenScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity,
-                        child: const Column(
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+                          children: const [
                             Text(
                               "ماركات تتصدر القائمة",
                               style: TextStyle(
@@ -495,7 +422,7 @@ class WomenScreen extends StatelessWidget {
                       height: 15,
                     ),
                     ConditionalBuilder(
-                      condition: Image.asset("assets/img_8.jpg") != null,
+                      condition: true,
                       builder: (context) => builderWidget(
                         "assets/img_6.jpg",
                         "assets/img_5.jpg",
@@ -509,9 +436,9 @@ class WomenScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    Container(
+                    const SizedBox(
                       width: double.infinity,
-                      child: const Image(
+                      child: Image(
                         image: AssetImage('assets/img_9.jpg'),
                         width: double.infinity,
                       ),
@@ -519,22 +446,22 @@ class WomenScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Image(
-                            image: AssetImage('assets/img_5.jpg'),
-                            width: 115,
+                            image: const AssetImage('assets/img_5.jpg'),
+                            width: size.width * 0.3,
                           ),
                           Image(
-                            image: AssetImage('assets/img_5.jpg'),
-                            width: 115,
+                            image: const AssetImage('assets/img_5.jpg'),
+                            width: size.width * 0.3,
                           ),
                           Image(
-                            image: AssetImage('assets/img_5.jpg'),
-                            width: 115,
+                            image: const AssetImage('assets/img_5.jpg'),
+                            width: size.width * 0.3,
                           ),
                         ],
                       ),
@@ -571,7 +498,7 @@ class WomenScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return Padding(
                               padding: const EdgeInsets.all(5),
-                              child: Container(
+                              child: SizedBox(
                                 width: size.width * 0.33,
                                 child: InkWell(
                                   onTap: () {},
@@ -683,9 +610,9 @@ class WomenScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    Container(
+                    const SizedBox(
                       width: double.infinity,
-                      child: const Image(
+                      child: Image(
                         image: AssetImage('assets/img_12.jpg'),
                         width: double.infinity,
                       ),
@@ -695,11 +622,11 @@ class WomenScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity,
-                        child: const Column(
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+                          children: const [
                             Text(
                               "أختيارت المحرر لهذا الشهر",
                               style: TextStyle(
@@ -724,7 +651,7 @@ class WomenScreen extends StatelessWidget {
                       height: 15,
                     ),
                     ConditionalBuilder(
-                      condition: Image.asset("assets/img_8.jpg") != null,
+                      condition: true,
                       builder: (context) => builderWidget(
                         "assets/img_13.jpg",
                         "assets/img_14.jpg",
@@ -738,7 +665,6 @@ class WomenScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-
                   ],
                 ),
               ),

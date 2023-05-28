@@ -1,6 +1,5 @@
 import 'package:clothes_store_app/modules/wishlist/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/wishlist/cubit/states.dart';
-import 'package:clothes_store_app/shared/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,13 +8,11 @@ class WishlistScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return BlocProvider(
       create: (BuildContext context) => WishlistCubit(),
       child: BlocConsumer<WishlistCubit, WishlistStates>(
           listener: (context, state) {},
           builder: (context, state) {
-            WishlistCubit cubit = WishlistCubit.get(context);
             return Scaffold(
               backgroundColor: Colors.white,
               appBar: AppBar(
@@ -36,20 +33,20 @@ class WishlistScreen extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.only(top: 10.0,left: 10.0,right: 10.0,),
+                       Padding(
+                        padding: const EdgeInsets.only(top: 10.0,left: 10.0,right: 10.0,),
                         child: Row(
                           children: [
-                            CircleAvatar(
+                            const CircleAvatar(
                               backgroundColor: Colors.tealAccent,
                               radius: 50,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
+                              children: const [
                                 Text(
                                   "قائمة الامنيات فارغة",
                                   style: TextStyle(
@@ -77,7 +74,7 @@ class WishlistScreen extends StatelessWidget {
                       const Divider(
                         thickness: 1,
                       ),
-                      SizedBox(height: 500,),
+                      const SizedBox(height: 500,),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(

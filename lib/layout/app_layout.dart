@@ -1,6 +1,7 @@
 import 'package:clothes_store_app/layout/cubit/cubit.dart';
 import 'package:clothes_store_app/layout/cubit/states.dart';
 import 'package:clothes_store_app/shared/components.dart';
+import 'package:clothes_store_app/shared/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,10 +22,10 @@ class AppScreen extends StatelessWidget {
             type: BottomNavigationBarType.fixed,
             onTap: (index) {
               cubit.changeIndex(index);
-            },
+            },  
             items: cubit.items(cubit.bottomNavIndex),
             currentIndex: cubit.bottomNavIndex,
-            selectedItemColor: Colors.green[600],
+            selectedItemColor: mainColor,
           ),
         );
       },

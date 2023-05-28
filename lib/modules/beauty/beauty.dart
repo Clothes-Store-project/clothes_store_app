@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:clothes_store_app/modules/beauty/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/beauty/cubit/states.dart';
-import 'package:clothes_store_app/modules/view_data/view_data.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,23 +29,15 @@ class BeautyScreen extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           itemCount: cubit.images.length,
                           itemBuilder: (context, index) {
-                            return InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => const ViewDataScreen()),
-                                );
-                              },
-                              child: Container(
-                                width: size.width * 0.21,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                      image: AssetImage(
-                                        cubit.images[index],
-                                      ),
-                                    )),
-                              ),
+                            return Container(
+                              width: size.width * 0.21,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      cubit.images[index],
+                                    ),
+                                  )),
                             );
                           },
                           separatorBuilder: (context, index) => const SizedBox(
@@ -56,47 +47,23 @@ class BeautyScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const ViewDataScreen()),
-                        );
-                      },
-                      child: const Image(
-                        image: AssetImage('assets/beauty/img_1.jpg'),
-                        width: double.infinity,
-                      ),
+                    const Image(
+                      image: AssetImage('assets/beauty/img_1.jpg'),
+                      width: double.infinity,
                     ),
                     const SizedBox(
                       height: 15.0,
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const ViewDataScreen()),
-                        );
-                      },
-                      child: const Image(
-                        image: AssetImage('assets/beauty/img_2.jpg'),
-                        width: double.infinity,
-                      ),
+                    const Image(
+                      image: AssetImage('assets/beauty/img_2.jpg'),
+                      width: double.infinity,
                     ),
                     const SizedBox(
                       height: 15.0,
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const ViewDataScreen()),
-                        );
-                      },
-                      child: const Image(
-                        image: AssetImage('assets/beauty/img_3.jpg'),
-                        width: double.infinity,
-                      ),
+                    const Image(
+                      image: AssetImage('assets/beauty/img_3.jpg'),
+                      width: double.infinity,
                     ),
                     const SizedBox(
                       height: 15.0,
@@ -111,12 +78,7 @@ class BeautyScreen extends StatelessWidget {
                             style: TextStyle(color: Colors.black, fontSize: 16),
                           ),
                           InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const ViewDataScreen()),
-                              );
-                            },
+                            onTap: () {},
                             child: const Text(
                               "اعرض الكل",
                               style:
@@ -136,12 +98,7 @@ class BeautyScreen extends StatelessWidget {
                             child: SizedBox(
                               width: size.width * 0.33,
                               child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => const ViewDataScreen()),
-                                  );
-                                },
+                                onTap: () {},
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -248,17 +205,9 @@ class BeautyScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15.0,
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const ViewDataScreen()),
-                        );
-                      },
-                      child: const Image(
-                        image: AssetImage('assets/men/img_3.jpg'),
-                        width: double.infinity,
-                      ),
+                    const Image(
+                      image: AssetImage('assets/men/img_3.jpg'),
+                      width: double.infinity,
                     ),
                     const SizedBox(
                       height: 15,
@@ -268,41 +217,17 @@ class BeautyScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const ViewDataScreen()),
-                              );
-                            },
-                            child: const Image(
-                              image: AssetImage('assets/men/img_4.jpg'),
-                              width: 115,
-                            ),
+                          Image(
+                            image: const AssetImage('assets/men/img_4.jpg'),
+                            width: size.width * 0.3,
                           ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => ViewDataScreen()),
-                              );
-                            },
-                            child: const Image(
-                              image: AssetImage('assets/men/img_4.jpg'),
-                              width: 115,
-                            ),
+                          Image(
+                            image: const AssetImage('assets/men/img_4.jpg'),
+                            width: size.width * 0.3,
                           ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => ViewDataScreen()),
-                              );
-                            },
-                            child: const Image(
-                              image: AssetImage('assets/men/img_4.jpg'),
-                              width: 115,
-                            ),
+                          Image(
+                            image: const AssetImage('assets/men/img_4.jpg'),
+                            width: size.width * 0.3,
                           ),
                         ],
                       ),
@@ -317,12 +242,7 @@ class BeautyScreen extends StatelessWidget {
                             style: TextStyle(color: Colors.black, fontSize: 16),
                           ),
                           InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => ViewDataScreen()),
-                              );
-                            },
+                            onTap: () {},
                             child: const Text(
                               "اعرض الكل",
                               style:
@@ -341,15 +261,10 @@ class BeautyScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return Padding(
                               padding: const EdgeInsets.all(5),
-                              child: Container(
+                              child: SizedBox(
                                 width: size.width * 0.33,
                                 child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => ViewDataScreen()),
-                                    );
-                                  },
+                                  onTap: () {},
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -458,9 +373,9 @@ class BeautyScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    Container(
+                    const SizedBox(
                       width: double.infinity,
-                      child: const Image(
+                      child: Image(
                         image: AssetImage('assets/men/img_6.jpg'),
                         width: double.infinity,
                       ),
@@ -470,11 +385,11 @@ class BeautyScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity,
-                        child: const Column(
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+                          children: const [
                             Text(
                               "ماركات تتصدر القائمة",
                               style: TextStyle(
@@ -498,7 +413,7 @@ class BeautyScreen extends StatelessWidget {
                       height: 15,
                     ),
                     ConditionalBuilder(
-                      condition: Image.asset("assets/men/img_7.jpg") != null,
+                      condition: true,
                       builder: (context) => builderWidget(
                         "assets/men/img_7.jpg",
                         "assets/men/img_8.jpg",
@@ -512,9 +427,9 @@ class BeautyScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    Container(
+                    const SizedBox(
                       width: double.infinity,
-                      child: const Image(
+                      child: Image(
                         image: AssetImage('assets/men/img_11.jpg'),
                         width: double.infinity,
                       ),
@@ -522,9 +437,9 @@ class BeautyScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    Container(
+                    const SizedBox(
                       width: double.infinity,
-                      child: const Image(
+                      child: Image(
                         image: AssetImage('assets/men/img_12.jpg'),
                         width: double.infinity,
                       ),
@@ -532,9 +447,9 @@ class BeautyScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    Container(
+                    const SizedBox(
                       width: double.infinity,
-                      child: const Image(
+                      child: Image(
                         image: AssetImage('assets/men/img_13.jpg'),
                         width: double.infinity,
                       ),
@@ -542,9 +457,9 @@ class BeautyScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    Container(
+                    const SizedBox(
                       width: double.infinity,
-                      child: const Image(
+                      child: Image(
                         image: AssetImage('assets/men/img_14.jpg'),
                         width: double.infinity,
                       ),
@@ -552,22 +467,22 @@ class BeautyScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Image(
-                            image: AssetImage('assets/men/img_4.jpg'),
-                            width: 115,
+                            image: const AssetImage('assets/men/img_4.jpg'),
+                            width: size.width * 0.3,
                           ),
                           Image(
-                            image: AssetImage('assets/men/img_4.jpg'),
-                            width: 115,
+                            image: const AssetImage('assets/men/img_4.jpg'),
+                            width: size.width * 0.3,
                           ),
                           Image(
-                            image: AssetImage('assets/men/img_4.jpg'),
-                            width: 115,
+                            image: const AssetImage('assets/men/img_4.jpg'),
+                            width: size.width * 0.3,
                           ),
                         ],
                       ),
@@ -604,7 +519,7 @@ class BeautyScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return Padding(
                               padding: const EdgeInsets.all(5),
-                              child: Container(
+                              child: SizedBox(
                                 width: size.width * 0.33,
                                 child: InkWell(
                                   onTap: () {},
@@ -718,11 +633,11 @@ class BeautyScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity,
-                        child: const Column(
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+                          children: const [
                             Text(
                               "أختيارت المحرر لهذا الشهر",
                               style: TextStyle(
@@ -733,7 +648,7 @@ class BeautyScreen extends StatelessWidget {
                             ),
                             Text(
                               'منتجات وستايلات ترحب بالموسم انتقاها خبراء الموضة من'
-                                  '\nمختلف الفئات لك خصيصا لتغطى احتياجاتك هذا الموسم.',
+                              '\nمختلف الفئات لك خصيصا لتغطى احتياجاتك هذا الموسم.',
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.black,
@@ -747,7 +662,7 @@ class BeautyScreen extends StatelessWidget {
                       height: 15,
                     ),
                     ConditionalBuilder(
-                      condition: Image.asset("assets/men/img_16.jpg") != null,
+                      condition: true,
                       builder: (context) => builderWidget(
                         "assets/men/img_16.jpg",
                         "assets/men/img_17.jpg",
