@@ -20,7 +20,7 @@ class ProfileScreen extends StatelessWidget {
               appBar: AppBar(
                 backgroundColor: Colors.white,
                 title: const Text(
-                  "صفختي",
+                  "صفحتي",
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 20,

@@ -18,7 +18,7 @@ class ShoppingCartScreen extends StatelessWidget {
               backgroundColor: Colors.white,
               appBar: AppBar(
                 backgroundColor: Colors.white,
-                title: const Text(
+                title: Text(
                   "حقيبة التسوق",
                   style: TextStyle(
                     color: Colors.black,
@@ -30,28 +30,28 @@ class ShoppingCartScreen extends StatelessWidget {
                 elevation: 0.5,
               ),
               body: Padding(
-                padding: const EdgeInsets.all(5.0),
+                padding: EdgeInsets.all(5.0),
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                        Padding(
-                        padding: const EdgeInsets.only(
+                        padding: EdgeInsets.only(
                           top: 10.0,
                           left: 10.0,
                           right: 10.0,
                         ),
                         child: Row(
                           children: [
-                            const CircleAvatar(
+                            CircleAvatar(
                               backgroundColor: Colors.tealAccent,
                               radius: 50,
                             ),
-                            const SizedBox(
+                            SizedBox(
                               width: 10,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
+                              children: [
                                 Text(
                                   "حقيبة التسوق فارغة",
                                   style: TextStyle(
@@ -73,17 +73,17 @@ class ShoppingCartScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         height: 15,
                       ),
-                      const Divider(
+                      Divider(
                         thickness: 1,
                       ),
-                      const SizedBox(
+                      SizedBox(
                         height: 500,
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(8.0),
                         child: Container(
                           width: double.infinity,
                           height: 60,
@@ -93,7 +93,7 @@ class ShoppingCartScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(0.0),
                           ),
                           child: MaterialButton(
-                            shape: const Border(
+                            shape: Border(
                               left: BorderSide(
                                 color: Color.fromRGBO(80, 192, 168, 1),
                               ),
@@ -109,7 +109,7 @@ class ShoppingCartScreen extends StatelessWidget {
                             ),
                             onPressed: () {},
                             height: 50.0,
-                            child: const Text(
+                            child: Text(
                               'الاستمرار بالتسوق',
                               style: TextStyle(
                                 color: Color.fromRGBO(80, 192, 168, 1),

@@ -3,6 +3,7 @@ import 'package:clothes_store_app/MyBlocObserver.dart';
 import 'package:clothes_store_app/layout/app_layout.dart';
 import 'package:clothes_store_app/layout/cubit/cubit.dart';
 import 'package:clothes_store_app/layout/cubit/states.dart';
+import 'package:clothes_store_app/modules/item_details/item_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
