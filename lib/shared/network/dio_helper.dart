@@ -6,11 +6,12 @@ class DioHelper {
   static init() {
     dio = Dio(
       BaseOptions(
-          baseUrl: 'https://confused-bat-stole.cyclic.app',
-          receiveDataWhenStatusError: true,
-          headers: {
-            'Content-Type': 'application/json',
-          }),
+        baseUrl: 'https://wild-rose-gecko-cap.cyclic.app',
+        receiveDataWhenStatusError: true,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      ),
     );
   }
 
@@ -36,7 +37,7 @@ class DioHelper {
     String? token,
   }) async {
     dio!.options.headers = {
-      'Authorization': "Bearer ${token?? ''}",
+      'Authorization': "Bearer ${token ?? ''}",
     };
 
     return dio!.post(
@@ -53,7 +54,7 @@ class DioHelper {
     String? token,
   }) async {
     dio!.options.headers = {
-      'Authorization': "Bearer ${token?? ''}",
+      'Authorization': "Bearer ${token ?? ''}",
     };
 
     return dio!.delete(
@@ -87,7 +88,7 @@ class DioHelper {
     String? token,
   }) async {
     dio!.options.headers = {
-      'Authorization': "Bearer ${token?? ''}",
+      'Authorization': "Bearer ${token ?? ''}",
     };
 
     return dio!.patch(

@@ -1,3 +1,4 @@
+import 'package:clothes_store_app/modules/login/login_screen.dart';
 import 'package:clothes_store_app/modules/profile/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/profile/cubit/states.dart';
 import 'package:clothes_store_app/shared/constant.dart';
@@ -50,7 +51,12 @@ class ProfileScreen extends StatelessWidget {
                             padding: EdgeInsets.all(10),
                             child: MaterialButton(
                               color: mainColor,
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                                );
+                              },
                               child: const SizedBox(
                                   width: double.infinity,
                                   child: Text(
@@ -79,7 +85,11 @@ class ProfileScreen extends StatelessWidget {
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsets.all(10),
-                                        child: Icon(Icons.car_crash_outlined, color: mainColor, size: size.width * 0.1,),
+                                        child: Icon(
+                                          Icons.car_crash_outlined,
+                                          color: mainColor,
+                                          size: size.width * 0.1,
+                                        ),
                                       ),
                                     ),
                                     Text("الطلبيات")
@@ -95,7 +105,11 @@ class ProfileScreen extends StatelessWidget {
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsets.all(10),
-                                        child: Icon(Icons.settings_backup_restore, color: mainColor, size: size.width * 0.1,),
+                                        child: Icon(
+                                          Icons.settings_backup_restore,
+                                          color: mainColor,
+                                          size: size.width * 0.1,
+                                        ),
                                       ),
                                     ),
                                     Text("الإرجاع")
@@ -111,7 +125,11 @@ class ProfileScreen extends StatelessWidget {
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsets.all(10),
-                                        child: Icon(Icons.money_off, color: mainColor, size: size.width * 0.1,),
+                                        child: Icon(
+                                          Icons.money_off,
+                                          color: mainColor,
+                                          size: size.width * 0.1,
+                                        ),
                                       ),
                                     ),
                                     Text("محفظة")
@@ -129,7 +147,11 @@ class ProfileScreen extends StatelessWidget {
                                         padding: const EdgeInsets.all(10),
                                         child: Column(
                                           children: [
-                                            Icon(Icons.card_giftcard, color: mainColor, size: size.width * 0.1,),
+                                            Icon(
+                                              Icons.card_giftcard,
+                                              color: mainColor,
+                                              size: size.width * 0.1,
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -143,37 +165,63 @@ class ProfileScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 10,),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     Container(
                       color: Colors.white,
                       child: Column(
                         children: [
                           ListTile(
-                            onTap: (){},
-                            trailing: Icon(Icons.arrow_back_ios_new_outlined, color: Colors.grey.shade400,),
+                            onTap: () {},
+                            trailing: Icon(
+                              Icons.arrow_back_ios_new_outlined,
+                              color: Colors.grey.shade400,
+                            ),
                             title: Text("بطاقة هدية"),
-                            leading: Icon(Icons.card_giftcard, color: Colors.grey.shade400,),
+                            leading: Icon(
+                              Icons.card_giftcard,
+                              color: Colors.grey.shade400,
+                            ),
                           ),
                           const Divider(),
                           ListTile(
-                            onTap: (){},
-                            trailing: Icon(Icons.arrow_back_ios_new_outlined, color: Colors.grey.shade400,),
+                            onTap: () {},
+                            trailing: Icon(
+                              Icons.arrow_back_ios_new_outlined,
+                              color: Colors.grey.shade400,
+                            ),
                             title: Text("العنواين المحفوظة"),
-                            leading: Icon(Icons.location_on_outlined, color: Colors.grey.shade400,),
+                            leading: Icon(
+                              Icons.location_on_outlined,
+                              color: Colors.grey.shade400,
+                            ),
                           ),
                           const Divider(),
                           ListTile(
-                            onTap: (){},
-                            trailing: Icon(Icons.arrow_back_ios_new_outlined, color: Colors.grey.shade400,),
+                            onTap: () {},
+                            trailing: Icon(
+                              Icons.arrow_back_ios_new_outlined,
+                              color: Colors.grey.shade400,
+                            ),
                             title: Text("بطاقات الائتمان المحفوظة"),
-                            leading: Icon(Icons.add_card_outlined, color: Colors.grey.shade400,),
+                            leading: Icon(
+                              Icons.add_card_outlined,
+                              color: Colors.grey.shade400,
+                            ),
                           ),
                           const Divider(),
                           ListTile(
-                            onTap: (){},
-                            trailing: Icon(Icons.arrow_back_ios_new_outlined, color: Colors.grey.shade400,),
+                            onTap: () {},
+                            trailing: Icon(
+                              Icons.arrow_back_ios_new_outlined,
+                              color: Colors.grey.shade400,
+                            ),
                             title: Text("البلد واللغة"),
-                            leading: Icon(Icons.language, color: Colors.grey.shade400,),
+                            leading: Icon(
+                              Icons.language,
+                              color: Colors.grey.shade400,
+                            ),
                           ),
                         ],
                       ),

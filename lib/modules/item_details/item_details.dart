@@ -67,7 +67,6 @@ class ItemDetailsScreen extends StatelessWidget {
                 ],
                 elevation: 0,
               ),
-              //backgroundColor: Colors.white,
               body: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: SafeArea(
