@@ -6,7 +6,7 @@ class DioHelper {
   static init() {
     dio = Dio(
       BaseOptions(
-        baseUrl: 'https://wild-rose-gecko-cap.cyclic.app',
+        baseUrl: 'http://192.168.1.5:5000',
         receiveDataWhenStatusError: true,
         headers: {
           'Content-Type': 'application/json',

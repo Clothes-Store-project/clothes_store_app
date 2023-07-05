@@ -1,7 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:clothes_store_app/models/product_category_model.dart';
 import 'package:clothes_store_app/modules/view_data/view_data.dart';
 import 'package:clothes_store_app/modules/women/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/women/cubit/states.dart';
+import 'package:clothes_store_app/shared/constant.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +15,7 @@ class WomenScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return BlocProvider(
-      create: (BuildContext context) => WomenCubit(),
+      create: (BuildContext context) => WomenCubit()..getProductCategory(),
       child: BlocConsumer<WomenCubit, WomenStates>(
           listener: (context, state) {},
           builder: (context, state) {
@@ -21,652 +23,233 @@ class WomenScreen extends StatelessWidget {
             return Scaffold(
               backgroundColor: Colors.white,
               body: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 100.0,
-                      child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: cubit.images.length,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              width: size.width * 0.21,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                      cubit.images[index],
+                child: cubit.isLoading
+                    ? Center(
+                        child: CircularProgressIndicator(
+                          color: mainColor,
+                        ),
+                      )
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 100.0,
+                            child: ListView.separated(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: cubit.images.length,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    width: size.width * 0.21,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                            cubit.images[index],
+                                          ),
+                                        )),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const ViewDataScreen()),
+                                        );
+                                      },
+                                      child: const SizedBox(),
                                     ),
-                                  )),
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                        const ViewDataScreen()),
                                   );
                                 },
-                                child: const SizedBox(),
-                              ),
-                            );
-                          },
-                          separatorBuilder: (context, index) => const SizedBox(
-                                width: 10.0,
-                              )),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Image(
-                      image: AssetImage('assets/img_1.png'),
-                      width: double.infinity,
-                    ),
-                    const SizedBox(
-                      height: 15.0,
-                    ),
-                    const Image(
-                      image: AssetImage('assets/img.png'),
-                      width: double.infinity,
-                    ),
-                    const SizedBox(
-                      height: 15.0,
-                    ),
-                    const Image(
-                      image: AssetImage('assets/img_2.png'),
-                      width: double.infinity,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            "عروض لفترة محدودة",
-                            style: TextStyle(color: Colors.black, fontSize: 16),
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(
+                                      width: 10.0,
+                                    )),
                           ),
-                          InkWell(
-                            onTap: () {},
-                            child: const Text(
-                              "اعرض الكل",
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 16),
-                            ),
+                          const SizedBox(
+                            height: 10,
                           ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 350.0,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(5),
-                            child: SizedBox(
-                              width: size.width * 0.33,
-                              child: InkWell(
-                                onTap: () {},
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                          ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: cubit.productCategoryModel!
+                                  .productCategory!.length,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                ProductCategory category = cubit.productCategoryModel!.productCategory![index];
+                                return Column(
                                   children: [
-                                    Expanded(
-                                      child: Container(
-                                        decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(5),
-                                            topRight: Radius.circular(5),
-                                            bottomRight: Radius.circular(5),
-                                            bottomLeft: Radius.circular(5),
+                                    Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            category.name!,
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16),
                                           ),
-                                          image: DecorationImage(
-                                            image: AssetImage(
-                                              'assets/img_3.jpg',
+                                          InkWell(
+                                            onTap: () {},
+                                            child: const Text(
+                                              "اعرض الكل",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16),
                                             ),
-                                            fit: BoxFit.cover,
                                           ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 350.0,
+                                      child: ListView.separated(
+                                        itemCount: cubit.list2[index].length,
+                                        scrollDirection: Axis.horizontal,
+                                        itemBuilder: (context, index2) {
+                                          return Padding(
+                                            padding: const EdgeInsets.all(5),
+                                            child: SizedBox(
+                                              width: size.width * 0.4,
+                                              child: InkWell(
+                                                onTap: () {},
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Expanded(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              const BorderRadius.only(
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    5),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    5),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    5),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    5),
+                                                          ),
+                                                          image:
+                                                              DecorationImage(
+                                                            image: NetworkImage(
+                                                              cubit.list2[index][index2].imageSrc![0]!,
+                                                            ),
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Text(
+                                                      cubit.list2[index][index2].name!,
+                                                      style: const TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 15,
+                                                      ),
+                                                      maxLines: 1,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Text(
+                                                      cubit.list2[index][index2].desc!,
+                                                      style: const TextStyle(
+                                                        color: Colors.black45,
+                                                        fontSize: 15,
+                                                      ),
+                                                      maxLines: 1,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    const Text(
+                                                      "د.أ. 178",
+                                                      style: TextStyle(
+                                                        color: Colors.red,
+                                                        fontSize: 15,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Container(
+                                                      decoration:
+                                                          const BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .only(
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        5),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        5),
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        5),
+                                                                bottomRight:
+                                                                    Radius
+                                                                        .circular(
+                                                                            5),
+                                                              ),
+                                                              color:
+                                                                  Colors.white,
+                                                              boxShadow: [
+                                                            BoxShadow(
+                                                              color: Colors.red,
+                                                              spreadRadius: 1,
+                                                              blurRadius: 4,
+                                                              offset:
+                                                                  Offset(0, 0),
+                                                            ),
+                                                          ]),
+                                                      width: 80,
+                                                      height: 20,
+                                                      child: const Center(
+                                                        child: Text(
+                                                          "خصم %50 ",
+                                                          style: TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: 15,
+                                                          ),
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        separatorBuilder: (context, index2) =>
+                                            const SizedBox(
+                                          width: 5.0,
                                         ),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    const Text(
-                                      "كوتون",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 15,
-                                      ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    const Text(
-                                      "Tencel Shorts High Rise Pocket",
-                                      style: TextStyle(
-                                        color: Colors.black45,
-                                        fontSize: 15,
-                                      ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    const Text(
-                                      "د.أ. 178",
-                                      style: TextStyle(
-                                        color: Colors.red,
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Container(
-                                      decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(5),
-                                            topRight: Radius.circular(5),
-                                            bottomLeft: Radius.circular(5),
-                                            bottomRight: Radius.circular(5),
-                                          ),
-                                          color: Colors.white,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.red,
-                                              spreadRadius: 1,
-                                              blurRadius: 4,
-                                              offset: Offset(0, 0),
-                                            ),
-                                          ]),
-                                      width: 80,
-                                      height: 20,
-                                      child: const Center(
-                                        child: Text(
-                                          "خصم %50 ",
-                                          style: TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 15,
-                                          ),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
                                     ),
                                   ],
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                        separatorBuilder: (context, index) => const SizedBox(
-                          width: 5.0,
-                        ),
-                        itemCount: 8,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15.0,
-                    ),
-                    const Image(
-                      image: AssetImage('assets/img_3.png'),
-                      width: double.infinity,
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Image(
-                            image: const AssetImage('assets/img_5.jpg'),
-                            width: size.width * 0.3,
-                          ),
-                          Image(
-                            image: const AssetImage('assets/img_5.jpg'),
-                            width: size.width * 0.3,
-                          ),
-                          Image(
-                            image: const AssetImage('assets/img_5.jpg'),
-                            width: size.width * 0.3,
-                          ),
+                                );
+                              })
                         ],
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            "أفضل مختارات الملابس",
-                            style: TextStyle(color: Colors.black, fontSize: 16),
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: const Text(
-                              "اعرض الكل",
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 16),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: SizedBox(
-                        height: 350.0,
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(5),
-                              child: SizedBox(
-                                width: size.width * 0.33,
-                                child: InkWell(
-                                  onTap: () {},
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          decoration: const BoxDecoration(
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(5),
-                                              topRight: Radius.circular(5),
-                                              bottomRight: Radius.circular(5),
-                                              bottomLeft: Radius.circular(5),
-                                            ),
-                                            image: DecorationImage(
-                                              image: AssetImage(
-                                                'assets/img_6.jpg',
-                                              ),
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      const Text(
-                                        "اديداس اوريجنالز",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 15,
-                                        ),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      const Text(
-                                        "بنطال فضفاض",
-                                        style: TextStyle(
-                                          color: Colors.black45,
-                                          fontSize: 15,
-                                        ),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      const Text(
-                                        "د.أ. 178",
-                                        style: TextStyle(
-                                          color: Colors.red,
-                                          fontSize: 15,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Container(
-                                        decoration: const BoxDecoration(
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(5),
-                                              topRight: Radius.circular(5),
-                                              bottomLeft: Radius.circular(5),
-                                              bottomRight: Radius.circular(5),
-                                            ),
-                                            color: Colors.white,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.red,
-                                                spreadRadius: 1,
-                                                blurRadius: 4,
-                                                offset: Offset(0, 0),
-                                              ),
-                                            ]),
-                                        width: 80,
-                                        height: 20,
-                                        child: const Center(
-                                          child: Text(
-                                            "خصم %50 ",
-                                            style: TextStyle(
-                                              color: Colors.red,
-                                              fontSize: 15,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                          separatorBuilder: (context, index) => const SizedBox(
-                            width: 5.0,
-                          ),
-                          itemCount: 8,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const SizedBox(
-                      width: double.infinity,
-                      child: Image(
-                        image: AssetImage('assets/women-nb-desktop-ar.jpg'),
-                        width: double.infinity,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text(
-                              "ماركات تتصدر القائمة",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                fontSize: 20,
-                                color: Colors.black,
-                              ),
-                            ),
-                            Text(
-                              "مختارة بعناية لتلبى احتياجاتك",
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    ConditionalBuilder(
-                      condition: true,
-                      builder: (context) => builderWidget(
-                        "assets/img_6.jpg",
-                        "assets/img_5.jpg",
-                        "assets/img_5.jpg",
-                        "assets/img_8.jpg",
-                        "assets/img_5.jpg",
-                      ),
-                      fallback: (context) =>
-                          const Center(child: CircularProgressIndicator()),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const SizedBox(
-                      width: double.infinity,
-                      child: Image(
-                        image: AssetImage('assets/img_9.jpg'),
-                        width: double.infinity,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Image(
-                            image: const AssetImage('assets/img_5.jpg'),
-                            width: size.width * 0.3,
-                          ),
-                          Image(
-                            image: const AssetImage('assets/img_5.jpg'),
-                            width: size.width * 0.3,
-                          ),
-                          Image(
-                            image: const AssetImage('assets/img_5.jpg'),
-                            width: size.width * 0.3,
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            "وصلنا حديثا",
-                            style: TextStyle(color: Colors.black, fontSize: 16),
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: const Text(
-                              "اعرض الكل",
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 16),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: SizedBox(
-                        height: 350.0,
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(5),
-                              child: SizedBox(
-                                width: size.width * 0.33,
-                                child: InkWell(
-                                  onTap: () {},
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          decoration: const BoxDecoration(
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(5),
-                                              topRight: Radius.circular(5),
-                                              bottomRight: Radius.circular(5),
-                                              bottomLeft: Radius.circular(5),
-                                            ),
-                                            image: DecorationImage(
-                                              image: AssetImage(
-                                                'assets/img_11.jpg',
-                                              ),
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      const Text(
-                                        "ديفاتكو",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 15,
-                                        ),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      const Text(
-                                        "Woman Bike Neck Knitted Short Sleeve Tunic",
-                                        style: TextStyle(
-                                          color: Colors.black45,
-                                          fontSize: 15,
-                                        ),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      const Text(
-                                        "د.أ. 159",
-                                        style: TextStyle(
-                                          color: Colors.red,
-                                          fontSize: 15,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Container(
-                                        decoration: const BoxDecoration(
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(5),
-                                              topRight: Radius.circular(5),
-                                              bottomLeft: Radius.circular(5),
-                                              bottomRight: Radius.circular(5),
-                                            ),
-                                            color: Colors.white,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.red,
-                                                spreadRadius: 1,
-                                                blurRadius: 4,
-                                                offset: Offset(0, 0),
-                                              ),
-                                            ]),
-                                        width: 80,
-                                        height: 20,
-                                        child: const Center(
-                                          child: Text(
-                                            "خصم %50 ",
-                                            style: TextStyle(
-                                              color: Colors.red,
-                                              fontSize: 15,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                          separatorBuilder: (context, index) => const SizedBox(
-                            width: 5.0,
-                          ),
-                          itemCount: 8,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const SizedBox(
-                      width: double.infinity,
-                      child: Image(
-                        image: AssetImage('assets/img_12.jpg'),
-                        width: double.infinity,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text(
-                              "أختيارت المحرر لهذا الشهر",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 25,
-                                color: Colors.black,
-                              ),
-                            ),
-                            Text(
-                              'منتجات وستايلات ترحب بالموسم انتقاها خبراء الموضة من'
-                              '\nمختلف الفئات لك خصيصا لتغطى احتياجاتك هذا الصيف.',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    ConditionalBuilder(
-                      condition: true,
-                      builder: (context) => builderWidget(
-                        "assets/img_13.jpg",
-                        "assets/img_14.jpg",
-                        "assets/img_15.jpg",
-                        "assets/img_16.jpg",
-                        "assets/img_17.jpg",
-                      ),
-                      fallback: (context) =>
-                          const Center(child: CircularProgressIndicator()),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                  ],
-                ),
               ),
             );
           }),
