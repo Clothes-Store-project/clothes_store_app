@@ -1,11 +1,6 @@
-import 'package:clothes_store_app/modules/beauty/beauty.dart';
-import 'package:clothes_store_app/modules/kids/kids.dart';
+import 'package:clothes_store_app/modules/home/home_screen.dart';
 import 'package:clothes_store_app/modules/main/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/main/cubit/states.dart';
-import 'package:clothes_store_app/modules/men/men.dart';
-import 'package:clothes_store_app/modules/premium/premium.dart';
-import 'package:clothes_store_app/modules/sport/sport.dart';
-import 'package:clothes_store_app/modules/women/women.dart';
 import 'package:clothes_store_app/shared/components.dart';
 import 'package:clothes_store_app/shared/constant.dart';
 import 'package:flutter/material.dart';
@@ -18,13 +13,17 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return BlocProvider(
-      create: (BuildContext context) => MainScreenCubit(),
+      create: (BuildContext context) => MainScreenCubit()..getMainCategories(),
       child: BlocConsumer<MainScreenCubit, MainScreenStates>(
           listener: (context, state) {},
           builder: (context, state) {
             MainScreenCubit cubit = MainScreenCubit.get(context);
-            return DefaultTabController(
-              length: 6,
+            return cubit.isLoading? Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(color: mainColor,),
+              ),
+            ) : DefaultTabController(
+              length: cubit.mainCategoriesModel!.response!.length,
               child: Scaffold(
                 backgroundColor: Colors.white,
                 appBar: AppBar(
@@ -77,56 +76,19 @@ class MainScreen extends StatelessWidget {
                     ),
                     onTap: (newIndex) => cubit.changeIndex(newIndex),
                     labelPadding: EdgeInsets.symmetric(horizontal: size.width * 0.0785),
-                    tabs: [
-                      Text(
-                        "النساء",
-                        style: TextStyle(
-                            color:
-                                cubit.index == 0 ? mainColor : Colors.black54),
-                      ),
-                      Text(
-                        "الرجال",
-                        style: TextStyle(
-                            color:
-                                cubit.index == 1 ? mainColor : Colors.black54),
-                      ),
-                      Text(
-                        "ركن الجمال",
-                        style: TextStyle(
-                            color:
-                                cubit.index == 2 ? mainColor : Colors.black54),
-                      ),
-                      Text(
-                        "الاطفال",
-                        style: TextStyle(
-                            color:
-                                cubit.index == 3 ? mainColor : Colors.black54),
-                      ),
-                      Text(
-                        "بريميوم",
-                        style: TextStyle(
-                            color:
-                                cubit.index == 4 ? mainColor : Colors.black54),
-                      ),
-                      Text(
-                        "رياضه",
-                        style: TextStyle(
-                            color:
-                                cubit.index == 5 ? mainColor : Colors.black54),
-                      ),
-                    ],
+                    tabs: List.generate(cubit.mainCategoriesModel!.response!.length, (index) => Text(
+                      cubit.mainCategoriesModel!.response![index].name!,
+                      style: TextStyle(
+                          color:
+                          cubit.index == index ? mainColor : Colors.black54),
+                    ),),
                   ),
                 ),
-                body: const TabBarView(
-                  physics: NeverScrollableScrollPhysics(),
-                  children: [
-                    WomenScreen(),
-                    MenScreen(),
-                    BeautyScreen(),
-                    KidsScreen(),
-                    PremiumScreen(),
-                    SportScreen(),
-                  ],
+                body: TabBarView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: List.generate(cubit.mainCategoriesModel!.response!.length, (index) {
+                    return HomeScreen(mainCategoryId: cubit.mainCategoriesModel!.response![index].sId!);
+                  }),
                 ),
               ),
             );

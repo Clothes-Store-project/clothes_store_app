@@ -1,6 +1,7 @@
 abstract class LoginStates {}
 
 class ChangeState extends LoginStates {}
+class ChangeIndexState extends LoginStates {}
 
 class LoginInitialState extends LoginStates {}
 

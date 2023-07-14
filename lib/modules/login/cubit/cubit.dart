@@ -9,12 +9,27 @@ class LoginCubit extends Cubit<LoginStates> {
   static LoginCubit get(context) => BlocProvider.of(context);
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController emailController1 = TextEditingController();
+  TextEditingController passwordController1 = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool isPassword = true;
 
   void changeState() {
     isPassword = !isPassword;
     emit(ChangeState());
+  }
+
+  int index  = 0;
+
+  void changeIndex(){
+    if(index == 0){
+      index = 1;
+    }else{
+      index = 0;
+    }
+    emit(ChangeIndexState());
   }
 
   void userLogin({
