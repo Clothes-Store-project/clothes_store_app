@@ -541,83 +541,107 @@ class ViewSubCategoryScreen extends StatelessWidget {
                                       const SizedBox(
                                         height: 5,
                                       ),
-                                      Text(
-                                        product.name!,
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 15,
-                                        ),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Text(
-                                        product.desc!.descreption!,
-                                        style: const TextStyle(
-                                          color: Colors.black45,
-                                          fontSize: 15,
-                                        ),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
                                       Row(
-                                        children: [Text(
-                                          product.priceBefore!.toString(),
-                                          style: const TextStyle(
-                                              color: Colors.red,
-                                              fontSize: 15,
-                                              decoration: TextDecoration.lineThrough
+                                        children: [
+                                          Expanded(
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  product.name!,
+                                                  style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 15,
+                                                  ),
+                                                  maxLines: 1,
+                                                  overflow: TextOverflow.ellipsis,
+                                                ),
+                                                const SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Text(
+                                                  product.desc!.descreption!,
+                                                  style: const TextStyle(
+                                                    color: Colors.black45,
+                                                    fontSize: 15,
+                                                  ),
+                                                  maxLines: 1,
+                                                  overflow: TextOverflow.ellipsis,
+                                                ),
+                                                const SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Row(
+                                                  children: [Text(
+                                                    product.priceBefore!.toString(),
+                                                    style: const TextStyle(
+                                                        color: Colors.red,
+                                                        fontSize: 15,
+                                                        decoration: TextDecoration.lineThrough
+                                                    ),
+                                                  ),
+                                                    const SizedBox(width: 10,),
+                                                    Text(
+                                                      product.priceAfter!.toString(),
+                                                      style: const TextStyle(
+                                                        color: Colors.green,
+                                                        fontSize: 25,
+                                                      ),
+                                                    ),],
+                                                ),
+                                                const SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Container(
+                                                  decoration: const BoxDecoration(
+                                                      borderRadius: BorderRadius.only(
+                                                        topLeft: Radius.circular(5),
+                                                        topRight: Radius.circular(5),
+                                                        bottomLeft: Radius.circular(5),
+                                                        bottomRight: Radius.circular(5),
+                                                      ),
+                                                      color: Colors.white,
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.red,
+                                                          spreadRadius: 1,
+                                                          blurRadius: 4,
+                                                          offset: Offset(0, 0),
+                                                        ),
+                                                      ]),
+                                                  width: 80,
+                                                  height: 20,
+                                                  child: Center(
+                                                    child: Text(
+                                                      "${100 - (product.priceAfter! / product.priceBefore! * 100)}%",
+                                                      style: TextStyle(
+                                                        color: Colors.red,
+                                                        fontSize: 15,
+                                                      ),
+                                                      textAlign: TextAlign.center,
+                                                    ),
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 5,
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                          const SizedBox(width: 10,),
-                                          Text(
-                                            product.priceAfter!.toString(),
-                                            style: const TextStyle(
-                                              color: Colors.green,
-                                              fontSize: 25,
+                                          Container(
+                                            width: size.width * 0.1,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(10),
+                                              color: mainColor,
                                             ),
-                                          ),],
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Container(
-                                        decoration: const BoxDecoration(
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(5),
-                                              topRight: Radius.circular(5),
-                                              bottomLeft: Radius.circular(5),
-                                              bottomRight: Radius.circular(5),
-                                            ),
-                                            color: Colors.white,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.red,
-                                                spreadRadius: 1,
-                                                blurRadius: 4,
-                                                offset: Offset(0, 0),
+                                            child: TextButton(
+                                              onPressed: () {},
+                                              child: Icon(
+                                                Icons.add,
+                                                color: Colors.white,
                                               ),
-                                            ]),
-                                        width: 80,
-                                        height: 20,
-                                        child: Center(
-                                          child: Text(
-                                            "${100 - (product.priceAfter! / product.priceBefore! * 100)}%",
-                                            style: TextStyle(
-                                              color: Colors.red,
-                                              fontSize: 15,
                                             ),
-                                            textAlign: TextAlign.center,
                                           ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
+                                        ],
                                       ),
                                     ],
                                   ),
