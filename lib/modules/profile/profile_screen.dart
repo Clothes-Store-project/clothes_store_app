@@ -1,3 +1,4 @@
+import 'package:clothes_store_app/modules/edit_profile/view_profile_screen.dart';
 import 'package:clothes_store_app/modules/login/login_screen.dart';
 import 'package:clothes_store_app/modules/profile/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/profile/cubit/states.dart';
@@ -12,10 +13,11 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return BlocProvider(
-      create: (BuildContext context) => ProfileCubit(),
+      create: (BuildContext context) => ProfileCubit()..getDataProfile(),
       child: BlocConsumer<ProfileCubit, ProfileStates>(
           listener: (context, state) {},
           builder: (context, state) {
+            ProfileCubit cubit = ProfileCubit.get(context);
             return Scaffold(
               backgroundColor: Colors.grey.shade200,
               appBar: AppBar(
@@ -41,34 +43,53 @@ class ProfileScreen extends StatelessWidget {
                 elevation: 0.5,
               ),
               body: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 child: Column(
                   children: [
                     Container(
                       color: Colors.white,
                       child: Column(
                         children: [
-                          Padding(
-                            padding: EdgeInsets.all(10),
-                            child: MaterialButton(
-                              color: mainColor,
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => LoginScreen()),
-                                );
-                              },
-                              child: const SizedBox(
-                                  width: double.infinity,
-                                  child: Text(
-                                    "التسجيل / تسجيل الدخول",
+                          token != null
+                              ? cubit.isLoading? SizedBox() : ListTile(
+                                  title: Text(
+                                     "${userModel!.respone!.username} \n ${userModel!.respone!.email}",
                                     style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w400,
                                     ),
-                                    textAlign: TextAlign.center,
-                                  )),
-                            ),
-                          ),
+                                  ),
+                                  trailing: Icon(
+                                    Icons.arrow_back_ios_new_outlined,
+                                  ),
+                                  onTap: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => ViewProfileScreen()));
+                                  },
+                                )
+                              : Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: MaterialButton(
+                                    color: mainColor,
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                LoginScreen()),
+                                      );
+                                    },
+                                    child: const SizedBox(
+                                        width: double.infinity,
+                                        child: Text(
+                                          "التسجيل / تسجيل الدخول",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        )),
+                                  ),
+                                ),
                           const Divider(),
                           Padding(
                             padding: const EdgeInsets.all(10),

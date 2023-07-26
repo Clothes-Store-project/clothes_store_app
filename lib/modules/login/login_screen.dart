@@ -38,6 +38,7 @@ class LoginScreen extends StatelessWidget {
               body: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
                   child: Form(
                     key: cubit.formKey,
                     child: Column(
@@ -372,14 +373,14 @@ class LoginScreen extends StatelessWidget {
                                   : Column(
                                       children: [
                                         TextFormField(
-                                          controller: cubit.firstNameController,
+                                          controller: cubit.userNameController,
                                           style: TextStyle(
                                             color: Colors.black,
                                           ),
                                           keyboardType:
-                                              TextInputType.text,
+                                          TextInputType.text,
                                           decoration: InputDecoration(
-                                            labelText: 'الاسم الاول *',
+                                            labelText: 'اسم المستخدم *',
                                             labelStyle: TextStyle(
                                               color: mainColor,
                                             ),
@@ -399,7 +400,7 @@ class LoginScreen extends StatelessWidget {
                                               ),
                                             ),
                                             focusedErrorBorder:
-                                                OutlineInputBorder(
+                                            OutlineInputBorder(
                                               borderSide: const BorderSide(
                                                 color: Colors.red,
                                               ),
@@ -407,56 +408,11 @@ class LoginScreen extends StatelessWidget {
                                           ),
                                           validator: (String? value) {
                                             if (value!.isEmpty) {
-                                              return 'الاسم الاول لا يجب ان يكون فارغا';
+                                              return 'اسم المستخدم لا يجب ان يكون فارغا';
                                             }
                                             return null;
                                           },
                                           cursorColor: mainColor,
-                                        ),
-                                        SizedBox(
-                                          height: 10.0,
-                                        ),
-                                        TextFormField(
-                                          controller: cubit.lastNameController,
-                                          keyboardType:
-                                              TextInputType.text,
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                          ),
-                                          decoration: InputDecoration(
-                                            labelText: 'اسم العائلة *',
-                                            labelStyle: TextStyle(
-                                              color: mainColor,
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: mainColor,
-                                              ),
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: mainColor,
-                                              ),
-                                            ),
-                                            errorBorder: OutlineInputBorder(
-                                              borderSide: const BorderSide(
-                                                color: Colors.red,
-                                              ),
-                                            ),
-                                            focusedErrorBorder:
-                                                OutlineInputBorder(
-                                              borderSide: const BorderSide(
-                                                color: Colors.red,
-                                              ),
-                                            ),
-                                          ),
-                                          cursorColor: mainColor,
-                                          validator: (String? value) {
-                                            if (value!.isEmpty) {
-                                              return 'اسم العائلة لا يجب ان يكون فارغا';
-                                            }
-                                            return null;
-                                          },
                                         ),
                                         SizedBox(
                                           height: 10.0,
@@ -563,6 +519,141 @@ class LoginScreen extends StatelessWidget {
                                         SizedBox(
                                           height: 10.0,
                                         ),
+                                        TextFormField(
+                                          controller: cubit.firstNameController,
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                          ),
+                                          keyboardType:
+                                              TextInputType.text,
+                                          decoration: InputDecoration(
+                                            labelText: 'الاسم الاول *',
+                                            labelStyle: TextStyle(
+                                              color: mainColor,
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: mainColor,
+                                              ),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: mainColor,
+                                              ),
+                                            ),
+                                            errorBorder: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                          ),
+                                          validator: (String? value) {
+                                            if (value!.isEmpty) {
+                                              return 'الاسم الاول لا يجب ان يكون فارغا';
+                                            }
+                                            return null;
+                                          },
+                                          cursorColor: mainColor,
+                                        ),
+                                        SizedBox(
+                                          height: 10.0,
+                                        ),
+                                        TextFormField(
+                                          controller: cubit.lastNameController,
+                                          keyboardType:
+                                              TextInputType.text,
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                          ),
+                                          decoration: InputDecoration(
+                                            labelText: 'اسم العائلة *',
+                                            labelStyle: TextStyle(
+                                              color: mainColor,
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: mainColor,
+                                              ),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: mainColor,
+                                              ),
+                                            ),
+                                            errorBorder: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                          ),
+                                          cursorColor: mainColor,
+                                          validator: (String? value) {
+                                            if (value!.isEmpty) {
+                                              return 'اسم العائلة لا يجب ان يكون فارغا';
+                                            }
+                                            return null;
+                                          },
+                                        ),
+                                        SizedBox(
+                                          height: 10.0,
+                                        ),
+                                        TextFormField(
+                                          controller: cubit.telephoneController,
+                                          keyboardType:
+                                          TextInputType.phone,
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                          ),
+                                          decoration: InputDecoration(
+                                            labelText: 'رقم الهاتف',
+                                            labelStyle: TextStyle(
+                                              color: mainColor,
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: mainColor,
+                                              ),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: mainColor,
+                                              ),
+                                            ),
+                                            errorBorder: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                            focusedErrorBorder:
+                                            OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                          ),
+                                          cursorColor: mainColor,
+                                          validator: (String? value) {
+                                            if (value!.isEmpty) {
+                                              return 'رقم الهاتف لا يجب ان يكون فارغا';
+                                            }
+                                            return null;
+                                          },
+                                        ),
+                                        SizedBox(
+                                          height: 10.0,
+                                        ),
                                         ConditionalBuilder(
                                           condition:
                                               state is! LoginLoadingState,
@@ -572,13 +663,7 @@ class LoginScreen extends StatelessWidget {
                                               onPressed: () {
                                                 if (cubit.formKey.currentState!
                                                     .validate()) {
-                                                  cubit.userLogin(
-                                                    email: cubit
-                                                        .emailController.text,
-                                                    password: cubit
-                                                        .passwordController
-                                                        .text,
-                                                  );
+                                                  cubit.userRegister();
                                                 }
                                               },
                                               color: mainColor,

@@ -26,6 +26,7 @@ class HomeScreen extends StatelessWidget {
             return Scaffold(
               backgroundColor: Colors.white,
               body: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 child: cubit.isLoading
                     ? Center(
                         child: CircularProgressIndicator(

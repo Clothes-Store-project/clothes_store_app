@@ -1,6 +1,9 @@
+import 'package:clothes_store_app/modules/shopping_cart/cart_widget.dart';
 import 'package:clothes_store_app/modules/shopping_cart/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/shopping_cart/cubit/states.dart';
 import 'package:clothes_store_app/shared/constant.dart';
+import 'package:clothes_store_app/shared/constant.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,13 +12,14 @@ class ShoppingCartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return BlocProvider(
-      create: (BuildContext context) => ShoppingCartCubit(),
+      create: (BuildContext context) => ShoppingCartCubit()..getDataCart(),
       child: BlocConsumer<ShoppingCartCubit, ShoppingCartStates>(
           listener: (context, state) {},
           builder: (context, state) {
+            ShoppingCartCubit cubit = ShoppingCartCubit.get(context);
             return Scaffold(
-              backgroundColor: Colors.white,
               appBar: AppBar(
                 backgroundColor: Colors.white,
                 title: Text(
@@ -24,106 +28,106 @@ class ShoppingCartScreen extends StatelessWidget {
                     color: Colors.black,
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
+                    fontFamily: 'regular',
                   ),
                 ),
                 leadingWidth: 50,
                 elevation: 0.5,
               ),
-              body: Padding(
-                padding: EdgeInsets.all(5.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                       Padding(
-                        padding: EdgeInsets.only(
-                          top: 10.0,
-                          left: 10.0,
-                          right: 10.0,
+              body: cubit.isLoading
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        color: mainColor,
+                      ),
+                    )
+                  : Column(
+                      children: [
+                        Expanded(
+                          child: ListView.separated(
+                            shrinkWrap: true,
+                            physics: BouncingScrollPhysics(),
+                            itemCount: cubit.cartsModel!.response!.length,
+                            itemBuilder: (context, index) => Container(
+                              width: double.infinity,
+                              color: Colors.white,
+                              child: CartWidget(
+                                  cartModel: cubit.cartsModel!.response![index],
+                                  index: index),
+                            ),
+                            separatorBuilder: (context, index) => SizedBox(
+                              height: 5.0,
+                            ),
+                          ),
                         ),
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.tealAccent,
-                              radius: 50,
+                        Container(
+                          height: size.height * 0.12,
+                          width: size.width,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border(
+                              top: BorderSide(
+                                color: Colors.black26,
+                              ),
                             ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 15.0, right: 15.0, top: 5.0),
+                            child: Column(
                               children: [
-                                Text(
-                                  "حقيبة التسوق فارغة",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 23,
-                                    fontWeight: FontWeight.w700,
-                                  ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'المجموع',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18.0,
+                                        fontFamily: 'regular',
+                                      ),
+                                    ),
+                                    Text(
+                                      '90.00 د.إ.',
+                                      style: TextStyle(
+                                        color: Colors.red,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18.0,
+                                        fontFamily: 'regular',
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  "اكتشف ما هو شائع",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w100,
+                                ConditionalBuilder(
+                                  condition: state is! CartLoadingState,
+                                  builder: (context) => Container(
+                                    width: double.infinity,
+                                    child: MaterialButton(
+                                      onPressed: () {},
+                                      color: mainColor,
+                                      height: size.height * 0.05,
+                                      child: const Text(
+                                        'اتمم عملية الشراء',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20.0,
+                                          fontFamily: 'regular',
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  fallback: (context) => Center(
+                                    child: CircularProgressIndicator(),
                                   ),
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Divider(
-                        thickness: 1,
-                      ),
-                      SizedBox(
-                        height: 500,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Container(
-                          width: double.infinity,
-                          height: 60,
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(0.0),
-                          ),
-                          child: MaterialButton(
-                            shape: Border(
-                              left: BorderSide(
-                                color: Color.fromRGBO(80, 192, 168, 1),
-                              ),
-                              right: BorderSide(
-                                color: Color.fromRGBO(80, 192, 168, 1),
-                              ),
-                              bottom: BorderSide(
-                                color: Color.fromRGBO(80, 192, 168, 1),
-                              ),
-                              top: BorderSide(
-                                color: Color.fromRGBO(80, 192, 168, 1),
-                              ),
-                            ),
-                            onPressed: () {},
-                            height: 50.0,
-                            child: Text(
-                              'الاستمرار بالتسوق',
-                              style: TextStyle(
-                                color: Color.fromRGBO(80, 192, 168, 1),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0,
-                              ),
-                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+                      ],
+                    ),
             );
           }),
     );

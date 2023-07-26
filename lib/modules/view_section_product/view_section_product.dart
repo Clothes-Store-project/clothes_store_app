@@ -1,3 +1,4 @@
+import 'package:clothes_store_app/modules/login/login_screen.dart';
 import 'package:clothes_store_app/modules/product_details/product_details.dart';
 import 'package:clothes_store_app/modules/view_section_product/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/view_section_product/cubit/states.dart';
@@ -68,6 +69,7 @@ class ViewSectionProductScreen extends StatelessWidget {
                 body: cubit.isLoading? Center(child: CircularProgressIndicator(color: mainColor,),) : Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -609,11 +611,11 @@ class ViewSectionProductScreen extends StatelessWidget {
                                                           offset: Offset(0, 0),
                                                         ),
                                                       ]),
-                                                  width: 80,
-                                                  height: 20,
+                                                  width: size.width * 0.2,
+                                                  height: size.height * 0.03,
                                                   child: Center(
                                                     child: Text(
-                                                      "${100 - (product.priceAfter! / product.priceBefore! * 100)}%",
+                                                      "خصم${100 - (product.priceAfter! / product.priceBefore! * 100)}%",
                                                       style: TextStyle(
                                                         color: Colors.red,
                                                         fontSize: 15,
@@ -635,7 +637,21 @@ class ViewSectionProductScreen extends StatelessWidget {
                                               color: mainColor,
                                             ),
                                             child: TextButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                if (token == null) {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            LoginScreen()),
+                                                  );
+                                                } else {
+                                                  print(product.sId);
+                                                  cubit.addToCart(
+                                                    productId: product.sId!,
+                                                  );
+                                                }
+                                              },
                                               child: Icon(
                                                 Icons.add,
                                                 color: Colors.white,

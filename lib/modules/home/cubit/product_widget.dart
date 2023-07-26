@@ -1,5 +1,7 @@
 import 'package:clothes_store_app/models/products_model.dart';
+import 'package:clothes_store_app/modules/login/login_screen.dart';
 import 'package:clothes_store_app/modules/product_details/product_details.dart';
+import 'package:clothes_store_app/modules/shopping_cart/shopping_cart.dart';
 import 'package:clothes_store_app/modules/view_section_product/view_section_product.dart';
 import 'package:clothes_store_app/shared/constant.dart';
 import 'package:clothes_store_app/shared/network/dio_helper.dart';
@@ -30,6 +32,24 @@ class _ProductWidgetState extends State<ProductWidget> {
           isLoading = false;
         });
       }).catchError((error) {
+        print(error.toString());
+      });
+    } catch (e) {}
+  }
+
+  Future<void> addToCart({
+    required String productId,
+  }) async {
+    try {
+      DioHelper.postData(
+              url: "/cart",
+              data: {
+                "product_id": productId,
+                "quantity": 1,
+              },
+              token: token)
+          .then((value) async {})
+          .catchError((error) {
         print(error.toString());
       });
     } catch (e) {}
@@ -122,12 +142,27 @@ class _ProductWidgetState extends State<ProductWidget> {
                                     const SizedBox(
                                       height: 5,
                                     ),
-                                    const Text(
-                                      "د.أ. 178",
-                                      style: TextStyle(
-                                        color: Colors.red,
-                                        fontSize: 15,
-                                      ),
+                                    Column(
+                                      children: [
+                                        Text(
+                                          product.priceBefore!.toString(),
+                                          style: const TextStyle(
+                                              color: Colors.red,
+                                              fontSize: 15,
+                                              decoration:
+                                                  TextDecoration.lineThrough),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          product.priceAfter!.toString(),
+                                          style: const TextStyle(
+                                            color: Colors.green,
+                                            fontSize: 25,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                     const SizedBox(
                                       height: 5,
@@ -149,11 +184,11 @@ class _ProductWidgetState extends State<ProductWidget> {
                                               offset: Offset(0, 0),
                                             ),
                                           ]),
-                                      width: 80,
-                                      height: 20,
-                                      child: const Center(
+                                      width: size.width * 0.2,
+                                      height: size.height * 0.03,
+                                      child: Center(
                                         child: Text(
-                                          "خصم %50 ",
+                                          "خصم${100 - (product.priceAfter! / product.priceBefore! * 100)}%",
                                           style: TextStyle(
                                             color: Colors.red,
                                             fontSize: 15,
@@ -176,7 +211,21 @@ class _ProductWidgetState extends State<ProductWidget> {
                                   color: mainColor,
                                 ),
                                 child: TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    if (token == null) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                LoginScreen()),
+                                      );
+                                    } else {
+                                      print(product.sId);
+                                      addToCart(
+                                        productId: product.sId!,
+                                      );
+                                    }
+                                  },
                                   child: Icon(
                                     Icons.add,
                                     color: Colors.white,

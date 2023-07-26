@@ -37,6 +37,7 @@ class CategoryScreen extends StatelessWidget {
                           color: Colors.grey.shade300,
                           width: size.width * 0.36,
                           child: ListView.builder(
+                            physics: BouncingScrollPhysics(),
                             itemCount: cubit.subCategoryModel!.response!.length,
                             itemBuilder: (context, index) => MaterialButton(
                               onPressed: () {

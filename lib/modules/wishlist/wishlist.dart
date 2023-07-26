@@ -31,6 +31,7 @@ class WishlistScreen extends StatelessWidget {
               body: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
                   child: Column(
                     children: [
                        Padding(

@@ -23,6 +23,7 @@ class CategoriesWomenScreen extends StatelessWidget {
                     color: Colors.grey.shade300,
                     width: size.width * 0.36,
                     child: ListView.builder(
+                      physics: BouncingScrollPhysics(),
                       itemBuilder: (context, index) => MaterialButton(
                         onPressed: () {
                           cubit.changeIndex(index);

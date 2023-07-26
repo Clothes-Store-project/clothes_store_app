@@ -3,14 +3,26 @@ import 'package:clothes_store_app/MyBlocObserver.dart';
 import 'package:clothes_store_app/layout/app_layout.dart';
 import 'package:clothes_store_app/layout/cubit/cubit.dart';
 import 'package:clothes_store_app/layout/cubit/states.dart';
+import 'package:clothes_store_app/modules/edit_profile/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/login/login_screen.dart';
+import 'package:clothes_store_app/modules/shopping_cart/cubit/cubit.dart';
+import 'package:clothes_store_app/shared/constant.dart';
 import 'package:clothes_store_app/shared/network/dio_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
+
+  final SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+  token = sharedPreferences.getString("token");
+
+  print("Hello $token");
+
   runApp(MyApp());
 }
 
@@ -23,6 +35,12 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => AppCubit(),
+        ),
+        BlocProvider(
+          create: (BuildContext context) => EditProfileCubit()..getDataProfile(),
+        ),
+        BlocProvider(
+            create: (BuildContext context) => ShoppingCartCubit()
         ),
       ],
       child: BlocConsumer<AppCubit, AppStates>(

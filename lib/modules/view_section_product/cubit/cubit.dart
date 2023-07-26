@@ -1,5 +1,6 @@
 import 'package:clothes_store_app/models/products_model.dart';
 import 'package:clothes_store_app/modules/view_section_product/cubit/states.dart';
+import 'package:clothes_store_app/shared/constant.dart';
 import 'package:clothes_store_app/shared/network/dio_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,6 +29,24 @@ class ViewSectionProductCubit extends Cubit<ViewSectionProductStates> {
       }).catchError((error) {
         print(error.toString());
         emit(ViewSectionProductErrorState());
+      });
+    } catch (e) {}
+  }
+
+  Future<void> addToCart({
+    required String productId,
+  }) async {
+    try {
+      DioHelper.postData(
+          url: "/cart",
+          data: {
+            "product_id": productId,
+            "quantity": 1,
+          },
+          token: token)
+          .then((value) async {})
+          .catchError((error) {
+        print(error.toString());
       });
     } catch (e) {}
   }

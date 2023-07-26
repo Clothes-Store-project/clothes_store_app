@@ -1,3 +1,4 @@
+import 'package:clothes_store_app/modules/login/login_screen.dart';
 import 'package:clothes_store_app/modules/product_details/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/product_details/cubit/states.dart';
 import 'package:clothes_store_app/shared/constant.dart';
@@ -122,6 +123,7 @@ class ProductDetailsScreen extends StatelessWidget {
                               padding: const EdgeInsets.all(10.0),
                               child: SafeArea(
                                 child: SingleChildScrollView(
+                                  physics: BouncingScrollPhysics(),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -240,11 +242,11 @@ class ProductDetailsScreen extends StatelessWidget {
                                                                 Offset(0, 0),
                                                           ),
                                                         ]),
-                                                    width: 80,
-                                                    height: 20,
+                                                    width: size.width * 0.2,
+                                                    height: size.height * 0.03,
                                                     child: Center(
                                                       child: Text(
-                                                        "${100 - (cubit.productModel!.priceAfter! / cubit.productModel!.priceBefore! * 100)}%",
+                                                        "خصم${100 - (cubit.productModel!.priceAfter! / cubit.productModel!.priceBefore! * 100)}%",
                                                         style: TextStyle(
                                                           color: Colors.red,
                                                           fontSize: 15,
@@ -564,19 +566,36 @@ class ProductDetailsScreen extends StatelessWidget {
                                     width: 10,
                                   ),
                                   Expanded(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                        color: mainColor,
-                                      ),
-                                      child: const Padding(
-                                        padding: EdgeInsets.all(10),
-                                        child: Text(
-                                          "اضف الى حقيبة التسوق",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20),
-                                          textAlign: TextAlign.center,
+                                    child: InkWell(
+                                      onTap: (){
+                                        if (token == null) {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    LoginScreen()),
+                                          );
+                                        } else {
+                                          print(cubit.productModel!.sId);
+                                          cubit.addToCart(
+                                            productId: cubit.productModel!.sId!,
+                                          );
+                                        }
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(5),
+                                          color: mainColor,
+                                        ),
+                                        child: const Padding(
+                                          padding: EdgeInsets.all(10),
+                                          child: Text(
+                                            "اضف الى حقيبة التسوق",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                            textAlign: TextAlign.center,
+                                          ),
                                         ),
                                       ),
                                     ),
