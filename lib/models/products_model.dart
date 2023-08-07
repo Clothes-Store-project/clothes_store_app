@@ -93,37 +93,37 @@ class ProductModel {
 class Desc {
   String? color;
   String? type;
-  Barnd? barnd;
-  String? descreption;
+  Brand? brand;
+  String? description;
 
-  Desc({this.color, this.type, this.barnd, this.descreption});
+  Desc({this.color, this.type, this.brand, this.description});
 
   Desc.fromJson(Map<String, dynamic> json) {
     color = json['color'];
     type = json['type'];
-    barnd = json['barnd'] != null ? new Barnd.fromJson(json['barnd']) : null;
-    descreption = json['descreption'];
+    brand = json['brand'] != null ? new Brand.fromJson(json['brand']) : null;
+    description = json['description'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['color'] = this.color;
     data['type'] = this.type;
-    if (this.barnd != null) {
-      data['barnd'] = this.barnd!.toJson();
+    if (this.brand != null) {
+      data['brand'] = this.brand!.toJson();
     }
-    data['descreption'] = this.descreption;
+    data['description'] = this.description;
     return data;
   }
 }
 
-class Barnd {
+class Brand {
   String? name;
   String? logo;
 
-  Barnd({this.name, this.logo});
+  Brand({this.name, this.logo});
 
-  Barnd.fromJson(Map<String, dynamic> json) {
+  Brand.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     logo = json['logo'];
   }

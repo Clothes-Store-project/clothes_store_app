@@ -39,6 +39,7 @@ class LoginCubit extends Cubit<LoginStates> {
   void userLogin({
     required String email,
     required String password,
+    required BuildContext context,
   }) async {
     emit(LoginLoadingState());
     DioHelper.postData(
@@ -50,6 +51,7 @@ class LoginCubit extends Cubit<LoginStates> {
     ).then((value) async {
       if(value.data["message"] == "Id or password is invalid"){
         print("Id or password is invalid");
+        emit(LoginErrorState());
       }else{
         print(value.data["token"]);
         token = value.data["token"];
@@ -57,12 +59,14 @@ class LoginCubit extends Cubit<LoginStates> {
             await SharedPreferences.getInstance();
 
         await sharedPreferences
-            .setString("token", token!);
+            .setString("token", token!).whenComplete(() {
+              Navigator.pop(context);
+        });
+        emit(LoginSuccessState());
       }
-      emit(LoginSuccessState());
     }).catchError((error) {
-      print(error);
-      emit(LoginErrorState(error.toString()));
+      print(error.toString());
+      emit(LoginErrorState());
     });
   }
 
@@ -81,13 +85,14 @@ class LoginCubit extends Cubit<LoginStates> {
     ).then((value) async {
       if(value.data["message"] == "This email is already in use"){
         print("This email is already in use");
+        emit(RegisterErrorState());
       }else{
         print(value.data["message"]);
+        emit(RegisterSuccessState());
       }
-      emit(RegisterSuccessState());
     }).catchError((error) {
-      print(error);
-      emit(RegisterErrorState(error.toString()));
+      print(error.toString());
+      emit(RegisterErrorState());
     });
   }
 }

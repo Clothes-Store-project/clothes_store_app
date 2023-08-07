@@ -5,7 +5,9 @@ import 'package:clothes_store_app/layout/cubit/cubit.dart';
 import 'package:clothes_store_app/layout/cubit/states.dart';
 import 'package:clothes_store_app/modules/edit_profile/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/login/login_screen.dart';
+import 'package:clothes_store_app/modules/profile/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/shopping_cart/cubit/cubit.dart';
+import 'package:clothes_store_app/modules/wishlist/cubit/cubit.dart';
 import 'package:clothes_store_app/shared/constant.dart';
 import 'package:clothes_store_app/shared/network/dio_helper.dart';
 import 'package:flutter/material.dart';
@@ -37,10 +39,16 @@ class MyApp extends StatelessWidget {
           create: (context) => AppCubit(),
         ),
         BlocProvider(
-          create: (BuildContext context) => EditProfileCubit()..getDataProfile(),
+          create: (BuildContext context) => EditProfileCubit()..dataUser(),
         ),
         BlocProvider(
-            create: (BuildContext context) => ShoppingCartCubit()
+            create: (BuildContext context) => ShoppingCartCubit(),
+        ),
+        BlocProvider(
+            create: (BuildContext context) => WishlistCubit(),
+        ),
+        BlocProvider(
+          create: (BuildContext context) => ProfileCubit(),
         ),
       ],
       child: BlocConsumer<AppCubit, AppStates>(
@@ -50,7 +58,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               home: Directionality(
                 textDirection: TextDirection.rtl,
-                child: AppScreen(),
+                child: AppScreen(index: 0,),
               ),
             );
           }),

@@ -2,6 +2,8 @@ import 'package:clothes_store_app/modules/edit_profile/view_profile_screen.dart'
 import 'package:clothes_store_app/modules/login/login_screen.dart';
 import 'package:clothes_store_app/modules/profile/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/profile/cubit/states.dart';
+import 'package:clothes_store_app/modules/user_orders/user_orders_screen.dart';
+import 'package:clothes_store_app/modules/user_returns/user_returns_screen.dart';
 import 'package:clothes_store_app/shared/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,21 +53,29 @@ class ProfileScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           token != null
-                              ? cubit.isLoading? SizedBox() : ListTile(
-                                  title: Text(
-                                     "${userModel!.respone!.username} \n ${userModel!.respone!.email}",
-                                    style: TextStyle(
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  trailing: Icon(
-                                    Icons.arrow_back_ios_new_outlined,
-                                  ),
-                                  onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => ViewProfileScreen()));
-                                  },
-                                )
+                              ? cubit.isLoading
+                                  ? SizedBox()
+                                  : ListTile(
+                                      title: Text(
+                                        "${userModel!.respone!.username} \n ${userModel!.respone!.email}",
+                                        style: TextStyle(
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      trailing: Icon(
+                                        Icons.arrow_back_ios_new_outlined,
+                                      ),
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ViewProfileScreen(),
+                                          ),
+                                        );
+                                      },
+                                    )
                               : Padding(
                                   padding: EdgeInsets.all(10),
                                   child: MaterialButton(
@@ -96,45 +106,67 @@ class ProfileScreen extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Column(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: mainColor.withOpacity(0.2),
-                                        shape: BoxShape.circle,
-                                        border: Border.all(color: mainColor),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            UserOrdersScreen(),
                                       ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(10),
-                                        child: Icon(
-                                          Icons.car_crash_outlined,
-                                          color: mainColor,
-                                          size: size.width * 0.1,
+                                    );
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: mainColor.withOpacity(0.2),
+                                          shape: BoxShape.circle,
+                                          border: Border.all(color: mainColor),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Icon(
+                                            Icons.car_crash_outlined,
+                                            color: mainColor,
+                                            size: size.width * 0.1,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Text("الطلبيات")
-                                  ],
+                                      Text("Orders")
+                                    ],
+                                  ),
                                 ),
-                                Column(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: mainColor.withOpacity(0.2),
-                                        shape: BoxShape.circle,
-                                        border: Border.all(color: mainColor),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            UserReturnsScreen(),
                                       ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(10),
-                                        child: Icon(
-                                          Icons.settings_backup_restore,
-                                          color: mainColor,
-                                          size: size.width * 0.1,
+                                    );
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: mainColor.withOpacity(0.2),
+                                          shape: BoxShape.circle,
+                                          border: Border.all(color: mainColor),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Icon(
+                                            Icons.settings_backup_restore,
+                                            color: mainColor,
+                                            size: size.width * 0.1,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Text("الإرجاع")
-                                  ],
+                                      Text("Returns")
+                                    ],
+                                  ),
                                 ),
                                 Column(
                                   children: [

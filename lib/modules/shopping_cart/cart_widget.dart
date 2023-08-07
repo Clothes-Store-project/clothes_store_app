@@ -7,16 +7,18 @@ import 'package:flutter/material.dart';
 
 class CartWidget extends StatefulWidget {
   final int index;
+  final bool Function(CartModel element) isRemove;
   final CartModel cartModel;
 
-  const CartWidget({super.key, required this.cartModel, required this.index});
+  const CartWidget({
+    super.key,
+    required this.cartModel,
+    required this.index,
+    required this.isRemove,
+  });
 
   @override
   State<CartWidget> createState() => _CartWidgetState();
-}
-
-void plusCounter(){
-
 }
 
 class _CartWidgetState extends State<CartWidget> {
@@ -24,45 +26,78 @@ class _CartWidgetState extends State<CartWidget> {
   int counter = 0;
   ProductModel? productModel;
 
+  List<int> z = [];
+
   @override
   void initState() {
     super.initState();
     DioHelper.getData(url: "/product/${widget.cartModel.productId}")
         .then((value) {
       productModel = ProductModel.fromJson(value.data);
+      z.add(widget.cartModel.quantity! * productModel!.priceAfter!);
       setState(() {
+        for (int i = 0; i < z.length; i++) {
+          ShoppingCartCubit.get(context).z1 += z[i];
+        }
+        ShoppingCartCubit.get(context)
+            .changeTotal(ShoppingCartCubit.get(context).z1);
+        print(ShoppingCartCubit.get(context).z1);
         counter = widget.cartModel.quantity!;
         isLoading = false;
       });
     });
   }
 
-  void delete(){
+  void delete(String id) {
     DioHelper.deleteData(url: "/cart/${widget.cartModel.sId}").then((value) {
-      ShoppingCartCubit.get(context).removeCart(widget.index);
-    }).catchError((error){
+
+      setState(() {
+        ShoppingCartCubit.get(context).removeCart(id);
+        ShoppingCartCubit.get(context).z1 += -counter * productModel!.priceAfter!;
+        print(ShoppingCartCubit.get(context).z1);
+        ShoppingCartCubit.get(context)
+            .changeTotal(ShoppingCartCubit.get(context).z1);
+      });
+    }).catchError((error) {
       print(error.toString());
     });
   }
 
-  void plus(){
+  void plus() {
     print(widget.cartModel.sId);
-    DioHelper.putData(url: "/cart/plus/${widget.cartModel.sId}", token: token, data: {}).then((value) {
+    DioHelper.putData(
+      url: "/cart/plus/${widget.cartModel.sId}",
+      token: token,
+      data: {},
+    ).then((value) {
       setState(() {
         counter++;
+        ShoppingCartCubit.get(context).z1 += productModel!.priceAfter!;
+        print(ShoppingCartCubit.get(context).z1);
+        ShoppingCartCubit.get(context)
+            .changeTotal(ShoppingCartCubit.get(context).z1);
       });
-      print(value.data);
-    }).catchError((error){
+    }).catchError((error) {
       print(error.toString());
     });
   }
 
-  void minus(){
-    DioHelper.putData(url: "/cart/minus/${widget.cartModel.sId}", token: token, data: {}).then((value) {
+  void minus() {
+    DioHelper.putData(
+      url: "/cart/minus/${widget.cartModel.sId}",
+      token: token,
+      data: {},
+    ).then((value) {
       setState(() {
+        if (counter > 1) {
           counter--;
+          ShoppingCartCubit.get(context).z1 -= productModel!.priceAfter!;
+          print(ShoppingCartCubit.get(context).z1);
+          ShoppingCartCubit.get(context)
+              .changeTotal(ShoppingCartCubit.get(context).z1);
+        }
       });
-    }).catchError((error){
+    }).catchError((error) {
       print(error.toString());
     });
   }
@@ -83,8 +118,8 @@ class _CartWidgetState extends State<CartWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  height: 150.0,
-                  width: 90.0,
+                  height: size.height * 0.17,
+                  width: size.width * 0.21,
                   child: Image(
                     image: NetworkImage("${productModel!.imageSrc![0]}"),
                   ),
@@ -104,7 +139,7 @@ class _CartWidgetState extends State<CartWidget> {
                         ),
                       ),
                       Text(
-                        "${productModel!.desc!.descreption}",
+                        "${productModel!.desc!.description}",
                         style: TextStyle(
                           color: Colors.black54,
                           fontSize: 16,
@@ -146,7 +181,7 @@ class _CartWidgetState extends State<CartWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              width: 35.0,
+                              width: size.width * 0.1,
                               decoration: BoxDecoration(
                                 border: Border(
                                   left: BorderSide(
@@ -156,14 +191,12 @@ class _CartWidgetState extends State<CartWidget> {
                               ),
                               child: TextButton(
                                 onPressed: () {
-                                  if(counter > 1){
-                                    minus();
-                                  }
+                                  minus();
                                 },
                                 child: Text(
                                   '-',
                                   style: TextStyle(
-                                    fontSize: 20.0,
+                                    fontSize: 14.0,
                                     color: Colors.black54,
                                   ),
                                 ),
@@ -178,7 +211,7 @@ class _CartWidgetState extends State<CartWidget> {
                               ),
                             ),
                             Container(
-                              width: 35.0,
+                              width: size.width * 0.1,
                               decoration: BoxDecoration(
                                 border: Border(
                                   right: BorderSide(
@@ -193,7 +226,7 @@ class _CartWidgetState extends State<CartWidget> {
                                 child: Text(
                                   '+',
                                   style: TextStyle(
-                                    fontSize: 20.0,
+                                    fontSize: 13.0,
                                     color: Colors.black54,
                                   ),
                                 ),
@@ -208,10 +241,10 @@ class _CartWidgetState extends State<CartWidget> {
                 Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right: 50.0),
+                      padding: const EdgeInsets.only(right: 45.0),
                       child: IconButton(
                         onPressed: () {
-                          delete();
+                          delete(productModel!.sId!);
                         },
                         icon: Icon(
                           Icons.close,

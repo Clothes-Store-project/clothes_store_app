@@ -12,13 +12,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   final String mainCategoryId;
+
   const HomeScreen({required this.mainCategoryId, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return BlocProvider(
-      create: (BuildContext context) => HomeCubit()..getSubCategory(id: mainCategoryId),
+      create: (BuildContext context) =>
+          HomeCubit()..getSubCategory(id: mainCategoryId),
       child: BlocConsumer<HomeCubit, HomeStates>(
           listener: (context, state) {},
           builder: (context, state) {
@@ -40,7 +42,8 @@ class HomeScreen extends StatelessWidget {
                             height: 100.0,
                             child: ListView.separated(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: cubit.subCategoryModel!.response!.length,
+                                itemCount:
+                                    cubit.subCategoryModel!.response!.length,
                                 itemBuilder: (context, index) {
                                   return Padding(
                                     padding: const EdgeInsets.all(10),
@@ -48,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                                       width: size.width * 0.21,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: mainColor
+                                        color: mainColor,
                                       ),
                                       child: Center(
                                         child: InkWell(
@@ -57,10 +60,21 @@ class HomeScreen extends StatelessWidget {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      ViewSubCategoryScreen(subCategoryId: cubit.subCategoryModel!.response![index].sId!)),
+                                                      ViewSubCategoryScreen(
+                                                        subCategoryId: cubit
+                                                            .subCategoryModel!
+                                                            .response![index]
+                                                            .sId!,
+                                                      )),
                                             );
                                           },
-                                          child: Text(cubit.subCategoryModel!.response![index].name!, style: TextStyle(color: Colors.white),),
+                                          child: Text(
+                                            cubit.subCategoryModel!
+                                                .response![index].name!,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -72,41 +86,51 @@ class HomeScreen extends StatelessWidget {
                                     )),
                           ),
                           Column(
-                            children: List.generate(cubit.products.length, (index) => Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(10),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        cubit.products[index],
-                                        style: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 16),
-                                      ),
-                                      InkWell(
-                                        onTap: () {
-                                          Navigator.push(context, MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ViewSectionProductScreen(
-                                                      categoryId: mainCategoryId,
-                                                      typeOfProduct: cubit.products[index])));
-                                        },
-                                        child: const Text(
-                                          "اعرض الكل",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 16),
+                            children: List.generate(
+                                cubit.products.length,
+                                (index) => Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                cubit.products[index],
+                                                style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 16),
+                                              ),
+                                              InkWell(
+                                                onTap: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              ViewSectionProductScreen(
+                                                                  categoryId:
+                                                                      mainCategoryId,
+                                                                  typeOfProduct:
+                                                                      cubit.products[
+                                                                          index])));
+                                                },
+                                                child: const Text(
+                                                  "اعرض الكل",
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 16),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                ProductWidget(categoryId: mainCategoryId, typeOfProduct: cubit.products[index])
-                              ],
-                            )),
+                                        ProductWidget(
+                                            categoryId: mainCategoryId,
+                                            typeOfProduct:
+                                                cubit.products[index])
+                                      ],
+                                    )),
                           )
                         ],
                       ),

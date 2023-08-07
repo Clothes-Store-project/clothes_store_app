@@ -139,7 +139,7 @@ class CategoryScreen extends StatelessWidget {
                                                 height: 5,
                                               ),
                                               Text(
-                                                product.desc!.descreption!,
+                                                product.desc!.description!,
                                                 style: const TextStyle(
                                                   color: Colors.black45,
                                                   fontSize: 15,

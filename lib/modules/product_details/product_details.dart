@@ -166,7 +166,7 @@ class ProductDetailsScreen extends StatelessWidget {
                                             ),
                                             Text(
                                               cubit.productModel!.desc!
-                                                  .descreption!,
+                                                  .description!,
                                               style: const TextStyle(
                                                 color: Colors.black38,
                                                 fontSize: 16.0,
@@ -374,7 +374,7 @@ class ProductDetailsScreen extends StatelessWidget {
                                                                       .bold),
                                                         ),
                                                         Text(
-                                                          "الماركة   ${cubit.productModel!.desc!.barnd!.name}",
+                                                          "الماركة   ${cubit.productModel!.desc!.brand!.name}",
                                                           style: const TextStyle(
                                                               fontSize: 16,
                                                               fontWeight:

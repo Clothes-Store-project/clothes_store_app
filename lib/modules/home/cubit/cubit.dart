@@ -11,6 +11,8 @@ class HomeCubit extends Cubit<HomeStates> {
   static HomeCubit get(context) => BlocProvider.of(context);
 
   bool isLoading = false;
+  bool isWish = false;
+  bool isAdd = false;
 
   List<String> products = [
     "Hot sale",

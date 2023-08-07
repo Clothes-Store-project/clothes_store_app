@@ -1,3 +1,4 @@
+import 'package:clothes_store_app/modules/proceed_to_checkout/proceed_to_checkout_screen.dart';
 import 'package:clothes_store_app/modules/shopping_cart/cart_widget.dart';
 import 'package:clothes_store_app/modules/shopping_cart/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/shopping_cart/cubit/states.dart';
@@ -45,14 +46,15 @@ class ShoppingCartScreen extends StatelessWidget {
                         Expanded(
                           child: ListView.separated(
                             shrinkWrap: true,
-                            physics: BouncingScrollPhysics(),
                             itemCount: cubit.cartsModel!.response!.length,
-                            itemBuilder: (context, index) => Container(
+                            itemBuilder: (context, index1) => Container(
                               width: double.infinity,
                               color: Colors.white,
                               child: CartWidget(
-                                  cartModel: cubit.cartsModel!.response![index],
-                                  index: index),
+                                cartModel: cubit.cartsModel!.response![index1],
+                                index: index1,
+                                isRemove: cubit.isRemove,
+                              ),
                             ),
                             separatorBuilder: (context, index) => SizedBox(
                               height: 5.0,
@@ -60,7 +62,7 @@ class ShoppingCartScreen extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          height: size.height * 0.12,
+                          height: size.height * 0.13,
                           width: size.width,
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -72,7 +74,10 @@ class ShoppingCartScreen extends StatelessWidget {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.only(
-                                left: 15.0, right: 15.0, top: 5.0),
+                              left: 15.0,
+                              right: 15.0,
+                              top: 5.0,
+                            ),
                             child: Column(
                               children: [
                                 Row(
@@ -80,7 +85,7 @@ class ShoppingCartScreen extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'المجموع',
+                                      'المجموع + الشحن',
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold,
@@ -89,7 +94,7 @@ class ShoppingCartScreen extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      '90.00 د.إ.',
+                                      '${cubit.total} د.إ.',
                                       style: TextStyle(
                                         color: Colors.red,
                                         fontWeight: FontWeight.bold,
@@ -104,11 +109,19 @@ class ShoppingCartScreen extends StatelessWidget {
                                   builder: (context) => Container(
                                     width: double.infinity,
                                     child: MaterialButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ProceedToCheckoutScreen(),
+                                          ),
+                                        );
+                                      },
                                       color: mainColor,
-                                      height: size.height * 0.05,
+                                      height: size.height * 0.06,
                                       child: const Text(
-                                        'اتمم عملية الشراء',
+                                        'Proceed to Checkout',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,

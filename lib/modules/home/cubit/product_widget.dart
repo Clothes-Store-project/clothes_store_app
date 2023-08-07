@@ -1,4 +1,5 @@
 import 'package:clothes_store_app/models/products_model.dart';
+import 'package:clothes_store_app/modules/home/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/login/login_screen.dart';
 import 'package:clothes_store_app/modules/product_details/product_details.dart';
 import 'package:clothes_store_app/modules/shopping_cart/shopping_cart.dart';
@@ -48,9 +49,29 @@ class _ProductWidgetState extends State<ProductWidget> {
                 "quantity": 1,
               },
               token: token)
-          .then((value) async {})
+          .then((value) async {
+            HomeCubit.get(context).isAdd = true;
+      })
           .catchError((error) {
-        print(error.toString()  );
+        print(error.toString());
+      });
+    } catch (e) {}
+  }
+
+  Future<void> addToWish({
+    required String productId,
+  }) async {
+    try {
+      DioHelper.postData(
+        url: "/wish",
+        data: {
+          "product_id": productId,
+        },
+        token: token,
+      ).then((value) async {
+        HomeCubit.get(context).isWish = true;
+      }).catchError((error) {
+        print(error.toString());
       });
     } catch (e) {}
   }
@@ -80,7 +101,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                 return Padding(
                   padding: const EdgeInsets.all(5),
                   child: SizedBox(
-                    width: size.width * 0.4,
+                    width: size.width * 0.45,
                     child: InkWell(
                       onTap: () {
                         Navigator.push(
@@ -131,7 +152,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                                       height: 5,
                                     ),
                                     Text(
-                                      product.desc!.descreption!,
+                                      product.desc!.description!,
                                       style: const TextStyle(
                                         color: Colors.black45,
                                         fontSize: 15,
@@ -204,33 +225,71 @@ class _ProductWidgetState extends State<ProductWidget> {
                                   ],
                                 ),
                               ),
-                              Container(
-                                width: size.width * 0.1,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: mainColor,
-                                ),
-                                child: TextButton(
-                                  onPressed: () {
-                                    if (token == null) {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                LoginScreen()),
-                                      );
-                                    } else {
-                                      print(product.sId);
-                                      addToCart(
-                                        productId: product.sId!,
-                                      );
-                                    }
-                                  },
-                                  child: Icon(
-                                    Icons.add,
-                                    color: Colors.white,
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Container(
+                                    width: size.width * 0.1,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: mainColor,
+                                    ),
+                                    child: TextButton(
+                                      onPressed: () {
+                                        if (token == null) {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    LoginScreen()),
+                                          );
+                                        } else {
+                                          print(product.sId);
+                                          addToCart(
+                                            productId: product.sId!,
+                                          );
+                                        }
+                                      },
+                                      child: HomeCubit.get(context).isAdd
+                                          ? Icon(
+                                              Icons.done,
+                                              color: Colors.white,
+                                            )
+                                          : Icon(
+                                              Icons.add,
+                                              color: Colors.white,
+                                            ),
+                                    ),
                                   ),
-                                ),
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  Container(
+                                    width: size.width * 0.1,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: mainColor,
+                                    ),
+                                    child: TextButton(
+                                      onPressed: () {
+                                        print(product.sId);
+                                        addToWish(
+                                          productId: product.sId!,
+                                        );
+                                      },
+                                      child: HomeCubit.get(context).isWish
+                                          ? Icon(
+                                              Icons.favorite,
+                                              color: Colors.redAccent,
+                                            )
+                                          : Icon(
+                                              Icons.favorite_border_outlined,
+                                              color: Colors.white,
+                                            ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),

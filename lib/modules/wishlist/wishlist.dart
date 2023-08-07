@@ -1,5 +1,7 @@
 import 'package:clothes_store_app/modules/wishlist/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/wishlist/cubit/states.dart';
+import 'package:clothes_store_app/modules/wishlist/wishlist_widget.dart';
+import 'package:clothes_store_app/shared/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,11 +10,13 @@ class WishlistScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return BlocProvider(
-      create: (BuildContext context) => WishlistCubit(),
+      create: (BuildContext context) => WishlistCubit()..getDataWishlist(),
       child: BlocConsumer<WishlistCubit, WishlistStates>(
           listener: (context, state) {},
           builder: (context, state) {
+            WishlistCubit cubit = WishlistCubit.get(context);
             return Scaffold(
               backgroundColor: Colors.white,
               appBar: AppBar(
@@ -28,96 +32,34 @@ class WishlistScreen extends StatelessWidget {
                 leadingWidth: 50,
                 elevation: 0.5,
               ),
-              body: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
-                  child: Column(
-                    children: [
-                       Padding(
-                        padding: const EdgeInsets.only(top: 10.0,left: 10.0,right: 10.0,),
-                        child: Row(
-                          children: [
-                            const CircleAvatar(
-                              backgroundColor: Colors.tealAccent,
-                              radius: 50,
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text(
-                                  "قائمة الامنيات فارغة",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 23,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                                Text(
-                                  "اكتشف ما هو شائع",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w100,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+              body: cubit.isLoading
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        color: mainColor,
                       ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      const Divider(
-                        thickness: 1,
-                      ),
-                      const SizedBox(height: 500,),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          width: double.infinity,
-                          height: 60,
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(0.0),
-                          ),
-                          child: MaterialButton(
-                            shape: const Border(
-                              left: BorderSide(
-                                color: Color.fromRGBO(80, 192, 168, 1),
-                              ),
-                              right: BorderSide(
-                                color: Color.fromRGBO(80, 192, 168, 1),
-                              ),
-                              bottom: BorderSide(
-                                color: Color.fromRGBO(80, 192, 168, 1),
-                              ),
-                              top: BorderSide(
-                                color: Color.fromRGBO(80, 192, 168, 1),
+                    )
+                  : Column(
+                      children: [
+                        Expanded(
+                          child: ListView.separated(
+                            shrinkWrap: true,
+                            physics: BouncingScrollPhysics(),
+                            itemCount: cubit.wishlistModel!.response!.length,
+                            itemBuilder: (context, index) => Container(
+                              width: double.infinity,
+                              color: Colors.white,
+                              child: WishlistWidget(
+                                wishModel: cubit.wishlistModel!.response![index],
+                                index: index,
                               ),
                             ),
-                            onPressed: () {},
-                            height: 50.0,
-                            child: const Text(
-                              'الاستمرار بالتسوق',
-                              style: TextStyle(
-                                color: Color.fromRGBO(80, 192, 168, 1),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0,
-                              ),
+                            separatorBuilder: (context, index) => SizedBox(
+                              height: 5.0,
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+                      ],
+                    ),
             );
           }),
     );

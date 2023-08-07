@@ -330,6 +330,7 @@ class LoginScreen extends StatelessWidget {
                                                     password: cubit
                                                         .passwordController
                                                         .text,
+                                                    context: context,
                                                   );
                                                 }
                                               },

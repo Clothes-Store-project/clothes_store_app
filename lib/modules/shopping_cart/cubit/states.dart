@@ -4,6 +4,8 @@ class ShoppingCartInitialState extends ShoppingCartStates {}
 
 class ChangeState extends ShoppingCartStates {}
 
+class ChangeTotalState extends ShoppingCartStates {}
+
 class ChangePlusState extends ShoppingCartStates {}
 
 class ChangeMinusState extends ShoppingCartStates {}

@@ -44,6 +44,7 @@ dependencies:
   flutter_image_slideshow: ^0.1.5
   dio: ^5.1.1
   shared_preferences: ^2.1.0
+  fluttertoast: ^8.2.2
 
 dev_dependencies:
   flutter_test:
