@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class CartWidget extends StatefulWidget {
   final int index;
-  final bool Function(CartModel element) isRemove;
+  final bool isRemove;
   final CartModel cartModel;
 
   const CartWidget({
@@ -31,14 +31,31 @@ class _CartWidgetState extends State<CartWidget> {
   @override
   void initState() {
     super.initState();
+    if(mounted){
+      if(ShoppingCartCubit.get(context).isRemove == true){
+        ShoppingCartCubit.get(context).z1 = 0;
+      }
+      getProducts();
+    }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  void getProducts(){
     DioHelper.getData(url: "/product/${widget.cartModel.productId}")
         .then((value) {
       productModel = ProductModel.fromJson(value.data);
-      z.add(widget.cartModel.quantity! * productModel!.priceAfter!);
       setState(() {
+        z.add(widget.cartModel.quantity! * productModel!.priceAfter!);
         for (int i = 0; i < z.length; i++) {
           ShoppingCartCubit.get(context).z1 += z[i];
         }
+        /*ShoppingCartCubit.get(context)
+            .changeTotal(ShoppingCartCubit.get(context).x);*/
         ShoppingCartCubit.get(context)
             .changeTotal(ShoppingCartCubit.get(context).z1);
         print(ShoppingCartCubit.get(context).z1);
@@ -50,9 +67,8 @@ class _CartWidgetState extends State<CartWidget> {
 
   void delete(String id) {
     DioHelper.deleteData(url: "/cart/${widget.cartModel.sId}").then((value) {
-
+      ShoppingCartCubit.get(context).removeCart(id);
       setState(() {
-        ShoppingCartCubit.get(context).removeCart(id);
         ShoppingCartCubit.get(context).z1 += -counter * productModel!.priceAfter!;
         print(ShoppingCartCubit.get(context).z1);
         ShoppingCartCubit.get(context)

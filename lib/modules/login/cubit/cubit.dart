@@ -1,3 +1,4 @@
+import 'package:clothes_store_app/layout/app_layout.dart';
 import 'package:clothes_store_app/modules/login/cubit/states.dart';
 import 'package:clothes_store_app/shared/constant.dart';
 import 'package:clothes_store_app/shared/network/dio_helper.dart';
@@ -25,12 +26,12 @@ class LoginCubit extends Cubit<LoginStates> {
     emit(ChangeState());
   }
 
-  int index  = 0;
+  int index = 0;
 
-  void changeIndex(){
-    if(index == 0){
+  void changeIndex() {
+    if (index == 0) {
       index = 1;
-    }else{
+    } else {
       index = 0;
     }
     emit(ChangeIndexState());
@@ -49,18 +50,22 @@ class LoginCubit extends Cubit<LoginStates> {
         'password': password,
       },
     ).then((value) async {
-      if(value.data["message"] == "Id or password is invalid"){
+      if (value.data["message"] == "Id or password is invalid") {
         print("Id or password is invalid");
         emit(LoginErrorState());
-      }else{
+      } else {
         print(value.data["token"]);
         token = value.data["token"];
         final SharedPreferences sharedPreferences =
             await SharedPreferences.getInstance();
 
-        await sharedPreferences
-            .setString("token", token!).whenComplete(() {
-              Navigator.pop(context);
+        await sharedPreferences.setString("token", token!).whenComplete(() {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AppScreen(index: 0),
+            ),
+          );
         });
         emit(LoginSuccessState());
       }
@@ -83,10 +88,10 @@ class LoginCubit extends Cubit<LoginStates> {
         'telephone': telephoneController.text,
       },
     ).then((value) async {
-      if(value.data["message"] == "This email is already in use"){
+      if (value.data["message"] == "This email is already in use") {
         print("This email is already in use");
         emit(RegisterErrorState());
-      }else{
+      } else {
         print(value.data["message"]);
         emit(RegisterSuccessState());
       }

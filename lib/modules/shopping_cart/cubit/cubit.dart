@@ -28,7 +28,7 @@ class ShoppingCartCubit extends Cubit<ShoppingCartStates> {
 
   String? id;
   bool isLoading = true;
-  bool Function(CartModel element) isRemove = (element) => true;
+  bool isRemove = false;
   int total = 0;
   int total1 = 0;
   int x = 50;
@@ -36,21 +36,28 @@ class ShoppingCartCubit extends Cubit<ShoppingCartStates> {
   int p = 0;
   int m = 0;
   CartsModel? cartsModel;
+  List<String> productsId = [];
 
   void changeTotal(int counter) {
-    total = counter + x;
+    total = counter;
     emit(ChangeTotalState());
   }
 
   void getDataCart() async {
+    cartsModel = null;
+    cartProductsId = [];
     emit(CartLoadingState());
     DioHelper.getData(
       url: "/cart",
       token: token,
     ).then((value) {
       cartsModel = CartsModel.fromJson(value.data);
-      total1 = total + x;
-      print(total1);
+      print("TTT ${value.data["response"].length}");
+      for(int i = 0; i < value.data["response"].length; i++){
+        cartProductsId.add(value.data["response"][i]["product_id"]);
+        emit(CartSuccessState());
+        print("TTT ${cartProductsId}");
+      }
       isLoading = false;
       emit(CartSuccessState());
     }).catchError((error) {
@@ -59,8 +66,11 @@ class ShoppingCartCubit extends Cubit<ShoppingCartStates> {
     });
   }
 
-  void removeCart(String id) async{
+  void removeCart(String id) {
     cartsModel!.response!.removeWhere((item) => item.productId == id);
+    getDataCart();
+    isRemove = true;
+    print(total);
     emit(RemoveCartState());
   }
 }

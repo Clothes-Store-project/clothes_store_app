@@ -22,7 +22,9 @@ class ShoppingCartScreen extends StatelessWidget {
             ShoppingCartCubit cubit = ShoppingCartCubit.get(context);
             return Scaffold(
               appBar: AppBar(
+                leading: SizedBox(),
                 backgroundColor: Colors.white,
+                centerTitle: true,
                 title: Text(
                   "حقيبة التسوق",
                   style: TextStyle(
@@ -35,7 +37,7 @@ class ShoppingCartScreen extends StatelessWidget {
                 leadingWidth: 50,
                 elevation: 0.5,
               ),
-              body: cubit.isLoading
+              body: cubit.isLoading || cubit.cartsModel == null
                   ? Center(
                       child: CircularProgressIndicator(
                         color: mainColor,
@@ -44,20 +46,29 @@ class ShoppingCartScreen extends StatelessWidget {
                   : Column(
                       children: [
                         Expanded(
-                          child: ListView.separated(
-                            shrinkWrap: true,
-                            itemCount: cubit.cartsModel!.response!.length,
-                            itemBuilder: (context, index1) => Container(
-                              width: double.infinity,
-                              color: Colors.white,
-                              child: CartWidget(
-                                cartModel: cubit.cartsModel!.response![index1],
-                                index: index1,
-                                isRemove: cubit.isRemove,
+                          child: SingleChildScrollView(
+                            physics: BouncingScrollPhysics(),
+                            child: Column(
+                              children: List.generate(
+                                cubit.cartsModel!.response!.length,
+                                (index) => Column(
+                                  children: [
+                                    Container(
+                                      width: double.infinity,
+                                      color: Colors.white,
+                                      child: CartWidget(
+                                        cartModel:
+                                            cubit.cartsModel!.response![index],
+                                        index: index,
+                                        isRemove: cubit.isRemove,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            separatorBuilder: (context, index) => SizedBox(
-                              height: 5.0,
                             ),
                           ),
                         ),
@@ -94,7 +105,7 @@ class ShoppingCartScreen extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      '${cubit.total} د.إ.',
+                                      '${cubit.total + cubit.x} د.إ.',
                                       style: TextStyle(
                                         color: Colors.red,
                                         fontWeight: FontWeight.bold,
@@ -114,7 +125,10 @@ class ShoppingCartScreen extends StatelessWidget {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                ProceedToCheckoutScreen(),
+                                                ProceedToCheckoutScreen(
+                                              totalPrice: cubit.total,
+                                              cartsModel: cubit.cartsModel!,
+                                            ),
                                           ),
                                         );
                                       },

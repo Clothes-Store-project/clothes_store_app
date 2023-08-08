@@ -347,7 +347,9 @@ class LoginScreen extends StatelessWidget {
                                             ),
                                           ),
                                           fallback: (context) => Center(
-                                            child: CircularProgressIndicator(),
+                                            child: CircularProgressIndicator(
+                                              color: mainColor,
+                                            ),
                                           ),
                                         ),
                                         SizedBox(

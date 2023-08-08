@@ -9,6 +9,7 @@ class UserOrdersCubit extends Cubit<UserOrdersStates> {
 
   static UserOrdersCubit get(context) => BlocProvider.of(context);
   bool isLoading = true;
+  bool isReturn = false;
   List<OrderModel> orderModel = [];
 
   void getDataOrder(){

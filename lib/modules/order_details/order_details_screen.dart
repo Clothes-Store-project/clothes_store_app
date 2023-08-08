@@ -18,7 +18,7 @@ class OrderDetailsScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return BlocProvider(
       create: (BuildContext context) =>
-          OrderDetailsCubit(),
+          OrderDetailsCubit()..viewButton(orderModel: orderModel),
       child: BlocConsumer<OrderDetailsCubit, OrderDetailsStates>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -32,6 +32,30 @@ class OrderDetailsScreen extends StatelessWidget {
                 ),
                 elevation: 0.5,
                 centerTitle: true,
+                actions: [
+                  cubit.isReturn
+                      ? SizedBox()
+                      : TextButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateColor.resolveWith(
+                                (states) => mainColor),
+                          ),
+                          onPressed: () {
+                            cubit.returnOrder(
+                              id: orderModel.sId!,
+                              context: context,
+                            );
+                          },
+                          child: Text(
+                            "Return",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                ],
                 backgroundColor: Colors.white,
                 title: Text(
                   "Order Details",

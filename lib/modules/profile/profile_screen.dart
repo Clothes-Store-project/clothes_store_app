@@ -23,6 +23,8 @@ class ProfileScreen extends StatelessWidget {
             return Scaffold(
               backgroundColor: Colors.grey.shade200,
               appBar: AppBar(
+                centerTitle: true,
+                leading: SizedBox(),
                 backgroundColor: Colors.white,
                 title: const Text(
                   "صفحتي",

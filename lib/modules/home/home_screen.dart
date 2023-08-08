@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return BlocProvider(
       create: (BuildContext context) =>
-          HomeCubit()..getSubCategory(id: mainCategoryId),
+          HomeCubit()..getSubCategory(id: mainCategoryId, context: context),
       child: BlocConsumer<HomeCubit, HomeStates>(
           listener: (context, state) {},
           builder: (context, state) {
@@ -126,9 +126,9 @@ class HomeScreen extends StatelessWidget {
                                           ),
                                         ),
                                         ProductWidget(
-                                            categoryId: mainCategoryId,
-                                            typeOfProduct:
-                                                cubit.products[index])
+                                          categoryId: mainCategoryId,
+                                          typeOfProduct: cubit.products[index],
+                                        )
                                       ],
                                     )),
                           )

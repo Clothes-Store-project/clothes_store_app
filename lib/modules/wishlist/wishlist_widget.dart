@@ -24,6 +24,10 @@ class _WishlistWidgetState extends State<WishlistWidget> {
   @override
   void initState() {
     super.initState();
+    getDataWish();
+  }
+
+  void getDataWish(){
     DioHelper.getData(url: "/product/${widget.wishModel.productId}")
         .then((value) {
       productModel = ProductModel.fromJson(value.data);
@@ -51,9 +55,12 @@ class _WishlistWidgetState extends State<WishlistWidget> {
     } catch (e) {}
   }
 
-  void delete(){
+  void delete(String id){
     DioHelper.deleteData(url: "/wish/${widget.wishModel.sId}").then((value) {
-      WishlistCubit.get(context).removeWishlist(widget.index);
+      setState(() {
+        WishlistCubit.get(context).removeWishlist(id);
+        wishProductsId.remove(id);
+      });
     }).catchError((error){
       print(error.toString());
     });
@@ -166,7 +173,7 @@ class _WishlistWidgetState extends State<WishlistWidget> {
                       padding: const EdgeInsets.only(right: 45.0),
                       child: IconButton(
                         onPressed: () {
-                          delete();
+                          delete(productModel!.sId!);
                         },
                         icon: Icon(
                           Icons.close,

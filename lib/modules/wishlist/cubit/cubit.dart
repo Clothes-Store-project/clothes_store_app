@@ -14,10 +14,18 @@ class WishlistCubit extends Cubit<WishlistStates> {
   WishlistModel? wishlistModel;
 
   void getDataWishlist() async{
+    wishlistModel = null;
+    wishProductsId = [];
     emit(WishlistLoadingState());
     DioHelper.getData(url: "/wish",token: token).then((value) {
       print(value.data);
       wishlistModel = WishlistModel.fromJson(value.data);
+      print("TTT ${value.data["response"].length}");
+      for(int i = 0; i < value.data["response"].length; i++){
+        wishProductsId.add(value.data["response"][i]["product_id"]);
+        emit(WishlistSuccessState());
+        print("TTT ${wishProductsId}");
+      }
       isLoading = false;
       emit(WishlistSuccessState());
     }).catchError((error){
@@ -26,8 +34,9 @@ class WishlistCubit extends Cubit<WishlistStates> {
     });
   }
 
-  void removeWishlist(int index){
-    wishlistModel!.response!.removeAt(index);
+  void removeWishlist(String id){
+    wishlistModel!.response!.removeWhere((item) => item.productId == id);
+    getDataWishlist();
     emit(RemoveWishlistState());
   }
 }

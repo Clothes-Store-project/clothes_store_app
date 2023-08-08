@@ -1,3 +1,4 @@
+import 'package:clothes_store_app/models/cart_model.dart';
 import 'package:clothes_store_app/modules/proceed_to_checkout/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/proceed_to_checkout/cubit/states.dart';
 import 'package:clothes_store_app/shared/components.dart';
@@ -6,7 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProceedToCheckoutScreen extends StatelessWidget {
-  const ProceedToCheckoutScreen({super.key});
+  final CartsModel cartsModel;
+  final int totalPrice;
+
+  const ProceedToCheckoutScreen({
+    super.key,
+    required this.cartsModel,
+    required this.totalPrice,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -145,9 +153,22 @@ class ProceedToCheckoutScreen extends StatelessWidget {
                         },
                       ),
                       SizedBox(
+                        height: 10.0,
+                      ),
+                      Text(
+                        "المجموع: $totalPrice",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(
                         height: 20.0,
                       ),
-                      Container(
+                      cubit.isLoading? CircularProgressIndicator(
+                        color: mainColor,
+                      ) : Container(
                         width: size.width * 0.5,
                         height: size.height * 0.07,
                         clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -157,7 +178,11 @@ class ProceedToCheckoutScreen extends StatelessWidget {
                         ),
                         child: MaterialButton(
                           onPressed: () {
-
+                            cubit.createOrder(
+                              cartsModel: cartsModel,
+                              totalPrice: totalPrice,
+                              context: context,
+                            );
                           },
                           child: Text(
                             'Finalize',

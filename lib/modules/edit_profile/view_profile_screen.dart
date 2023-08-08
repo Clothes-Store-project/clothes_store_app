@@ -16,9 +16,13 @@ class ViewProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery
+        .of(context)
+        .size;
     return BlocProvider(
-      create: (BuildContext context) => EditProfileCubit()..dataUser(),
+      create: (BuildContext context) =>
+      EditProfileCubit()
+        ..dataUser(),
       child: BlocConsumer<EditProfileCubit, EditProfileStates>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -59,7 +63,7 @@ class ViewProfileScreen extends StatelessWidget {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text(
                                     "معلومات الحساب",
@@ -69,128 +73,153 @@ class ViewProfileScreen extends StatelessWidget {
                                     ),
                                   ),
                                   IconButton(
-                                    onPressed: () => showDialog<String>(
-                                      context: context,
-                                      builder: (BuildContext context) => Dialog(
-                                        child: Directionality(
-                                          textDirection: TextDirection.rtl,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Center(
-                                                  child: Text('معلومات الحساب'),
-                                                ),
-                                                SizedBox(
-                                                  height: 10.0,
-                                                ),
-                                                TextFormFieldWidget(
-                                                  context: context,
-                                                  controller:
-                                                      cubit.firstNameController,
-                                                  type: TextInputType.name,
-                                                  labelText: "الاسم الاول*",
-                                                  validate: (String? value) {
-                                                    if (value!.isEmpty) {
-                                                      return 'الاسم الاول لا يجب ان يكون فارغا';
-                                                    }
-                                                    return null;
-                                                  },
-                                                ),
-                                                SizedBox(
-                                                  height: 10.0,
-                                                ),
-                                                TextFormFieldWidget(
-                                                  context: context,
-                                                  controller:
-                                                      cubit.lastNameController,
-                                                  type: TextInputType.name,
-                                                  labelText: "الاسم العائلة*",
-                                                  validate: (String? value) {
-                                                    if (value!.isEmpty) {
-                                                      return 'الاسم العائلة لا يجب ان يكون فارغا';
-                                                    }
-                                                    return null;
-                                                  },
-                                                ),
-                                                SizedBox(
-                                                  height: 10.0,
-                                                ),
-                                                TextFormFieldWidget(
-                                                  context: context,
-                                                  controller:
-                                                      cubit.emailController,
-                                                  type: TextInputType.phone,
-                                                  labelText:
-                                                      "البريد الالكتروني*",
-                                                  validate: (String? value) {
-                                                    if (value!.isEmpty) {
-                                                      return 'البريد الالكتروني لا يجب ان يكون فارغا';
-                                                    }
-                                                    return null;
-                                                  },
-                                                ),
-                                                SizedBox(
-                                                  height: 30.0,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Container(
-                                                      width: size.width * 0.2,
-                                                      decoration: BoxDecoration(
-                                                        color: Colors.white,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10.0),
-                                                      ),
-                                                      child: MaterialButton(
-                                                        onPressed: () {
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                        child: Text(
-                                                          "إلغاء",
-                                                          style: TextStyle(
-                                                            fontSize: 18.0,
-                                                            color: Colors.black,
-                                                          ),
+                                    onPressed: () =>
+                                        showDialog<String>(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              Dialog(
+                                                child: Directionality(
+                                                  textDirection: TextDirection
+                                                      .rtl,
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                        .all(8.0),
+                                                    child: Column(
+                                                      mainAxisSize: MainAxisSize
+                                                          .min,
+                                                      children: [
+                                                        Center(
+                                                          child: Text(
+                                                              'معلومات الحساب'),
                                                         ),
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      width: size.width * 0.25,
-                                                      decoration: BoxDecoration(
-                                                        color: mainColor,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10.0),
-                                                      ),
-                                                      child: MaterialButton(
-                                                        onPressed: () {
-                                                          cubit.editDataProfile(
-                                                              context: context);
-                                                        },
-                                                        child: Text(
-                                                          "تحديث",
-                                                          style: TextStyle(
-                                                            fontSize: 18.0,
-                                                            color: Colors.white,
-                                                          ),
+                                                        SizedBox(
+                                                          height: 10.0,
                                                         ),
-                                                      ),
+                                                        TextFormFieldWidget(
+                                                          context: context,
+                                                          controller:
+                                                          cubit
+                                                              .firstNameController,
+                                                          type: TextInputType
+                                                              .name,
+                                                          labelText: "الاسم الاول*",
+                                                          validate: (
+                                                              String? value) {
+                                                            if (value!
+                                                                .isEmpty) {
+                                                              return 'الاسم الاول لا يجب ان يكون فارغا';
+                                                            }
+                                                            return null;
+                                                          },
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10.0,
+                                                        ),
+                                                        TextFormFieldWidget(
+                                                          context: context,
+                                                          controller:
+                                                          cubit
+                                                              .lastNameController,
+                                                          type: TextInputType
+                                                              .name,
+                                                          labelText: "الاسم العائلة*",
+                                                          validate: (
+                                                              String? value) {
+                                                            if (value!
+                                                                .isEmpty) {
+                                                              return 'الاسم العائلة لا يجب ان يكون فارغا';
+                                                            }
+                                                            return null;
+                                                          },
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10.0,
+                                                        ),
+                                                        TextFormFieldWidget(
+                                                          context: context,
+                                                          controller:
+                                                          cubit.emailController,
+                                                          type: TextInputType
+                                                              .phone,
+                                                          labelText:
+                                                          "البريد الالكتروني*",
+                                                          validate: (
+                                                              String? value) {
+                                                            if (value!
+                                                                .isEmpty) {
+                                                              return 'البريد الالكتروني لا يجب ان يكون فارغا';
+                                                            }
+                                                            return null;
+                                                          },
+                                                        ),
+                                                        SizedBox(
+                                                          height: 30.0,
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                          children: [
+                                                            Container(
+                                                              width: size
+                                                                  .width * 0.2,
+                                                              decoration: BoxDecoration(
+                                                                color: Colors
+                                                                    .white,
+                                                                borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                    10.0),
+                                                              ),
+                                                              child: MaterialButton(
+                                                                onPressed: () {
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                },
+                                                                child: Text(
+                                                                  "إلغاء",
+                                                                  style: TextStyle(
+                                                                    fontSize: 18.0,
+                                                                    color: Colors
+                                                                        .black,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              width: size
+                                                                  .width * 0.25,
+                                                              decoration: BoxDecoration(
+                                                                color: mainColor,
+                                                                borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                    10.0),
+                                                              ),
+                                                              child: MaterialButton(
+                                                                onPressed: () {
+                                                                  cubit
+                                                                      .editDataProfile(
+                                                                      context: context);
+                                                                },
+                                                                child: Text(
+                                                                  "تحديث",
+                                                                  style: TextStyle(
+                                                                    fontSize: 18.0,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
+                                                  ),
                                                 ),
-                                              ],
-                                            ),
-                                          ),
+                                              ),
                                         ),
-                                      ),
-                                    ),
                                     icon: const Icon(
                                       Icons.edit,
                                     ),
@@ -203,31 +232,34 @@ class ViewProfileScreen extends StatelessWidget {
                                   width: double.infinity,
                                   decoration: const BoxDecoration(
                                       border: Border(
-                                    bottom: BorderSide(color: Colors.grey),
-                                    left: BorderSide(color: Colors.grey),
-                                    right: BorderSide(color: Colors.grey),
-                                    top: BorderSide(color: Colors.grey),
-                                  )),
+                                        bottom: BorderSide(color: Colors.grey),
+                                        left: BorderSide(color: Colors.grey),
+                                        right: BorderSide(color: Colors.grey),
+                                        top: BorderSide(color: Colors.grey),
+                                      )),
                                   child: Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "الاسم الاول : ${userModel!.respone!.firstName}",
+                                        "الاسم الاول : ${userModel!.respone!
+                                            .firstName}",
                                         style: TextStyle(
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.w500,
                                         ),
                                       ),
                                       Text(
-                                        "اسم العائلة : ${userModel!.respone!.lastName}",
+                                        "اسم العائلة : ${userModel!.respone!
+                                            .lastName}",
                                         style: TextStyle(
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.w500,
                                         ),
                                       ),
                                       Text(
-                                        "البريد الالكتروني : ${userModel!.respone!.email}",
+                                        "البريد الالكتروني : ${userModel!
+                                            .respone!.email}",
                                         style: TextStyle(
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.w500,
@@ -254,7 +286,7 @@ class ViewProfileScreen extends StatelessWidget {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text(
                                     "رقم الهاتف",
@@ -264,95 +296,113 @@ class ViewProfileScreen extends StatelessWidget {
                                     ),
                                   ),
                                   IconButton(
-                                    onPressed: () => showDialog<String>(
-                                      context: context,
-                                      builder: (BuildContext context) => Dialog(
-                                        child: Directionality(
-                                          textDirection: TextDirection.rtl,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Center(
-                                                  child: Text('رقم الحساب'),
-                                                ),
-                                                SizedBox(
-                                                  height: 10.0,
-                                                ),
-                                                TextFormFieldWidget(
-                                                  context: context,
-                                                  controller:
-                                                      cubit.telephoneController,
-                                                  type: TextInputType.name,
-                                                  labelText: "رقم الهاتف*",
-                                                  validate: (String? value) {
-                                                    if (value!.isEmpty) {
-                                                      return 'رقم الهاتف لا يجب ان يكون فارغا';
-                                                    }
-                                                    return null;
-                                                  },
-                                                ),
-                                                SizedBox(
-                                                  height: 20.0,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Container(
-                                                      width: size.width * 0.2,
-                                                      decoration: BoxDecoration(
-                                                        color: Colors.white,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10.0),
-                                                      ),
-                                                      child: MaterialButton(
-                                                        onPressed: () {
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                        child: Text(
-                                                          "إلغاء",
-                                                          style: TextStyle(
-                                                            fontSize: 18.0,
-                                                            color: Colors.black,
-                                                          ),
+                                    onPressed: () =>
+                                        showDialog<String>(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              Dialog(
+                                                child: Directionality(
+                                                  textDirection: TextDirection
+                                                      .rtl,
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                        .all(8.0),
+                                                    child: Column(
+                                                      mainAxisSize: MainAxisSize
+                                                          .min,
+                                                      children: [
+                                                        Center(
+                                                          child: Text(
+                                                              'رقم الحساب'),
                                                         ),
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      width: size.width * 0.25,
-                                                      decoration: BoxDecoration(
-                                                        color: mainColor,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10.0),
-                                                      ),
-                                                      child: MaterialButton(
-                                                        onPressed: () {
-                                                          cubit.editDataProfile(
-                                                              context: context);
-                                                        },
-                                                        child: Text(
-                                                          "تحديث",
-                                                          style: TextStyle(
-                                                            fontSize: 18.0,
-                                                            color: Colors.white,
-                                                          ),
+                                                        SizedBox(
+                                                          height: 10.0,
                                                         ),
-                                                      ),
+                                                        TextFormFieldWidget(
+                                                          context: context,
+                                                          controller:
+                                                          cubit
+                                                              .telephoneController,
+                                                          type: TextInputType
+                                                              .name,
+                                                          labelText: "رقم الهاتف*",
+                                                          validate: (
+                                                              String? value) {
+                                                            if (value!
+                                                                .isEmpty) {
+                                                              return 'رقم الهاتف لا يجب ان يكون فارغا';
+                                                            }
+                                                            return null;
+                                                          },
+                                                        ),
+                                                        SizedBox(
+                                                          height: 20.0,
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                          children: [
+                                                            Container(
+                                                              width: size
+                                                                  .width * 0.2,
+                                                              decoration: BoxDecoration(
+                                                                color: Colors
+                                                                    .white,
+                                                                borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                    10.0),
+                                                              ),
+                                                              child: MaterialButton(
+                                                                onPressed: () {
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                },
+                                                                child: Text(
+                                                                  "إلغاء",
+                                                                  style: TextStyle(
+                                                                    fontSize: 18.0,
+                                                                    color: Colors
+                                                                        .black,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              width: size
+                                                                  .width * 0.25,
+                                                              decoration: BoxDecoration(
+                                                                color: mainColor,
+                                                                borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                    10.0),
+                                                              ),
+                                                              child: MaterialButton(
+                                                                onPressed: () {
+                                                                  cubit
+                                                                      .editDataProfile(
+                                                                      context: context);
+                                                                },
+                                                                child: Text(
+                                                                  "تحديث",
+                                                                  style: TextStyle(
+                                                                    fontSize: 18.0,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
+                                                  ),
                                                 ),
-                                              ],
-                                            ),
-                                          ),
+                                              ),
                                         ),
-                                      ),
-                                    ),
                                     icon: const Icon(
                                       Icons.edit,
                                     ),
@@ -365,11 +415,11 @@ class ViewProfileScreen extends StatelessWidget {
                                   width: double.infinity,
                                   decoration: const BoxDecoration(
                                       border: Border(
-                                    bottom: BorderSide(color: Colors.grey),
-                                    left: BorderSide(color: Colors.grey),
-                                    right: BorderSide(color: Colors.grey),
-                                    top: BorderSide(color: Colors.grey),
-                                  )),
+                                        bottom: BorderSide(color: Colors.grey),
+                                        left: BorderSide(color: Colors.grey),
+                                        right: BorderSide(color: Colors.grey),
+                                        top: BorderSide(color: Colors.grey),
+                                      )),
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
@@ -399,7 +449,7 @@ class ViewProfileScreen extends StatelessWidget {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text(
                                     "كلمة السر",
@@ -422,11 +472,11 @@ class ViewProfileScreen extends StatelessWidget {
                                   width: double.infinity,
                                   decoration: const BoxDecoration(
                                       border: Border(
-                                    bottom: BorderSide(color: Colors.grey),
-                                    left: BorderSide(color: Colors.grey),
-                                    right: BorderSide(color: Colors.grey),
-                                    top: BorderSide(color: Colors.grey),
-                                  )),
+                                        bottom: BorderSide(color: Colors.grey),
+                                        left: BorderSide(color: Colors.grey),
+                                        right: BorderSide(color: Colors.grey),
+                                        top: BorderSide(color: Colors.grey),
+                                      )),
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
@@ -461,15 +511,15 @@ class ViewProfileScreen extends StatelessWidget {
                                   color: Colors.white70,
                                   onPressed: () {},
                                   child: SizedBox(
-                                      width: double.infinity,
-                                      child: Text(
-                                        "حذف حسابي",
-                                        style: TextStyle(
-                                          color: mainColor,
-                                          fontSize: 16,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      )),
+                                    width: double.infinity,
+                                    child: Text(
+                                      "حذف حسابي",
+                                      style: TextStyle(
+                                        color: mainColor,
+                                        fontSize: 16,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),),
                                 ),
                               ),
                               Padding(

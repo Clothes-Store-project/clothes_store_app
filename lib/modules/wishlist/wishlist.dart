@@ -20,6 +20,8 @@ class WishlistScreen extends StatelessWidget {
             return Scaffold(
               backgroundColor: Colors.white,
               appBar: AppBar(
+                leading: SizedBox(),
+                centerTitle: true,
                 backgroundColor: Colors.white,
                 title: const Text(
                   "قائمة الامنيات",
@@ -32,7 +34,7 @@ class WishlistScreen extends StatelessWidget {
                 leadingWidth: 50,
                 elevation: 0.5,
               ),
-              body: cubit.isLoading
+              body: cubit.isLoading || cubit.wishlistModel == null
                   ? Center(
                       child: CircularProgressIndicator(
                         color: mainColor,
@@ -41,20 +43,27 @@ class WishlistScreen extends StatelessWidget {
                   : Column(
                       children: [
                         Expanded(
-                          child: ListView.separated(
-                            shrinkWrap: true,
+                          child: SingleChildScrollView(
                             physics: BouncingScrollPhysics(),
-                            itemCount: cubit.wishlistModel!.response!.length,
-                            itemBuilder: (context, index) => Container(
-                              width: double.infinity,
-                              color: Colors.white,
-                              child: WishlistWidget(
-                                wishModel: cubit.wishlistModel!.response![index],
-                                index: index,
+                            child: Column(
+                              children: List.generate(
+                                cubit.wishlistModel!.response!.length,
+                                (index) => Column(
+                                  children: [
+                                    Container(
+                                      width: double.infinity,
+                                      color: Colors.white,
+                                      child: WishlistWidget(
+                                        wishModel: cubit.wishlistModel!.response![index],
+                                        index: index,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            separatorBuilder: (context, index) => SizedBox(
-                              height: 5.0,
                             ),
                           ),
                         ),

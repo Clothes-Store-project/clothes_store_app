@@ -4,6 +4,7 @@ import 'package:clothes_store_app/layout/app_layout.dart';
 import 'package:clothes_store_app/layout/cubit/cubit.dart';
 import 'package:clothes_store_app/layout/cubit/states.dart';
 import 'package:clothes_store_app/modules/edit_profile/cubit/cubit.dart';
+import 'package:clothes_store_app/modules/home/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/login/login_screen.dart';
 import 'package:clothes_store_app/modules/profile/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/shopping_cart/cubit/cubit.dart';
@@ -39,13 +40,16 @@ class MyApp extends StatelessWidget {
           create: (context) => AppCubit(),
         ),
         BlocProvider(
+            create: (BuildContext context) => HomeCubit(),
+        ),
+        BlocProvider(
           create: (BuildContext context) => EditProfileCubit()..dataUser(),
         ),
         BlocProvider(
-            create: (BuildContext context) => ShoppingCartCubit(),
+            create: (BuildContext context) => ShoppingCartCubit()..getDataCart(),
         ),
         BlocProvider(
-            create: (BuildContext context) => WishlistCubit(),
+            create: (BuildContext context) => WishlistCubit()..getDataWishlist(),
         ),
         BlocProvider(
           create: (BuildContext context) => ProfileCubit(),

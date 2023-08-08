@@ -7,6 +7,7 @@ class ChangeState extends ShoppingCartStates {}
 class ChangeTotalState extends ShoppingCartStates {}
 
 class ChangePlusState extends ShoppingCartStates {}
+class CartProductState extends ShoppingCartStates {}
 
 class ChangeMinusState extends ShoppingCartStates {}
 

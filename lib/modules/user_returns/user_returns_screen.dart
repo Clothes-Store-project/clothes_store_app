@@ -62,7 +62,7 @@ class UserReturnsScreen extends StatelessWidget {
                                   softWrap: false,
                                 ),
                                 Text(
-                                  "Status: ${cubit.orderModel[index].status}",
+                                  "Status: ${cubit.orderModel[index].returnrequest}",
                                   style: TextStyle(
                                     color: Colors.black54,
                                     fontSize: 18.0,

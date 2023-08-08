@@ -163,7 +163,7 @@ class ReturnsDetailsScreen extends StatelessWidget {
                           height: 5.0,
                         ),
                         Text(
-                          "Status: ",
+                          "Status: ${orderModel.returnrequest}",
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 17.0,

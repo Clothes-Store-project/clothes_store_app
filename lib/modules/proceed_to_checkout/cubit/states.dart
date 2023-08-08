@@ -4,8 +4,8 @@ class ProceedToCheckoutInitialState extends ProceedToCheckoutStates {}
 
 class ChangeState extends ProceedToCheckoutStates {}
 
-class ProceedToCheckoutLoadingState extends ProceedToCheckoutStates {}
+class CreateOrderLoadingState extends ProceedToCheckoutStates {}
 
-class ProceedToCheckoutSuccessState extends ProceedToCheckoutStates {}
+class CreateOrderSuccessState extends ProceedToCheckoutStates {}
 
-class ProceedToCheckoutErrorState extends ProceedToCheckoutStates {}
+class CreateOrderErrorState extends ProceedToCheckoutStates {}

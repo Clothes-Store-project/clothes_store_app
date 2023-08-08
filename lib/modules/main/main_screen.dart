@@ -27,6 +27,7 @@ class MainScreen extends StatelessWidget {
               child: Scaffold(
                 backgroundColor: Colors.white,
                 appBar: AppBar(
+                  leading: SizedBox(),
                   elevation: 0.5,
                   backgroundColor: Colors.white,
                   actions: [

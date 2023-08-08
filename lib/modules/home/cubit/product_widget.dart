@@ -1,9 +1,12 @@
+import 'package:clothes_store_app/models/cart_model.dart';
 import 'package:clothes_store_app/models/products_model.dart';
 import 'package:clothes_store_app/modules/home/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/login/login_screen.dart';
 import 'package:clothes_store_app/modules/product_details/product_details.dart';
+import 'package:clothes_store_app/modules/shopping_cart/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/shopping_cart/shopping_cart.dart';
 import 'package:clothes_store_app/modules/view_section_product/view_section_product.dart';
+import 'package:clothes_store_app/modules/wishlist/cubit/cubit.dart';
 import 'package:clothes_store_app/shared/constant.dart';
 import 'package:clothes_store_app/shared/network/dio_helper.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +15,11 @@ class ProductWidget extends StatefulWidget {
   final String categoryId;
   final String typeOfProduct;
 
-  const ProductWidget(
-      {required this.categoryId, required this.typeOfProduct, super.key});
+  const ProductWidget({
+    required this.categoryId,
+    required this.typeOfProduct,
+    super.key,
+  });
 
   @override
   State<ProductWidget> createState() => _ProductWidgetState();
@@ -21,7 +27,10 @@ class ProductWidget extends StatefulWidget {
 
 class _ProductWidgetState extends State<ProductWidget> {
   bool isLoading = true;
+  bool newIsAdd = true;
+  bool newIsWish = true;
   ProductsModel? productsModel;
+
 
   Future<void> getProductsHotSale() async {
     try {
@@ -50,9 +59,12 @@ class _ProductWidgetState extends State<ProductWidget> {
               },
               token: token)
           .then((value) async {
-            HomeCubit.get(context).isAdd = true;
-      })
-          .catchError((error) {
+      }).whenComplete(() async{
+        setState(() {
+          cartProductsId.add(productId);
+          ShoppingCartCubit.get(context).getDataCart();
+        });
+      }).catchError((error) {
         print(error.toString());
       });
     } catch (e) {}
@@ -69,7 +81,9 @@ class _ProductWidgetState extends State<ProductWidget> {
         },
         token: token,
       ).then((value) async {
-        HomeCubit.get(context).isWish = true;
+        setState(() {
+          WishlistCubit.get(context).getDataWishlist();
+        });
       }).catchError((error) {
         print(error.toString());
       });
@@ -251,8 +265,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                                           );
                                         }
                                       },
-                                      child: HomeCubit.get(context).isAdd
-                                          ? Icon(
+                                      child: cartProductsId.contains(productsModel!.response![index].sId)? Icon(
                                               Icons.done,
                                               color: Colors.white,
                                             )
@@ -278,7 +291,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                                           productId: product.sId!,
                                         );
                                       },
-                                      child: HomeCubit.get(context).isWish
+                                      child: wishProductsId.contains(productsModel!.response![index].sId)
                                           ? Icon(
                                               Icons.favorite,
                                               color: Colors.redAccent,
