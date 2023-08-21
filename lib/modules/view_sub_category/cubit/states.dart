@@ -1,6 +1,7 @@
 abstract class ViewSubCategoryStates {}
 
 class ViewSubCategoryInitialState extends ViewSubCategoryStates {}
+class ChangeState extends ViewSubCategoryStates {}
 
 class ProductsLoadingState extends ViewSubCategoryStates {}
 

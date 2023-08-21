@@ -29,16 +29,8 @@ class MainScreen extends StatelessWidget {
                 appBar: AppBar(
                   leading: SizedBox(),
                   elevation: 0.5,
+                  actions: [SizedBox(width: size.width * 0.13,)],
                   backgroundColor: Colors.white,
-                  actions: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.notifications_none,
-                        color: Colors.red,
-                      ),
-                    ),
-                  ],
                   title: TextField(
                     keyboardType: TextInputType.text,
                     controller: cubit.searchController,

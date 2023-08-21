@@ -44,13 +44,13 @@ class ProductDetailsScreen extends StatelessWidget {
                                   backgroundColor: Colors.white,
                                   iconTheme: IconThemeData(color: Colors.black),
                                   actions: [
-                                    IconButton(
+                                    /*IconButton(
                                       onPressed: () {},
                                       icon: Icon(
                                         Icons.share,
                                         color: Colors.black,
                                       ),
-                                    ),
+                                    ),*/
                                     IconButton(
                                       onPressed: () {},
                                       icon: Icon(
@@ -130,146 +130,124 @@ class ProductDetailsScreen extends StatelessWidget {
                                     children: [
                                       Container(
                                         color: Colors.white,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  cubit.productModel!.name!,
-                                                  style: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 16.0,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                cubit.productModel!.name!,
+                                                style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16.0,
+                                                  fontWeight: FontWeight.w600,
                                                 ),
-                                                InkWell(
-                                                  child: Text(
-                                                    "تابع الماركة",
-                                                    style: TextStyle(
-                                                      color: mainColor,
-                                                      fontSize: 16.0,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                    ),
-                                                  ),
-                                                  onTap: () {},
-                                                ),
-                                              ],
-                                            ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            Text(
-                                              cubit.productModel!.desc!
-                                                  .description!,
-                                              style: const TextStyle(
-                                                color: Colors.black38,
-                                                fontSize: 16.0,
-                                                fontWeight: FontWeight.w600,
                                               ),
-                                            ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      cubit.productModel!
-                                                          .priceBefore
-                                                          .toString(),
-                                                      style: const TextStyle(
-                                                          color: Colors.grey,
-                                                          fontSize: 16.0,
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                cubit.productModel!.desc!
+                                                    .description!,
+                                                style: const TextStyle(
+                                                  color: Colors.black38,
+                                                  fontSize: 16.0,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        cubit.productModel!
+                                                            .priceBefore
+                                                            .toString(),
+                                                        style: const TextStyle(
+                                                            color: Colors.grey,
+                                                            fontSize: 16.0,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            decoration:
+                                                                TextDecoration
+                                                                    .lineThrough),
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Text(
+                                                        cubit.productModel!
+                                                            .priceAfter
+                                                            .toString(),
+                                                        style: const TextStyle(
+                                                          color: Colors.red,
+                                                          fontSize: 25,
                                                           fontWeight:
                                                               FontWeight.w600,
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .lineThrough),
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    Text(
-                                                      cubit.productModel!
-                                                          .priceAfter
-                                                          .toString(),
-                                                      style: const TextStyle(
-                                                        color: Colors.red,
-                                                        fontSize: 25,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(10),
-                                                  child: Container(
-                                                    decoration:
-                                                        const BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .only(
-                                                              topLeft: Radius
-                                                                  .circular(5),
-                                                              topRight: Radius
-                                                                  .circular(5),
-                                                              bottomLeft: Radius
-                                                                  .circular(5),
-                                                              bottomRight:
-                                                                  Radius
-                                                                      .circular(
-                                                                          5),
-                                                            ),
-                                                            color: Colors.white,
-                                                            boxShadow: [
-                                                          BoxShadow(
-                                                            color: Colors.red,
-                                                            spreadRadius: 1,
-                                                            blurRadius: 4,
-                                                            offset:
-                                                                Offset(0, 0),
-                                                          ),
-                                                        ]),
-                                                    width: size.width * 0.2,
-                                                    height: size.height * 0.03,
-                                                    child: Center(
-                                                      child: Text(
-                                                        "خصم${100 - (cubit.productModel!.priceAfter! / cubit.productModel!.priceBefore! * 100)}%",
-                                                        style: TextStyle(
-                                                          color: Colors.red,
-                                                          fontSize: 15,
                                                         ),
-                                                        textAlign:
-                                                            TextAlign.center,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(10),
+                                                    child: Container(
+                                                      decoration:
+                                                          const BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .only(
+                                                                topLeft: Radius
+                                                                    .circular(5),
+                                                                topRight: Radius
+                                                                    .circular(5),
+                                                                bottomLeft: Radius
+                                                                    .circular(5),
+                                                                bottomRight:
+                                                                    Radius
+                                                                        .circular(
+                                                                            5),
+                                                              ),
+                                                              color: Colors.white,
+                                                              boxShadow: [
+                                                            BoxShadow(
+                                                              color: Colors.red,
+                                                              spreadRadius: 1,
+                                                              blurRadius: 4,
+                                                              offset:
+                                                                  Offset(0, 0),
+                                                            ),
+                                                          ]),
+                                                      width: size.width * 0.2,
+                                                      height: size.height * 0.03,
+                                                      child: Center(
+                                                        child: Text(
+                                                          "خصم %${100 - (cubit.productModel!.priceAfter! / cubit.productModel!.priceBefore! * 100).ceilToDouble()}",
+                                                          style: TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: 15,
+                                                          ),
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                          ],
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                       const SizedBox(
                                         height: 20.0,
-                                      ),
-                                      const SizedBox(
-                                        height: 10.0,
                                       ),
                                       Container(
                                         color: Colors.white,
@@ -389,142 +367,6 @@ class ProductDetailsScreen extends StatelessWidget {
                                       ),
                                       SizedBox(
                                         height: 10.0,
-                                      ),
-                                      Container(
-                                        color: Colors.white,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "تقييمات",
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 16,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10.0,
-                                      ),
-                                      Container(
-                                        color: Colors.white,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      CircleAvatar(
-                                                        backgroundImage: AssetImage(
-                                                            'assets/img_24.png'),
-                                                        radius: 25,
-                                                        foregroundColor:
-                                                            Colors.black26,
-                                                      ),
-                                                      SizedBox(
-                                                        width: 10,
-                                                      ),
-                                                      Text(
-                                                        "روبرت وود",
-                                                        style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 18.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Container(
-                                                    width: size.height * 0.09,
-                                                    height: size.height * 0.048,
-                                                    clipBehavior: Clip
-                                                        .antiAliasWithSaveLayer,
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.white,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              1.0),
-                                                    ),
-                                                    child: MaterialButton(
-                                                      shape: Border(
-                                                        left: BorderSide(
-                                                          color: mainColor,
-                                                        ),
-                                                        right: BorderSide(
-                                                          color: mainColor,
-                                                        ),
-                                                        bottom: BorderSide(
-                                                          color: mainColor,
-                                                        ),
-                                                        top: BorderSide(
-                                                          color: mainColor,
-                                                        ),
-                                                      ),
-                                                      onPressed: () {},
-                                                      child: Text(
-                                                        'تابع',
-                                                        style: TextStyle(
-                                                          color: mainColor,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 14.0,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: Text(
-                                                "تابع هذه الماركة لتصلك أحدث إصداراتها وآخر مستجدات تشكيلتها الحالية وغيرها الكثير.",
-                                                style: TextStyle(
-                                                  color: Colors.black38,
-                                                  fontSize: 14.0,
-                                                ),
-                                              ),
-                                            ),
-                                            InkWell(
-                                              onTap: () {},
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.black38,
-                                                      blurRadius: 0.6,
-                                                    ),
-                                                  ],
-                                                ),
-                                                width: double.infinity,
-                                                height: size.height * 0.05,
-                                                child: Center(
-                                                  child: Text(
-                                                    "عرض كل المنتجات",
-                                                    style: TextStyle(
-                                                      color: Colors.black38,
-                                                      fontSize: 14.0,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
                                       ),
                                     ],
                                   ),

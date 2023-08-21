@@ -23,7 +23,7 @@ class LoginScreen extends StatelessWidget {
               appBar: AppBar(
                 backgroundColor: Colors.white,
                 title: Text(
-                  "نمشي",
+                  "الذئب",
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -44,7 +44,7 @@ class LoginScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
+                        /*Container(
                           color: Colors.white,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,14 +125,14 @@ class LoginScreen extends StatelessWidget {
                         ),
                         SizedBox(
                           height: 10.0,
-                        ),
+                        ),*/
                         Container(
                           color: Colors.white,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "تسجيل الدخول نمشي الخاص بك",
+                                "تسجيل الدخول الخاص بك",
                                 style: TextStyle(
                                   color: Colors.black54,
                                   fontSize: 16,
@@ -161,7 +161,7 @@ class LoginScreen extends StatelessWidget {
                                             padding: const EdgeInsets.symmetric(
                                                 vertical: 10, horizontal: 20),
                                             child: Text(
-                                              "الدخول",
+                                              "تسجيل الدخول",
                                               style: TextStyle(
                                                 color: cubit.index == 0
                                                     ? mainColor
@@ -299,7 +299,7 @@ class LoginScreen extends StatelessWidget {
                                                 cubit.isPassword
                                                     ? Icons.visibility
                                                     : Icons.visibility_off,
-                                                color: Colors.black,
+                                                color: mainColor,
                                               ),
                                             ),
                                           ),
@@ -337,7 +337,7 @@ class LoginScreen extends StatelessWidget {
                                               color: mainColor,
                                               height: size.height * 0.05,
                                               child: const Text(
-                                                'الدخول',
+                                                'تسجيل الدخول',
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold,
@@ -428,7 +428,7 @@ class LoginScreen extends StatelessWidget {
                                           keyboardType:
                                           TextInputType.emailAddress,
                                           decoration: InputDecoration(
-                                            labelText: 'البريد الالكتروني',
+                                            labelText: 'البريد الالكتروني *',
                                             labelStyle: TextStyle(
                                               color: mainColor,
                                             ),
@@ -473,7 +473,7 @@ class LoginScreen extends StatelessWidget {
                                             color: Colors.black,
                                           ),
                                           decoration: InputDecoration(
-                                            labelText: 'كلمة السر',
+                                            labelText: 'كلمة السر *',
                                             labelStyle: TextStyle(
                                               color: mainColor,
                                             ),
@@ -506,7 +506,7 @@ class LoginScreen extends StatelessWidget {
                                                 cubit.isPassword
                                                     ? Icons.visibility
                                                     : Icons.visibility_off,
-                                                color: Colors.black,
+                                                color: mainColor,
                                               ),
                                             ),
                                           ),
@@ -620,7 +620,7 @@ class LoginScreen extends StatelessWidget {
                                             color: Colors.black,
                                           ),
                                           decoration: InputDecoration(
-                                            labelText: 'رقم الهاتف',
+                                            labelText: 'رقم الهاتف *',
                                             labelStyle: TextStyle(
                                               color: mainColor,
                                             ),
@@ -672,7 +672,7 @@ class LoginScreen extends StatelessWidget {
                                               color: mainColor,
                                               height: size.height * 0.05,
                                               child: const Text(
-                                                'اشترك منا',
+                                                'اشترك معنا',
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold,
@@ -688,22 +688,6 @@ class LoginScreen extends StatelessWidget {
                                         SizedBox(
                                           height: 10.0,
                                         ),
-                                        Center(
-                                          child: InkWell(
-                                            onTap: () {},
-                                            child: Text(
-                                              "هل نسيت كلمة السر؟",
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 10.0,
-                                        ),
                                       ],
                                     )
                             ],
@@ -711,65 +695,6 @@ class LoginScreen extends StatelessWidget {
                         ),
                         SizedBox(
                           height: 10.0,
-                        ),
-                        InkWell(
-                          onTap: () {},
-                          child: Container(
-                            color: Colors.white,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "راسل خدمة العملاء",
-                                      style: TextStyle(
-                                        color: Colors.black38,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    Text(
-                                      "اتصل بنا",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black38,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "اذهب إلى صفحتي",
-                                      style: TextStyle(
-                                        color: Colors.black38,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    Text(
-                                      "744 626 800",
-                                      style: TextStyle(
-                                        color: Colors.black38,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                              ],
-                            ),
-                          ),
                         ),
                       ],
                     ),

@@ -34,15 +34,6 @@ class ProfileScreen extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                actions: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.notifications_none,
-                      color: Colors.red,
-                    ),
-                  ),
-                ],
                 leadingWidth: 50,
                 elevation: 0.5,
               ),
@@ -106,7 +97,7 @@ class ProfileScreen extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(10),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 InkWell(
                                   onTap: () {
@@ -170,7 +161,7 @@ class ProfileScreen extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                Column(
+                                /*Column(
                                   children: [
                                     Container(
                                       decoration: BoxDecoration(
@@ -189,31 +180,7 @@ class ProfileScreen extends StatelessWidget {
                                     ),
                                     Text("محفظة")
                                   ],
-                                ),
-                                Column(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: mainColor.withOpacity(0.2),
-                                        shape: BoxShape.circle,
-                                        border: Border.all(color: mainColor),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(10),
-                                        child: Column(
-                                          children: [
-                                            Icon(
-                                              Icons.card_giftcard,
-                                              color: mainColor,
-                                              size: size.width * 0.1,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Text("المكافآت")
-                                  ],
-                                ),
+                                ),*/
                               ],
                             ),
                           )
@@ -227,7 +194,7 @@ class ProfileScreen extends StatelessWidget {
                       color: Colors.white,
                       child: Column(
                         children: [
-                          ListTile(
+                          /*ListTile(
                             onTap: () {},
                             trailing: Icon(
                               Icons.arrow_back_ios_new_outlined,
@@ -265,7 +232,7 @@ class ProfileScreen extends StatelessWidget {
                               color: Colors.grey.shade400,
                             ),
                           ),
-                          const Divider(),
+                          const Divider(),*/
                           ListTile(
                             onTap: () {},
                             trailing: Icon(
@@ -280,7 +247,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

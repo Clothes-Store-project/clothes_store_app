@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            height: 100.0,
+                            height: size.height * 0.20,
                             child: ListView.separated(
                                 scrollDirection: Axis.horizontal,
                                 itemCount:
@@ -48,7 +48,7 @@ class HomeScreen extends StatelessWidget {
                                   return Padding(
                                     padding: const EdgeInsets.all(10),
                                     child: Container(
-                                      width: size.width * 0.21,
+                                      width: size.width * 0.30,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: mainColor,
@@ -65,6 +65,7 @@ class HomeScreen extends StatelessWidget {
                                                             .subCategoryModel!
                                                             .response![index]
                                                             .sId!,
+                                                        subCategoryName: cubit.subCategoryModel!.response![index].name!,
                                                       )),
                                             );
                                           },
@@ -72,7 +73,11 @@ class HomeScreen extends StatelessWidget {
                                             cubit.subCategoryModel!
                                                 .response![index].name!,
                                             style: TextStyle(
-                                              color: Colors.white,
+                                              foreground: Paint()
+                                                ..style = PaintingStyle.stroke
+                                                ..strokeWidth = 1
+                                                ..color = Colors.white,
+                                              fontSize: 16
                                             ),
                                           ),
                                         ),

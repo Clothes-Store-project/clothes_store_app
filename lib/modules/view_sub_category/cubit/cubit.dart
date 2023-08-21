@@ -12,8 +12,14 @@ class ViewSubCategoryCubit extends Cubit<ViewSubCategoryStates> {
   TextEditingController searchController = TextEditingController();
 
   bool isLoading = true;
+  int isSelected = 0;
 
   ProductsModel? productsModel;
+
+  void changeIndex(int newIndex){
+    isSelected = newIndex;
+    emit(ChangeState());
+  }
 
   Future<void> getProducts({required String subCategoryId}) async{
     try{
