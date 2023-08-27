@@ -26,7 +26,7 @@ class _CartWidgetState extends State<CartWidget> {
   int counter = 0;
   ProductModel? productModel;
 
-  List<int> z = [];
+  List<num> z = [];
 
   @override
   void initState() {
@@ -145,23 +145,30 @@ class _CartWidgetState extends State<CartWidget> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "${productModel!.name}",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'regular',
+                      Container(
+                        width: size.width * 0.4,
+                        child: Text(
+                          "${productModel!.name}",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'regular',
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.fade,
                         ),
                       ),
-                      Text(
+                      SizedBox(height: size.height * 0.05,),
+                      /*Text(
                         "${productModel!.desc!.description}",
                         style: TextStyle(
                           color: Colors.black54,
                           fontSize: 16,
                           fontFamily: 'regular',
                         ),
-                      ),
+                        softWrap: true,
+                      ),*/
                       Row(
                         children: [
                           Text(

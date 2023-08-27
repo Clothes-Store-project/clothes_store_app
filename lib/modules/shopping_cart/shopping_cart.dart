@@ -105,7 +105,7 @@ class ShoppingCartScreen extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      '${cubit.total + cubit.x} د.إ.',
+                                      '${(cubit.total + cubit.x).toStringAsFixed(3)} د.إ.',
                                       style: TextStyle(
                                         color: Colors.red,
                                         fontWeight: FontWeight.bold,

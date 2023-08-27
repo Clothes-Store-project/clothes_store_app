@@ -33,7 +33,7 @@ class HomeCubit extends Cubit<HomeStates> {
   List<String> products = [
     "Hot sale",
     "Ai recom",
-    "Super deals",
+    /*"Super deals",*/
     "Viewed products",
     "First visit products",
   ];

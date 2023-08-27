@@ -25,7 +25,7 @@ class ProceedToCheckoutCubit extends Cubit<ProceedToCheckoutStates> {
 
   void createOrder({
     required CartsModel cartsModel,
-    required int totalPrice,
+    required num totalPrice,
     required BuildContext context,
   }) {
     isLoading = true;
@@ -42,7 +42,7 @@ class ProceedToCheckoutCubit extends Cubit<ProceedToCheckoutStates> {
         "city": cityController.text,
         "zipCode": cityController.text,
         "payment": "cash",
-        "totalPrice": "$totalPrice",
+        "totalPrice": "${totalPrice + 50}",
         "products": cartsModel.response,
       },
     ).then((value) {

@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProceedToCheckoutScreen extends StatelessWidget {
   final CartsModel cartsModel;
-  final int totalPrice;
+  final num totalPrice;
 
   const ProceedToCheckoutScreen({
     super.key,
@@ -19,6 +19,7 @@ class ProceedToCheckoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    num x = 50;
     return BlocProvider(
       create: (BuildContext context) => ProceedToCheckoutCubit(),
       child: BlocConsumer<ProceedToCheckoutCubit, ProceedToCheckoutStates>(
@@ -156,7 +157,7 @@ class ProceedToCheckoutScreen extends StatelessWidget {
                         height: 10.0,
                       ),
                       Text(
-                        "المجموع: $totalPrice",
+                        "المجموع: ${(50 + totalPrice).toStringAsFixed(3)}",
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 20.0,
@@ -185,7 +186,7 @@ class ProceedToCheckoutScreen extends StatelessWidget {
                             );
                           },
                           child: Text(
-                            'Finalize',
+                            'Complete Order',
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,

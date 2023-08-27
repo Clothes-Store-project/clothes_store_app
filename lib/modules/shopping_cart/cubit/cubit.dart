@@ -29,16 +29,16 @@ class ShoppingCartCubit extends Cubit<ShoppingCartStates> {
   String? id;
   bool isLoading = true;
   bool isRemove = false;
-  int total = 0;
+  num total = 0;
   int total1 = 0;
   int x = 50;
-  int z1 = 0;
+  num z1 = 0;
   int p = 0;
   int m = 0;
   CartsModel? cartsModel;
   List<String> productsId = [];
 
-  void changeTotal(int counter) {
+  void changeTotal(num counter) {
     total = counter;
     emit(ChangeTotalState());
   }

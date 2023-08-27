@@ -239,12 +239,15 @@ class OrderDetailsScreen extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          "Name: ${orderModel.products![index].name}",
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.w500,
+                                        Container(
+                                          width: size.width * 0.55,
+                                          child: Text(
+                                            "Name: ${orderModel.products![index].name}",
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                           ),
                                         ),
                                         SizedBox(
@@ -255,7 +258,7 @@ class OrderDetailsScreen extends StatelessWidget {
                                           style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 16.0,
-                                            fontWeight: FontWeight.w500,
+                                            fontWeight: FontWeight.w400,
                                           ),
                                         ),
                                         SizedBox(
@@ -266,7 +269,7 @@ class OrderDetailsScreen extends StatelessWidget {
                                           style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 16.0,
-                                            fontWeight: FontWeight.w500,
+                                            fontWeight: FontWeight.w400,
                                           ),
                                         ),
                                       ],

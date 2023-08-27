@@ -439,7 +439,7 @@ class ViewProfileScreen extends StatelessWidget {
                       SizedBox(
                         height: 10.0,
                       ),
-                      Container(
+                      /*Container(
                         color: Colors.white,
                         width: double.infinity,
                         child: Padding(
@@ -492,7 +492,7 @@ class ViewProfileScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                      ),
+                      ),*/
                       SizedBox(
                         height: 10.0,
                       ),

@@ -6,6 +6,7 @@ import 'package:clothes_store_app/shared/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../models/products_model.dart';
 
@@ -430,7 +431,8 @@ class ViewSubCategoryScreen extends StatelessWidget {
                                                         const SizedBox(
                                                           height: 5,
                                                         ),
-                                                        Row(
+                                                        Column(
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
                                                           children: [
                                                             Text(
                                                               product
@@ -520,37 +522,93 @@ class ViewSubCategoryScreen extends StatelessWidget {
                                                       ],
                                                     ),
                                                   ),
-                                                  Container(
-                                                    width: size.width * 0.1,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      color: mainColor,
-                                                    ),
-                                                    child: TextButton(
-                                                      onPressed: () {
-                                                        if (token == null) {
-                                                          Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
+                                                  Column(
+                                                    mainAxisAlignment: MainAxisAlignment.end,
+                                                    mainAxisSize: MainAxisSize.max,
+                                                    children: [
+                                                      Container(
+                                                        width: size.width * 0.1,
+                                                        decoration: BoxDecoration(
+                                                          borderRadius: BorderRadius.circular(10),
+                                                          color: mainColor,
+                                                        ),
+                                                        child: TextButton(
+                                                          onPressed: () {
+                                                            if (token == null) {
+                                                              Navigator.push(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                    builder: (context) =>
                                                                         LoginScreen()),
-                                                          );
-                                                        } else {
-                                                          print(product.sId);
-                                                          cubit.addToCart(
-                                                            productId:
-                                                                product.sId!,
-                                                          );
-                                                        }
-                                                      },
-                                                      child: Icon(
-                                                        Icons.add,
-                                                        color: Colors.white,
+                                                              );
+                                                            } else {
+                                                              print(product.sId);
+                                                              Fluttertoast.showToast(
+                                                                msg: "Product Added to cart",
+                                                                toastLength: Toast.LENGTH_SHORT,
+                                                                gravity: ToastGravity.BOTTOM,
+                                                                timeInSecForIosWeb: 1,
+                                                                backgroundColor: Colors.green,
+                                                                textColor: Colors.white,
+                                                                fontSize: 16,
+                                                              ).whenComplete(() {
+                                                                cubit.addToCart(
+                                                                  productId: product.sId!,
+                                                                );
+                                                              });
+                                                            }
+                                                          },
+                                                          child: cartProductsId.contains(
+                                                              product.sId)
+                                                              ? Icon(
+                                                            Icons.done,
+                                                            color: Colors.white,
+                                                          )
+                                                              : Icon(
+                                                            Icons.add,
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
                                                       ),
-                                                    ),
+                                                      SizedBox(
+                                                        height: 10.0,
+                                                      ),
+                                                      Container(
+                                                        width: size.width * 0.1,
+                                                        decoration: BoxDecoration(
+                                                          borderRadius: BorderRadius.circular(10),
+                                                          color: mainColor,
+                                                        ),
+                                                        child: TextButton(
+                                                          onPressed: () {
+                                                            print(product.sId);
+                                                            Fluttertoast.showToast(
+                                                              msg: "Product Added to wishlist",
+                                                              toastLength: Toast.LENGTH_SHORT,
+                                                              gravity: ToastGravity.BOTTOM,
+                                                              timeInSecForIosWeb: 1,
+                                                              backgroundColor: Colors.green,
+                                                              textColor: Colors.white,
+                                                              fontSize: 16,
+                                                            ).whenComplete(() {
+                                                              cubit.addToWish(
+                                                                productId: product.sId!,
+                                                              );
+                                                            });
+                                                          },
+                                                          child: wishProductsId.contains(
+                                                              product.sId)
+                                                              ? Icon(
+                                                            Icons.favorite,
+                                                            color: Colors.redAccent,
+                                                          )
+                                                              : Icon(
+                                                            Icons.favorite_border_outlined,
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ],
                                               ),

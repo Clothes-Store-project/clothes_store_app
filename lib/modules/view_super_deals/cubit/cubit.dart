@@ -1,41 +1,34 @@
 import 'package:clothes_store_app/models/products_model.dart';
-import 'package:clothes_store_app/modules/view_sub_category/cubit/states.dart';
+import 'package:clothes_store_app/modules/view_super_deals/cubit/states.dart';
 import 'package:clothes_store_app/shared/constant.dart';
 import 'package:clothes_store_app/shared/network/dio_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ViewSubCategoryCubit extends Cubit<ViewSubCategoryStates> {
-  ViewSubCategoryCubit() : super(ViewSubCategoryInitialState());
+class ViewSuperDealsCubit extends Cubit<ViewSuperDealsStates> {
+  ViewSuperDealsCubit() : super(ViewSuperDealsInitialState());
 
-  static ViewSubCategoryCubit get(context) => BlocProvider.of(context);
+  static ViewSuperDealsCubit get(context) => BlocProvider.of(context);
   TextEditingController searchController = TextEditingController();
 
   bool isLoading = true;
-  int isSelected = 0;
 
   ProductsModel? productsModel;
 
-  void changeIndex(int newIndex){
-    isSelected = newIndex;
-    emit(ChangeState());
-  }
-
-  Future<void> getProducts({required String subCategoryId}) async{
-    try{
+  Future<void> getProducts(
+      {required String categoryId}) async {
+    try {
       isLoading = true;
-      emit(ProductsLoadingState());
-      DioHelper.getData(
-          url: "/product/category/$subCategoryId",
-      ).then((value) async {
+      emit(ViewSuperDealsLoadingState());
+      DioHelper.getData(url: "/product/main_category/$categoryId").then((value) async {
         productsModel = ProductsModel.fromJson(value.data);
         isLoading = false;
-        emit(ProductsSuccessState());
+        emit(ViewSuperDealsSuccessState());
       }).catchError((error) {
         print(error.toString());
-        emit(ProductsErrorState());
+        emit(ViewSuperDealsErrorState());
       });
-    }catch (e) {}
+    } catch (e) {}
   }
 
   Future<void> addToCart({

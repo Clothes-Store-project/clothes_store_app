@@ -22,126 +22,136 @@ class HomeScreen extends StatelessWidget {
       create: (BuildContext context) =>
           HomeCubit()..getSubCategory(id: mainCategoryId, context: context),
       child: BlocConsumer<HomeCubit, HomeStates>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            HomeCubit cubit = HomeCubit.get(context);
-            return Scaffold(
-              backgroundColor: Colors.white,
-              body: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                child: cubit.isLoading
-                    ? Center(
-                        child: CircularProgressIndicator(
-                          color: mainColor,
-                        ),
-                      )
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: size.height * 0.20,
-                            child: ListView.separated(
-                                scrollDirection: Axis.horizontal,
-                                itemCount:
-                                    cubit.subCategoryModel!.response!.length,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(10),
-                                    child: Container(
-                                      width: size.width * 0.30,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: mainColor,
-                                      ),
-                                      child: Center(
-                                        child: InkWell(
-                                          onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ViewSubCategoryScreen(
-                                                        subCategoryId: cubit
-                                                            .subCategoryModel!
-                                                            .response![index]
-                                                            .sId!,
-                                                        subCategoryName: cubit.subCategoryModel!.response![index].name!,
-                                                      )),
-                                            );
-                                          },
-                                          child: Text(
-                                            cubit.subCategoryModel!
-                                                .response![index].name!,
-                                            style: TextStyle(
+        listener: (context, state) {},
+        builder: (context, state) {
+          HomeCubit cubit = HomeCubit.get(context);
+          return Scaffold(
+            backgroundColor: Colors.white,
+            body: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: cubit.isLoading
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        color: mainColor,
+                      ),
+                    )
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: size.height * 0.20,
+                          child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemCount:
+                                  cubit.subCategoryModel!.response!.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Container(
+                                    width: size.width * 0.30,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: mainColor,
+                                    ),
+                                    child: Center(
+                                      child: InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ViewSubCategoryScreen(
+                                                subCategoryId: cubit
+                                                    .subCategoryModel!
+                                                    .response![index]
+                                                    .sId!,
+                                                subCategoryName: cubit
+                                                    .subCategoryModel!
+                                                    .response![index]
+                                                    .name!,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Text(
+                                          cubit.subCategoryModel!
+                                              .response![index].name!,
+                                          style: TextStyle(
                                               foreground: Paint()
                                                 ..style = PaintingStyle.stroke
                                                 ..strokeWidth = 1
                                                 ..color = Colors.white,
-                                              fontSize: 16
-                                            ),
-                                          ),
+                                              fontSize: 16),
                                         ),
                                       ),
                                     ),
-                                  );
-                                },
-                                separatorBuilder: (context, index) =>
-                                    const SizedBox(
-                                      width: 10.0,
-                                    )),
-                          ),
-                          Column(
-                            children: List.generate(
-                                cubit.products.length,
-                                (index) => Column(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                cubit.products[index],
-                                                style: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 16),
+                                  ),
+                                );
+                              },
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(
+                                    width: 10.0,
+                                  )),
+                        ),
+                        Column(
+                          children: List.generate(
+                            cubit.products.length,
+                            (index) => Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        cubit.products[index],
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ViewSectionProductScreen(
+                                                categoryId: mainCategoryId,
+                                                categoryName: cubit
+                                                    .subCategoryModel!
+                                                    .response![index]
+                                                    .name!,
                                               ),
-                                              InkWell(
-                                                onTap: () {
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              ViewSectionProductScreen(
-                                                                  categoryId:
-                                                                      mainCategoryId,
-                                                                  typeOfProduct:
-                                                                      cubit.products[
-                                                                          index])));
-                                                },
-                                                child: const Text(
-                                                  "اعرض الكل",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 16),
-                                                ),
-                                              ),
-                                            ],
+                                            ),
+                                          );
+                                        },
+                                        child: const Text(
+                                          "اعرض الكل",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 16,
                                           ),
                                         ),
-                                        ProductWidget(
-                                          categoryId: mainCategoryId,
-                                          typeOfProduct: cubit.products[index],
-                                        )
-                                      ],
-                                    )),
-                          )
-                        ],
-                      ),
-              ),
-            );
-          }),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                ProductWidget(
+                                  categoryId: mainCategoryId,
+                                  type: cubit.products[index],
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

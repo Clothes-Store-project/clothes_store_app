@@ -23,83 +23,103 @@ class ProductsModel {
 
 class ProductModel {
   String? sId;
-  String? name;
-  List<String>? imageSrc;
-  Desc? desc;
-  int? quantity;
-  String? sKU;
+  String? supplier;
   String? categoryId;
-  int? priceBefore;
-  int? priceAfter;
-  Sizes? sizes;
   String? subCategory;
   String? typeOfProduct;
+  bool? firstVisit;
+  String? name;
+  String? sKU;
+  num? priceBefore;
+  num? priceAfter;
+  List<String>? imageSrc;
+  Desc? desc;
+  bool? view;
+  /*bool? sizeable;
+  bool? colors;
+  bool? dressing;*/
   int? iV;
+  //Quabtity? quantity;
 
-  ProductModel(
-      {this.sId,
-        this.name,
-        this.imageSrc,
-        this.desc,
-        this.quantity,
-        this.sKU,
-        this.categoryId,
-        this.priceBefore,
-        this.priceAfter,
-        this.sizes,
-        this.subCategory,
-        this.typeOfProduct,
-        this.iV});
+  ProductModel({this.sId,
+    this.supplier,
+    this.categoryId,
+    this.subCategory,
+    this.typeOfProduct,
+    this.firstVisit,
+    this.name,
+    this.sKU,
+    this.priceBefore,
+    this.priceAfter,
+    this.imageSrc,
+    this.desc,
+    this.view,
+    /*this.sizeable,
+        this.colors,
+        this.dressing,*/
+    this.iV,
+    //this.quantity}
+  });
 
   ProductModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
-    name = json['name'];
-    imageSrc = json['imageSrc'].cast<String>();
-    desc = json['desc'] != null ? new Desc.fromJson(json['desc']) : null;
-    quantity = json['quantity'];
-    sKU = json['SKU'];
+    supplier = json['supplier'];
     categoryId = json['category_id'];
-    priceBefore = json['price_before'];
-    priceAfter = json['price_after'];
-    sizes = json['sizes'] != null ? new Sizes.fromJson(json['sizes']) : null;
     subCategory = json['subCategory'];
     typeOfProduct = json['typeOfProduct'];
+    firstVisit = json['first_visit'];
+    name = json['name'];
+    sKU = json['SKU'];
+    priceBefore = json['price_before'];
+    priceAfter = json['price_after'];
+    imageSrc = json['imageSrc'].cast<String>();
+    desc = json['desc'] != null ? new Desc.fromJson(json['desc']) : null;
+    view = json['view'];
+    /*sizeable = json['sizeable'];
+    colors = json['colors'];
+    dressing = json['dressing'];*/
     iV = json['__v'];
+    /*quantity = json['quantity'] != null
+        ? new Quabtity.fromJson(json['quantity'])
+        : null;*/
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['_id'] = this.sId;
+    data['supplier'] = this.supplier;
+    data['category_id'] = this.categoryId;
+    data['subCategory'] = this.subCategory;
+    data['typeOfProduct'] = this.typeOfProduct;
+    data['first_visit'] = this.firstVisit;
     data['name'] = this.name;
+    data['SKU'] = this.sKU;
+    data['price_before'] = this.priceBefore;
+    data['price_after'] = this.priceAfter;
     data['imageSrc'] = this.imageSrc;
     if (this.desc != null) {
       data['desc'] = this.desc!.toJson();
     }
-    data['quantity'] = this.quantity;
-    data['SKU'] = this.sKU;
-    data['category_id'] = this.categoryId;
-    data['price_before'] = this.priceBefore;
-    data['price_after'] = this.priceAfter;
-    if (this.sizes != null) {
-      data['sizes'] = this.sizes!.toJson();
-    }
-    data['subCategory'] = this.subCategory;
-    data['typeOfProduct'] = this.typeOfProduct;
+    data['view'] = this.view;
+    /*data['sizeable'] = this.sizeable;
+    data['colors'] = this.colors;
+    data['dressing'] = this.dressing;*/
     data['__v'] = this.iV;
+    /*if (this.quantity != null) {
+      data['quantity'] = this.quantity!.toJson();
+    }*/
     return data;
   }
 }
 
 class Desc {
-  String? color;
   String? type;
   Brand? brand;
   String? description;
 
-  Desc({this.color, this.type, this.brand, this.description});
+  Desc({this.type, this.brand, this.description});
 
   Desc.fromJson(Map<String, dynamic> json) {
-    color = json['color'];
     type = json['type'];
     brand = json['brand'] != null ? new Brand.fromJson(json['brand']) : null;
     description = json['description'];
@@ -107,7 +127,6 @@ class Desc {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['color'] = this.color;
     data['type'] = this.type;
     if (this.brand != null) {
       data['brand'] = this.brand!.toJson();
@@ -136,30 +155,18 @@ class Brand {
   }
 }
 
-class Sizes {
-  int? s;
-  int? m;
-  int? l;
-  int? xl;
-  int? xxl;
+class Quabtity {
+  int? avilable;
 
-  Sizes({this.s, this.m, this.l, this.xl, this.xxl});
+  Quabtity({this.avilable});
 
-  Sizes.fromJson(Map<String, dynamic> json) {
-    s = json['s'];
-    m = json['m'];
-    l = json['l'];
-    xl = json['xl'];
-    xxl = json['xxl'];
+  Quabtity.fromJson(Map<String, dynamic> json) {
+    avilable = json['avilable'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['s'] = this.s;
-    data['m'] = this.m;
-    data['l'] = this.l;
-    data['xl'] = this.xl;
-    data['xxl'] = this.xxl;
+    data['avilable'] = this.avilable;
     return data;
   }
 }

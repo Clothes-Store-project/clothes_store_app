@@ -56,4 +56,55 @@ class ProductDetailsCubit extends Cubit<ProductDetailsStates> {
       });
     } catch (e) {}
   }
+
+  Future<void> addToWish({
+    required String productId,
+  }) async {
+    try {
+      DioHelper.postData(
+        url: "/wish",
+        data: {
+          "product_id": productId,
+        },
+        token: token,
+      ).then((value) async {
+      }).catchError((error) {
+        print(error.toString());
+      });
+    } catch (e) {}
+  }
+
+  List<String> sizeName = [
+    "s",
+    "m",
+    "l",
+    "xl",
+    "xxl",
+    "xxl",
+    "xxl",
+    "xxl",
+  ];
+
+  int index2 = 0;
+
+  void changeColorIndex(int newIndex){
+    index2 = newIndex;
+    emit(ChangeState());
+  }
+
+  List<Color> color = [
+    Colors.yellow,
+    Colors.black,
+    Colors.red,
+    Colors.green,
+  ];
+  List<Color> color2 = [
+    Colors.black,
+    Colors.red,
+    Colors.green,
+  ];
+  List<Color> color3 = [
+    Colors.black,
+    Colors.red,
+  ];
 }

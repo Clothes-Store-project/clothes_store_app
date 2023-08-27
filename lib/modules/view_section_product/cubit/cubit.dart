@@ -16,13 +16,11 @@ class ViewSectionProductCubit extends Cubit<ViewSectionProductStates> {
   ProductsModel? productsModel;
 
   Future<void> getProducts(
-      {required String categoryId, required String typeOfProduct}) async {
+      {required String categoryId}) async {
     try {
       isLoading = true;
       emit(ViewSectionProductLoadingState());
-      DioHelper.postData(url: "/product/type/$categoryId", data: {
-        "typeOfProduct": typeOfProduct,
-      }).then((value) async {
+      DioHelper.getData(url: "/product/main_category/$categoryId").then((value) async {
         productsModel = ProductsModel.fromJson(value.data);
         isLoading = false;
         emit(ViewSectionProductSuccessState());
@@ -46,6 +44,23 @@ class ViewSectionProductCubit extends Cubit<ViewSectionProductStates> {
           token: token)
           .then((value) async {})
           .catchError((error) {
+        print(error.toString());
+      });
+    } catch (e) {}
+  }
+
+  Future<void> addToWish({
+    required String productId,
+  }) async {
+    try {
+      DioHelper.postData(
+        url: "/wish",
+        data: {
+          "product_id": productId,
+        },
+        token: token,
+      ).then((value) async {
+      }).catchError((error) {
         print(error.toString());
       });
     } catch (e) {}

@@ -6,6 +6,7 @@ import 'package:clothes_store_app/modules/wishlist/cubit/cubit.dart';
 import 'package:clothes_store_app/shared/constant.dart';
 import 'package:clothes_store_app/shared/network/dio_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class WishlistWidget extends StatefulWidget {
   final int index;
@@ -77,113 +78,130 @@ class _WishlistWidgetState extends State<WishlistWidget> {
           )
         : Padding(
             padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: size.height * 0.17,
-                  width: size.width * 0.21,
-                  child: Image(
-                    image: NetworkImage("${productModel!.imageSrc![0]}"),
+            child: Container(
+              width: size.width * 0.6,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: size.height * 0.17,
+                    width: size.width * 0.21,
+                    child: Image(
+                      image: NetworkImage("${productModel!.imageSrc![0]}"),
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "${productModel!.name}",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'regular',
-                        ),
-                      ),
-                      Text(
-                        "${productModel!.desc!.description}",
-                        style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: 16,
-                          fontFamily: 'regular',
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "السعر: ",
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: size.width * 0.4,
+                          child: Text(
+                            "${productModel!.name}",
                             style: TextStyle(
-                              fontSize: 18.0,
-                              color: Colors.black54,
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
                               fontFamily: 'regular',
                             ),
                           ),
-                          Text(
-                            "${productModel!.priceAfter}",
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              color: Colors.red,
-                              fontFamily: 'regular',
-                            ),
-                          ),
-                        ],
-                      ),
-                      Container(
-                        width: size.width * 0.4,
-                        height: size.height * 0.04,
-                        decoration: BoxDecoration(
-                          border: Border(
-                            right: BorderSide(color: Colors.black12),
-                            left: BorderSide(color: Colors.black12),
-                            top: BorderSide(color: Colors.black12),
-                            bottom: BorderSide(color: Colors.black12),
-                          ),
                         ),
-                        child: Container(
-                          width: double.infinity,
-                          height: size.height * 0.05,
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          decoration: BoxDecoration(
-                            color: mainColor,
-                            borderRadius: BorderRadius.circular(0.0),
+                        /*Text(
+                          "${productModel!.desc!.description}",
+                          style: TextStyle(
+                            color: Colors.black54,
+                            fontSize: 5,
+                            fontFamily: 'regular',
                           ),
-                          child: MaterialButton(
-                            onPressed: () {
-                              addToCart(productId: productModel!.sId!);
-                            },
-                            child: const Text(
-                              'Add To Cart',
+                          softWrap: true,
+                        ),*/
+                        Row(
+                          children: [
+                            Text(
+                              "السعر: ",
                               style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
                                 fontSize: 18.0,
+                                color: Colors.black54,
+                                fontFamily: 'regular',
                               ),
                             ),
+                            Text(
+                              "${productModel!.priceAfter!}",
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                color: Colors.red,
+                                fontFamily: 'regular',
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          width: size.width * 0.4,
+                          height: size.height * 0.04,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              right: BorderSide(color: Colors.black12),
+                              left: BorderSide(color: Colors.black12),
+                              top: BorderSide(color: Colors.black12),
+                              bottom: BorderSide(color: Colors.black12),
+                            ),
+                          ),
+                          child: Container(
+                            width: double.infinity,
+                            height: size.height * 0.05,
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            decoration: BoxDecoration(
+                              color: mainColor,
+                              borderRadius: BorderRadius.circular(0.0),
+                            ),
+                            child: MaterialButton(
+                              onPressed: () {
+                                Fluttertoast.showToast(
+                                  msg: "Product added to cart",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.green,
+                                  textColor: Colors.white,
+                                  fontSize: 16,
+                                ).whenComplete(() {
+                                  addToCart(productId: productModel!.sId!);
+                                });
+                              },
+                              child: const Text(
+                                'Add To Cart',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18.0,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 45.0),
+                        child: IconButton(
+                          onPressed: () {
+                            delete(productModel!.sId!);
+                          },
+                          icon: Icon(
+                            Icons.close,
+                            color: Colors.black26,
                           ),
                         ),
                       ),
                     ],
                   ),
-                ),
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 45.0),
-                      child: IconButton(
-                        onPressed: () {
-                          delete(productModel!.sId!);
-                        },
-                        icon: Icon(
-                          Icons.close,
-                          color: Colors.black26,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                ],
+              ),
             ),
           );
   }

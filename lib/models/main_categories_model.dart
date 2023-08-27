@@ -7,15 +7,15 @@ class MainCategoriesModel {
     if (json['response'] != null) {
       response = <MainCategory>[];
       json['response'].forEach((v) {
-        response!.add(MainCategory.fromJson(v));
+        response!.add(new MainCategory.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (response != null) {
-      data['response'] = response!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.response != null) {
+      data['response'] = this.response!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -35,10 +35,10 @@ class MainCategory {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['_id'] = sId;
-    data['name'] = name;
-    data['__v'] = iV;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['_id'] = this.sId;
+    data['name'] = this.name;
+    data['__v'] = this.iV;
     return data;
   }
 }
