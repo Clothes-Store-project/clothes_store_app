@@ -9,3 +9,4 @@ class ProductLoadingState extends ProductDetailsStates {}
 class ProductSuccessState extends ProductDetailsStates {}
 
 class ProductErrorState extends ProductDetailsStates {}
+class FillQuantityState extends ProductDetailsStates {}

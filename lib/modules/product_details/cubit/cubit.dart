@@ -23,6 +23,9 @@ class ProductDetailsCubit extends Cubit<ProductDetailsStates> {
     }
     emit(ChangeState());
   }
+
+  Map<String, dynamic> quantities = {};
+
   Future<void> getProduct(
       {required String id}) async {
     try {
@@ -30,6 +33,7 @@ class ProductDetailsCubit extends Cubit<ProductDetailsStates> {
       emit(ProductLoadingState());
       DioHelper.getData(url: "/product/$id").then((value) async {
         productModel = ProductModel.fromJson(value.data);
+        getAllSize(sizeable: value.data["sizeable"], colors: value.data["colors"], quantity: value.data["quantity"]);
         isLoading = false;
         emit(ProductSuccessState());
       }).catchError((error) {
@@ -37,6 +41,31 @@ class ProductDetailsCubit extends Cubit<ProductDetailsStates> {
         emit(ProductErrorState());
       });
     } catch (e) {}
+  }
+
+  void getAllSize({required bool sizeable, required bool colors, required Map<String, dynamic> quantity}){
+    if(!sizeable && !colors){
+      quantities = {"avilable": quantity["avilable"] > 0};
+    }
+    if (colors ? !sizeable : sizeable) {
+      Map<String, dynamic> Available =  Map.fromEntries(quantity.entries.where((element) => element.value > 0));
+
+      quantities = Available;
+    }
+    if (colors && sizeable) {
+      for (String key in quantity.keys) {
+        Map<String, dynamic> Available =  Map.fromEntries(quantity[key].entries.where((color) => color[key].value > 0));
+        if(Available.isNotEmpty){
+          quantities["size"] = {};
+          for(String key1 in Available.keys){
+            quantities[key][Available[key1]] = 1;
+          }
+        }
+      }
+    }
+
+    print("Hello $quantities");
+    emit(FillQuantityState());
   }
 
   Future<void> addToCart({
