@@ -128,6 +128,8 @@ class ShoppingCartScreen extends StatelessWidget {
                                                 ProceedToCheckoutScreen(
                                               totalPrice: cubit.total,
                                               cartsModel: cubit.cartsModel!,
+                                                  color: '',
+                                                  productSize: '',
                                             ),
                                           ),
                                         );

@@ -15,6 +15,8 @@ class EditProfileCubit extends Cubit<EditProfileStates> {
   TextEditingController lastNameController = TextEditingController();
   TextEditingController telephoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController newPasswordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
   //bool isLoading = true;
 
   void dataUser() {
@@ -41,6 +43,21 @@ class EditProfileCubit extends Cubit<EditProfileStates> {
     }).catchError((error) {
       //isLoading = true;
       emit(ErrorEditState());
+    });
+  }
+
+  void editPassword({
+    required BuildContext context,
+  }) {
+    //isLoading = true;
+    emit(LoadingChangePasswordState());
+    DioHelper.postData(url: "/user/update_password", token: token, data: {
+      'password': newPasswordController.text,
+    }).then((value) {
+      print("heloooooo${value.data}");
+      emit(SuccessChangePasswordState());
+    }).catchError((error) {
+      emit(ErrorChangePasswordState());
     });
   }
 

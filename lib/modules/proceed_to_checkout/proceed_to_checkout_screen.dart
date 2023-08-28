@@ -9,11 +9,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ProceedToCheckoutScreen extends StatelessWidget {
   final CartsModel cartsModel;
   final num totalPrice;
+  final String color;
+  final String productSize;
 
   const ProceedToCheckoutScreen({
     super.key,
     required this.cartsModel,
     required this.totalPrice,
+    required this.color,
+    required this.productSize,
   });
 
   @override
@@ -167,34 +171,38 @@ class ProceedToCheckoutScreen extends StatelessWidget {
                       SizedBox(
                         height: 20.0,
                       ),
-                      cubit.isLoading? CircularProgressIndicator(
-                        color: mainColor,
-                      ) : Container(
-                        width: size.width * 0.5,
-                        height: size.height * 0.07,
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        decoration: BoxDecoration(
-                          color: mainColor,
-                          borderRadius: BorderRadius.circular(25.0),
-                        ),
-                        child: MaterialButton(
-                          onPressed: () {
-                            cubit.createOrder(
-                              cartsModel: cartsModel,
-                              totalPrice: totalPrice,
-                              context: context,
-                            );
-                          },
-                          child: Text(
-                            'Complete Order',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20.0,
+                      cubit.isLoading
+                          ? CircularProgressIndicator(
+                              color: mainColor,
+                            )
+                          : Container(
+                              width: size.width * 0.5,
+                              height: size.height * 0.07,
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              decoration: BoxDecoration(
+                                color: mainColor,
+                                borderRadius: BorderRadius.circular(25.0),
+                              ),
+                              child: MaterialButton(
+                                onPressed: () {
+                                  cubit.createOrder(
+                                    cartsModel: cartsModel,
+                                    totalPrice: totalPrice,
+                                    context: context,
+                                    size: productSize,
+                                    color: color,
+                                  );
+                                },
+                                child: Text(
+                                  'Complete Order',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.0,
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ),

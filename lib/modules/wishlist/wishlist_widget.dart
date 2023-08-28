@@ -1,6 +1,7 @@
 import 'package:clothes_store_app/models/cart_model.dart';
 import 'package:clothes_store_app/models/products_model.dart';
 import 'package:clothes_store_app/models/wish_model.dart';
+import 'package:clothes_store_app/modules/product_details/product_details.dart';
 import 'package:clothes_store_app/modules/shopping_cart/cubit/cubit.dart';
 import 'package:clothes_store_app/modules/wishlist/cubit/cubit.dart';
 import 'package:clothes_store_app/shared/constant.dart';
@@ -12,7 +13,8 @@ class WishlistWidget extends StatefulWidget {
   final int index;
   final WishModel wishModel;
 
-  const WishlistWidget({super.key, required this.wishModel, required this.index});
+  const WishlistWidget(
+      {super.key, required this.wishModel, required this.index});
 
   @override
   State<WishlistWidget> createState() => _WishlistWidgetState();
@@ -28,7 +30,7 @@ class _WishlistWidgetState extends State<WishlistWidget> {
     getDataWish();
   }
 
-  void getDataWish(){
+  void getDataWish() {
     DioHelper.getData(url: "/product/${widget.wishModel.productId}")
         .then((value) {
       productModel = ProductModel.fromJson(value.data);
@@ -43,26 +45,26 @@ class _WishlistWidgetState extends State<WishlistWidget> {
   }) async {
     try {
       DioHelper.postData(
-          url: "/cart",
-          data: {
-            "product_id": productId,
-            "quantity": 1,
-          },
-          token: token)
+              url: "/cart",
+              data: {
+                "product_id": productId,
+                "quantity": 1,
+              },
+              token: token)
           .then((value) async {})
           .catchError((error) {
-        print(error.toString()  );
+        print(error.toString());
       });
     } catch (e) {}
   }
 
-  void delete(String id){
+  void delete(String id) {
     DioHelper.deleteData(url: "/wish/${widget.wishModel.sId}").then((value) {
       setState(() {
         WishlistCubit.get(context).removeWishlist(id);
         wishProductsId.remove(id);
       });
-    }).catchError((error){
+    }).catchError((error) {
       print(error.toString());
     });
   }
@@ -158,7 +160,14 @@ class _WishlistWidgetState extends State<WishlistWidget> {
                             ),
                             child: MaterialButton(
                               onPressed: () {
-                                Fluttertoast.showToast(
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ProductDetailsScreen(
+                                        productId: productModel!.sId!),
+                                  ),
+                                );
+                                /* Fluttertoast.showToast(
                                   msg: "Product added to cart",
                                   toastLength: Toast.LENGTH_SHORT,
                                   gravity: ToastGravity.BOTTOM,
@@ -168,10 +177,10 @@ class _WishlistWidgetState extends State<WishlistWidget> {
                                   fontSize: 16,
                                 ).whenComplete(() {
                                   addToCart(productId: productModel!.sId!);
-                                });
+                                });*/
                               },
                               child: const Text(
-                                'Add To Cart',
+                                'View Product',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,

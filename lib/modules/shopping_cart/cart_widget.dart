@@ -65,6 +65,10 @@ class _CartWidgetState extends State<CartWidget> {
     });
   }
 
+  Color hexToColor(String hexString) {
+    return Color(int.parse(hexString, radix: 16)).withOpacity(1.0);
+  }
+
   void delete(String id) {
     DioHelper.deleteData(url: "/cart/${widget.cartModel.sId}").then((value) {
       ShoppingCartCubit.get(context).removeCart(id);
@@ -159,16 +163,42 @@ class _CartWidgetState extends State<CartWidget> {
                           overflow: TextOverflow.fade,
                         ),
                       ),
-                      SizedBox(height: size.height * 0.05,),
-                      /*Text(
-                        "${productModel!.desc!.description}",
-                        style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: 16,
-                          fontFamily: 'regular',
-                        ),
-                        softWrap: true,
-                      ),*/
+                      SizedBox(height: 15.0,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          widget.cartModel.size != ""? Container(
+                            width: size.width * 0.15,
+                            height: size.height * 0.04,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.black,
+                            ),
+                            child: Center(
+                              child: Text(
+                                "${widget.cartModel.size}",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'regular',
+                                ),
+                              ),
+                            ),
+                          ) : SizedBox(height: 15.0,),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          widget.cartModel.color! != ""? Container(
+                            width: size.width * 0.1,
+                            height: size.height * 0.04,
+                            decoration: BoxDecoration(
+                              color: hexToColor(widget.cartModel.color!.replaceAll("#", "")),
+                              border: Border.all(color: Colors.black38,),
+                            ),
+                          ) : SizedBox(),
+                        ],
+                      ),
                       Row(
                         children: [
                           Text(

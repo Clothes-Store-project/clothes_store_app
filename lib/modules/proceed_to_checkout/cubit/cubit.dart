@@ -27,6 +27,8 @@ class ProceedToCheckoutCubit extends Cubit<ProceedToCheckoutStates> {
     required CartsModel cartsModel,
     required num totalPrice,
     required BuildContext context,
+    required String size,
+    required String color,
   }) {
     isLoading = true;
     emit(CreateOrderLoadingState());
@@ -44,6 +46,8 @@ class ProceedToCheckoutCubit extends Cubit<ProceedToCheckoutStates> {
         "payment": "cash",
         "totalPrice": "${totalPrice + 50}",
         "products": cartsModel.response,
+        "color": color,
+        "size": size,
       },
     ).then((value) {
       isLoading = false;

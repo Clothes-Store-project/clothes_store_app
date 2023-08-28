@@ -35,11 +35,11 @@ class ProductModel {
   List<String>? imageSrc;
   Desc? desc;
   bool? view;
-  /*bool? sizeable;
+  bool? sizeable;
   bool? colors;
-  bool? dressing;*/
+  bool? dressing;
   int? iV;
-  //Quabtity? quantity;
+  var quantity;
 
   ProductModel({this.sId,
     this.supplier,
@@ -54,11 +54,11 @@ class ProductModel {
     this.imageSrc,
     this.desc,
     this.view,
-    /*this.sizeable,
-        this.colors,
-        this.dressing,*/
+    this.sizeable,
+    this.colors,
+    this.dressing,
     this.iV,
-    //this.quantity}
+    this.quantity,
   });
 
   ProductModel.fromJson(Map<String, dynamic> json) {
@@ -75,13 +75,11 @@ class ProductModel {
     imageSrc = json['imageSrc'].cast<String>();
     desc = json['desc'] != null ? new Desc.fromJson(json['desc']) : null;
     view = json['view'];
-    /*sizeable = json['sizeable'];
+    sizeable = json['sizeable'];
     colors = json['colors'];
-    dressing = json['dressing'];*/
+    dressing = json['dressing'];
     iV = json['__v'];
-    /*quantity = json['quantity'] != null
-        ? new Quabtity.fromJson(json['quantity'])
-        : null;*/
+    quantity = json['quantity'];
   }
 
   Map<String, dynamic> toJson() {
@@ -101,13 +99,11 @@ class ProductModel {
       data['desc'] = this.desc!.toJson();
     }
     data['view'] = this.view;
-    /*data['sizeable'] = this.sizeable;
+    data['sizeable'] = this.sizeable;
     data['colors'] = this.colors;
-    data['dressing'] = this.dressing;*/
+    data['dressing'] = this.dressing;
     data['__v'] = this.iV;
-    /*if (this.quantity != null) {
-      data['quantity'] = this.quantity!.toJson();
-    }*/
+    data['quantity'] = this.quantity!;
     return data;
   }
 }

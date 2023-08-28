@@ -12,3 +12,7 @@ class ErrorEditState extends EditProfileStates {}
 class LoadingViewState extends EditProfileStates {}
 class SuccessViewState extends EditProfileStates {}
 class ErrorViewState extends EditProfileStates {}
+
+class LoadingChangePasswordState extends EditProfileStates {}
+class SuccessChangePasswordState extends EditProfileStates {}
+class ErrorChangePasswordState extends EditProfileStates {}

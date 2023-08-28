@@ -11,6 +11,8 @@ class ShoppingCartCubit extends Cubit<ShoppingCartStates> {
   static ShoppingCartCubit get(context) => BlocProvider.of(context);
   bool isEmpty = false;
   int counter = 0;
+  String productColor = '';
+  String productSize = '';
 
   void changePlus() {
     counter++;

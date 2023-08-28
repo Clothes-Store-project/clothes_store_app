@@ -26,15 +26,26 @@ class CartModel {
   String? userId;
   String? productId;
   int? quantity;
+  String? size;
+  String? color;
   int? iV;
 
-  CartModel({this.sId, this.userId, this.productId, this.quantity, this.iV});
+  CartModel(
+      {this.sId,
+        this.userId,
+        this.productId,
+        this.quantity,
+        this.size,
+        this.color,
+        this.iV});
 
   CartModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     userId = json['user_id'];
     productId = json['product_id'];
     quantity = json['quantity'];
+    size = json['size'];
+    color = json['color'];
     iV = json['__v'];
   }
 
@@ -44,6 +55,8 @@ class CartModel {
     data['user_id'] = this.userId;
     data['product_id'] = this.productId;
     data['quantity'] = this.quantity;
+    data['size'] = this.size;
+    data['color'] = this.color;
     data['__v'] = this.iV;
     return data;
   }
